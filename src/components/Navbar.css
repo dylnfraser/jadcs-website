@@ -1,0 +1,68 @@
+.navbar {
+    animation: appear 0.3s ease-in-out forwards;
+    position: fixed;
+    top: 16px;
+    height: 36px;
+    background-color: white;
+    border-radius: 12px;
+    border: solid 0.5px rgba(0, 0, 0, 0.15);
+    box-shadow: rgba(0, 0, 0, 0.08) 0px 8px 16px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0px;
+    z-index: 9999;
+}
+
+.navbar-left {
+    left: 16px;
+}
+
+.navbar-right {
+    right: 16px;
+}
+
+.navbar button {
+    cursor: pointer;
+    transition: 0.1s ease-in-out;
+    background: none;
+    box-shadow: none;
+    border: none;
+    padding: 8px 16px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.9);
+    border-radius: 8px;
+    text-decoration: underline;
+    text-decoration-thickness: 1.5px;
+    text-decoration-color: rgba(0, 0, 0, 0);
+}
+
+.navbar button img {
+    opacity: 0.9;
+    width: 1rem;
+}
+
+.navbar button:focus {
+    outline: none;
+}
+
+.navbar button:hover {
+    opacity: 0.85;
+    text-decoration-color: rgba(0, 0, 0, 0.5);
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        margin-top: -6px;
+    }
+    to {
+    }
+}

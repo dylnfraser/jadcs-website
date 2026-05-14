@@ -1,3 +1,53 @@
+@font-face {
+    font-family: "default";
+    src: url("./assets/font/Author-Variable.ttf");
+}
+
+@font-face {
+    font-family: "serif";
+    src: url("./assets/font/Sentient-Variable.ttf");
+}
+
 :root {
-    background: white;
+    background: rgb(240, 240, 240);
+    font-family: "default";
+
+    --prim-color: #fa965c;
+    --prim-color2: #ff903b;
+
+    --sec-color: green;
+
+    text-align: center;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "serif";
+}
+
+@keyframes parallax-scroll {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 20px;
+    }
+}
+
+button {
+    cursor: pointer;
+    background-color: white;
+    border-radius: 12px;
+    border: solid 0.5px rgba(0, 0, 0, 0.15);
+    box-shadow: rgba(0, 0, 0, 0.08) 0px 8px 16px;
+    padding: 6px 12px;
+}
+
+#learnMore {
+    margin-top: 5%;
+    padding: 9px 24px;
 }
