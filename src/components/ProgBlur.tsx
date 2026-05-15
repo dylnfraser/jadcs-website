@@ -10,8 +10,8 @@ const backgroundBlur: React.CSSProperties = {
 
   width: "100vw",
   height: "100vh",
-  backdropFilter: "blur(24px)",
-  maskImage: "linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 5%)",
+  backdropFilter: "blur(6px)",
+  maskImage: "linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 7.5%)",
 };
 
 function ProgBlur(): ReactElement {

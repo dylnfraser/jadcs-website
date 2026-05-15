@@ -12,12 +12,18 @@
     background: rgb(240, 240, 240);
     font-family: "default";
 
-    --prim-color: #fa965c;
+    --prim-color: #fe5924;
     --prim-color2: #ff903b;
+    --prim-color3: #ffc9b8;
 
     --sec-color: green;
 
     text-align: center;
+    scroll-behavior: smooth;
+}
+
+::selection {
+    background: var(--prim-color3);
 }
 
 h1,
