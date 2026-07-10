@@ -1,33 +1,40 @@
 import type { ReactElement } from "react";
 import { useRef } from "react";
 import "./App.css";
-import Header from "./components/Header";
-import Background from "./components/Background";
-import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-// import ProgBlur from "./components/ProgBlur";
+import Background from "./components/layout/Background";
+import Navbar from "./components/layout/Navbar";
+import WelcomeSection from "./components/sections/Welcome/WelcomeSection";
+import MissionSection from "./components/sections/Mission/MissionSection";
+import ProgramsSection from "./components/sections/Programs/ProgramsSection";
+import GetInvolvedSection from "./components/sections/GetInvolved/GetInvolvedSection";
+import ContactFooter from "./components/sections/ContactFooter/ContactFooter";
+// import ProgressiveBlur from "./components/effects/ProgressiveBlur";
 
 function App(): ReactElement {
-  const heroRef = useRef<HTMLDivElement>(null);
+  const missionRef = useRef<HTMLElement>(null);
 
   const handleLearnMore = () => {
-    heroRef.current?.scrollIntoView({
+    missionRef.current?.scrollIntoView({
       behavior: "smooth",
     });
   };
 
   return (
     <>
+      <title>JADCS</title>
       <Background />
       <Navbar />
-      <Header />
+      <WelcomeSection />
       <button id="learnMore" onClick={handleLearnMore}>
         Learn More
       </button>
-      <div ref={heroRef}>
-        <Hero />
-      </div>
-      {/*<ProgBlur />*/}
+      <main className="pageSections" ref={missionRef}>
+        <MissionSection />
+        <ProgramsSection />
+        <GetInvolvedSection />
+        <ContactFooter />
+      </main>
+      {/*<ProgressiveBlur />*/}
     </>
   );
 }

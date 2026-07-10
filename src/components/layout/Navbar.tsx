@@ -1,9 +1,9 @@
 import "./Navbar.css";
 import React from "react";
-// import bookmark from "../assets/icon/bookmark.svg";
-// import contact from "../assets/icon/contact.svg";
-import link from "../assets/icon/link.svg";
-// import star from "../assets/icon/star.svg";
+// import bookmark from "../../assets/icon/bookmark.svg";
+// import contact from "../../assets/icon/contact.svg";
+import link from "../../assets/icon/link.svg";
+// import star from "../../assets/icon/star.svg";
 
 const Navbar: React.FC = () => {
   const redirect = (): void => {

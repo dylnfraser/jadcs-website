@@ -1,0 +1,13 @@
+.char {
+    cursor: default;
+    transition:
+        1s font-weight,
+        1s margin;
+    font-weight: 400;
+}
+
+.char:hover {
+    margin: 2px;
+    transition: 0.1s;
+    font-weight: 700;
+}

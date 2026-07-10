@@ -1,0 +1,96 @@
+.missionSection {
+    padding-top: 10%;
+}
+
+.missionContent {
+    text-align: left;
+
+    pre {
+        color: var(--prim-color2);
+        font-size: 1.5rem;
+    }
+
+    h1 {
+        font-weight: inherit;
+        margin-bottom: -0.4rem;
+    }
+
+    b {
+        font-weight: 400;
+    }
+
+    h2 {
+        font-family: "default";
+        font-weight: 400;
+        letter-spacing: 0.075rem;
+        opacity: 0.5;
+    }
+
+    h4 {
+        margin-top: -1rem;
+        margin-bottom: 2rem;
+        font-family: "default";
+        font-weight: inherit;
+        font-size: 1.25rem;
+    }
+
+    #missionGoals {
+        display: flex;
+        justify-content: space-between;
+
+        width: 90%;
+        margin-left: 5%;
+        margin-top: 2rem;
+        gap: 16px;
+
+        span {
+            background: none;
+            padding: 0 32px;
+        }
+
+        .missionGoalSeparator {
+            min-width: 2px;
+            min-height: 100%;
+            background: var(--prim-color);
+            border-radius: 4px;
+            opacity: 0.6;
+        }
+    }
+
+    p {
+        font-size: 1.2rem;
+        font-family: "serif";
+        strong {
+            font-size: 3rem;
+            font-style: italic;
+            font-weight: 300;
+        }
+        u {
+            text-decoration-color: var(--prim-color2);
+        }
+        line-height: 2.5rem;
+        font-weight: 350;
+    }
+
+    #missionVerticalSeparator {
+        width: 200vw;
+        margin-left: -72.5vw;
+        position: relative;
+        height: 40vw;
+        background: radial-gradient(circle at 50% -20%, transparent 30%, var(--prim-color) 55%, transparent 80%);
+        margin-top: -60%;
+
+        opacity: 0.25;
+        mask-image: linear-gradient(to bottom, transparent, black 25%, black 75%, transparent);
+    }
+}
+
+@media (max-width: 800px) {
+    .missionContent #missionGoals {
+        flex-direction: column;
+    }
+
+    .missionContent .missionGoalSeparator {
+        display: none;
+    }
+}

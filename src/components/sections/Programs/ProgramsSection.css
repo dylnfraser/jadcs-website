@@ -1,0 +1,38 @@
+.programsSection {
+    padding-top: 4rem;
+}
+
+.programCards {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+    margin-top: 2rem;
+}
+
+.programCard {
+    text-align: left;
+    padding: 28px;
+    border: solid 1px rgba(0, 0, 0, 0.12);
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.72);
+    box-shadow: rgba(0, 0, 0, 0.06) 0 12px 30px;
+}
+
+.programCard h3 {
+    margin: 0 0 0.75rem;
+    font-size: 1.4rem;
+    font-weight: 450;
+}
+
+.programCard p {
+    margin: 0;
+    font-family: "serif";
+    font-size: 1.05rem;
+    line-height: 1.8rem;
+}
+
+@media (max-width: 800px) {
+    .programCards {
+        grid-template-columns: 1fr;
+    }
+}

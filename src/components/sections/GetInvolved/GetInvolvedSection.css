@@ -1,0 +1,53 @@
+.getInvolvedSection {
+    padding-top: 4rem;
+}
+
+.involvementList {
+    display: grid;
+    gap: 14px;
+    margin-top: 2rem;
+}
+
+.involvementOption {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    text-align: left;
+    padding: 22px 26px;
+    border: solid 1px rgba(0, 0, 0, 0.12);
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.76);
+}
+
+.involvementOption h3 {
+    margin: 0 0 0.4rem;
+    font-size: 1.3rem;
+    font-weight: 450;
+}
+
+.involvementOption p {
+    margin: 0;
+    font-family: "serif";
+    font-size: 1rem;
+    line-height: 1.7rem;
+}
+
+.involvementOption a {
+    flex-shrink: 0;
+    color: black;
+    text-decoration-color: var(--prim-color2);
+    text-decoration-thickness: 2px;
+    font-weight: 500;
+}
+
+.involvementOption a:hover {
+    color: var(--prim-color);
+}
+
+@media (max-width: 800px) {
+    .involvementOption {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}

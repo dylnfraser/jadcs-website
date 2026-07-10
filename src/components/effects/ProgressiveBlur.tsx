@@ -14,7 +14,7 @@ const backgroundBlur: React.CSSProperties = {
   maskImage: "linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 7.5%)",
 };
 
-function ProgBlur(): ReactElement {
+function ProgressiveBlur(): ReactElement {
   return (
     <>
       <div style={backgroundBlur}></div>
@@ -22,4 +22,4 @@ function ProgBlur(): ReactElement {
   );
 }
 
-export default ProgBlur;
+export default ProgressiveBlur;

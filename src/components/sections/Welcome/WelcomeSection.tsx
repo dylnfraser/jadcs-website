@@ -1,4 +1,5 @@
 import type { ReactElement } from "react";
+import "./WelcomeSection.css";
 
 const gradientText: React.CSSProperties = {
   color: "transparent",
@@ -27,23 +28,25 @@ const quote: React.CSSProperties = {
   lineHeight: "1.5rem",
 };
 
-function Header(): ReactElement {
+function WelcomeSection(): ReactElement {
   const text = "Welcome to JADCS";
 
   return (
     <div>
       <h1 style={gradientText}>
-        {text.split("").map((char) => (
-          <span className="char">{char === " " ? "\u00A0" : char}</span>
+        {text.split("").map((char, index) => (
+          <span className="char" key={`${char}-${index}`}>
+            {char === " " ? "\u00A0" : char}
+          </span>
         ))}
       </h1>
 
       <h2 style={quote}>
-        We're a group of students aiming to provide interactive STEM instruction to children and
-        narrow the digital divide by providing assistive technology access to those in need.
+        We're a group of students aiming to provide interactive STEM instruction to children and narrow the digital
+        divide by providing assistive technology access to those in need.
       </h2>
     </div>
   );
 }
 
-export default Header;
+export default WelcomeSection;
