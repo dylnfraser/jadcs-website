@@ -5,29 +5,27 @@ import contact from "../../assets/icon/contact.svg";
 import link from "../../assets/icon/link.svg";
 import star from "../../assets/icon/star.svg";
 
-const Navbar: React.FC = () => {
-  const redirect = (): void => {
-    window.location.href = "https://givebutter.com/laptops-for-stem-students-y64rsa";
-  };
+const donationUrl = "https://givebutter.com/laptops-for-stem-students-y64rsa";
 
+const Navbar: React.FC = () => {
   return (
     <div>
-      <nav className="navbar navbar-left">
-        <button>
-          <img src={star} /> Events
-        </button>
-        <button>
-          <img src={bookmark} /> Our Mission
-        </button>
-        <button>
-          <img src={contact} /> Contact Us
-        </button>
+      <nav className="navbar navbar-left" aria-label="Main navigation">
+        <a href="#programs">
+          <img src={star} alt="" /> Programs
+        </a>
+        <a href="#mission">
+          <img src={bookmark} alt="" /> Our Mission
+        </a>
+        <a href="#contact">
+          <img src={contact} alt="" /> Contact Us
+        </a>
       </nav>
 
-      <nav className="navbar navbar-right">
-        <button onClick={redirect}>
-          <img src={link} /> Donate
-        </button>
+      <nav className="navbar navbar-right" aria-label="Donation">
+        <a href={donationUrl} target="_blank" rel="noreferrer">
+          <img src={link} alt="" /> Donate
+        </a>
       </nav>
     </div>
   );

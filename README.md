@@ -1,75 +1,59 @@
-# React + TypeScript + Vite
+# JADCS
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+JADCS exists to close the opportunity gap in STEM education by equipping curious, STEM-driven young minds with the knowledge, tools, and technology they need to thrive.
 
-Currently, two official plugins are available:
+Too many students with the talent and drive to succeed in STEM are held back not by ability, but by access. Under-resourced schools, outdated equipment, and a lack of exposure to computer science leave entire communities on the sidelines of the technology revolution.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+JADCS is working to change that through hands-on computer science instruction, mentorship, and direct donations of computers and resources to underfunded students.
 
-## React Compiler
+## Our mission
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+We believe that access, not circumstance, should determine who gets to shape the future of technology. Every student deserves the chance to learn, create, and lead.
 
-Note: This will impact Vite dev & build performances.
+## What we do
 
-## Expanding the ESLint configuration
+### Computer Science Workshops
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Hands-on lessons for students learning programming, robotics, and digital literacy.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Laptop & Technology Donations
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Collect, refurbish, and distribute devices to students who need reliable technology access.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### Mentorship
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Pair students with volunteers who can support STEM learning and career exploration.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### School & Community Partnerships
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Work with schools, libraries, and nonprofits to reach students directly in their communities.
+
+## Goals for this year
+
+- **5** founding members
+- **100** student members
+- **$1,000** initial fundraising goal
+
+## Get involved
+
+JADCS welcomes support from people and organizations who want to expand STEM access for students.
+
+You can help by:
+
+- Volunteering
+- Donating a laptop or other technology
+- Partnering with JADCS through a school, library, nonprofit, or community group
+- Supporting student membership and workshops
+- Donating to the laptop fund
+
+## Donate
+
+Support JADCS through the laptop donation fund:
+
+https://givebutter.com/laptops-for-stem-students-y64rsa
+
+## Contact
+
+Have a laptop to donate, want to volunteer, or want to bring JADCS to your school?
+
+Contact: hello@jadcs.org

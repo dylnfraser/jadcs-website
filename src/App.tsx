@@ -14,8 +14,10 @@ function App(): ReactElement {
   const missionRef = useRef<HTMLElement>(null);
 
   const handleLearnMore = () => {
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
     missionRef.current?.scrollIntoView({
-      behavior: "smooth",
+      behavior: prefersReducedMotion ? "auto" : "smooth",
     });
   };
 
@@ -26,9 +28,11 @@ function App(): ReactElement {
       <ProgressiveBlur></ProgressiveBlur>
       <Navbar />
       <WelcomeSection />
-      <button id="learnMore" onClick={handleLearnMore}>
-        Learn More
-      </button>
+      <div className="heroCtas" aria-label="Primary actions">
+        <button id="learnMore" onClick={handleLearnMore}>
+          Learn More
+        </button>
+      </div>
       <main className="pageSections" ref={missionRef}>
         <MissionSection />
         <ProgramsSection />

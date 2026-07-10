@@ -45,7 +45,7 @@ function Background(): ReactElement {
   return (
     <>
       <div id="bgContainer">
-        <div style={backgroundGrid}></div>
+        <div className="animatedBackgroundGrid" style={backgroundGrid}></div>
         <div style={backgroundGradient}></div>
       </div>
     </>

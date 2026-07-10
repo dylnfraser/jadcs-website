@@ -23,7 +23,7 @@
     right: 8px;
 }
 
-.navbar button {
+.navbar a {
     cursor: pointer;
     transition: 0.1s ease-in-out;
     background: none;
@@ -44,16 +44,12 @@
     text-decoration-color: rgba(0, 0, 0, 0);
 }
 
-.navbar button img {
+.navbar a img {
     opacity: 0.9;
     width: 1rem;
 }
 
-.navbar button:focus {
-    outline: none;
-}
-
-.navbar button:hover {
+.navbar a:hover {
     opacity: 0.85;
     text-decoration-color: rgba(0, 0, 0, 0.5);
 }
@@ -79,7 +75,7 @@
         width: auto;
     }
 
-    .navbar button {
+    .navbar a {
         flex: 1 1 0;
         height: 40px;
         min-width: 0;
@@ -89,23 +85,23 @@
         font-size: 14px;
     }
 
-    .navbar button img {
+    .navbar a img {
         width: 0.95rem;
     }
 
-    .navbar-right button {
+    .navbar-right a {
         width: 100%;
         justify-content: center;
     }
 }
 
 @media (max-width: 430px) {
-    .navbar button {
+    .navbar a {
         padding-inline: 8px;
         font-size: 13px;
     }
 
-    .navbar button img {
+    .navbar a img {
         width: 0.85rem;
     }
 }

@@ -47,6 +47,19 @@
     :root {
         scroll-behavior: auto;
     }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.001ms !important;
+    }
+
+    .animatedBackgroundGrid {
+        animation: none !important;
+    }
 }
 
 html,
@@ -54,6 +67,12 @@ body,
 #root {
     min-width: 0;
     overflow-x: clip;
+}
+
+html,
+body {
+    min-height: 100%;
+    overscroll-behavior-y: none;
 }
 
 body {
@@ -86,6 +105,11 @@ h6 {
     100% {
         background-position: 0 20px;
     }
+}
+
+:where(a, button):focus-visible {
+    outline: solid 3px var(--prim-color2);
+    outline-offset: 3px;
 }
 
 button {
