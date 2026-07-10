@@ -15,11 +15,55 @@
     --prim-color: #fe5924;
     --prim-color2: #ff903b;
     --prim-color3: #ffc9b8;
+    --grain-texture: url("data:image/svg+xml,%3Csvg viewBox='0 0 140 140' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.15' numOctaves='5' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='table' tableValues='0 0.85'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.72'/%3E%3C/svg%3E");
 
     --sec-color: green;
 
     text-align: center;
     scroll-behavior: smooth;
+    scrollbar-color: var(--prim-color2) rgba(255, 255, 255, 0.55);
+    scrollbar-width: thin;
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.55);
+}
+
+::-webkit-scrollbar-thumb {
+    border: solid 3px rgba(255, 255, 255, 0.55);
+    border-radius: 999px;
+    background: linear-gradient(180deg, var(--prim-color2), var(--prim-color));
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, var(--prim-color), var(--prim-color2));
+}
+
+@media (prefers-reduced-motion: reduce) {
+    :root {
+        scroll-behavior: auto;
+    }
+}
+
+html,
+body,
+#root {
+    min-width: 0;
+    overflow-x: clip;
+}
+
+body {
+    margin: 0;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
 }
 
 ::selection {
@@ -56,4 +100,11 @@ button {
 #learnMore {
     margin-top: 5%;
     padding: 9px 24px;
+}
+
+@media (max-width: 700px) {
+    #learnMore {
+        margin-top: 2rem;
+        padding: 10px 24px;
+    }
 }

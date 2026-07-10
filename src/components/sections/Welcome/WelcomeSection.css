@@ -1,3 +1,37 @@
+.welcomeSection {
+    width: min(900px, 88vw);
+    margin: calc(7.5% + 5vh) auto 0;
+    padding: 0 0.5rem;
+}
+
+.welcomeTitle {
+    width: 100%;
+    margin: 0;
+    color: transparent;
+    background: linear-gradient(12deg, var(--prim-color), var(--prim-color2));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    font-weight: 400;
+    line-height: 0.95;
+    text-align: center;
+    user-select: none;
+}
+
+.welcomeQuote {
+    width: min(680px, 100%);
+    margin: 1rem auto 0;
+    color: rgba(0, 0, 0, 1);
+    font-family: "default";
+    font-size: clamp(1rem, 2.3vw, 1.25rem);
+    font-weight: 300;
+    line-height: 1.65rem;
+    text-align: justify;
+    text-wrap: pretty;
+    user-select: none;
+}
+
 .char {
     cursor: default;
     transition:
@@ -10,4 +44,34 @@
     margin: 2px;
     transition: 0.1s;
     font-weight: 700;
+}
+
+@media (max-width: 700px) {
+    .welcomeSection {
+        width: min(94vw, 560px);
+        margin-top: 8.5rem;
+    }
+
+    .welcomeTitle {
+        font-size: clamp(4rem, 18vw, 6rem);
+        line-height: 0.86;
+        text-wrap: balance;
+    }
+
+    .welcomeQuote {
+        margin-top: 1.25rem;
+        line-height: 1.55rem;
+        text-align: left;
+    }
+
+    .char:hover {
+        margin: 0;
+        font-weight: 400;
+    }
+}
+
+@media (max-width: 420px) {
+    .welcomeTitle {
+        font-size: clamp(3.6rem, 17vw, 4.75rem);
+    }
 }

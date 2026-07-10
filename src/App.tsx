@@ -6,9 +6,9 @@ import Navbar from "./components/layout/Navbar";
 import WelcomeSection from "./components/sections/Welcome/WelcomeSection";
 import MissionSection from "./components/sections/Mission/MissionSection";
 import ProgramsSection from "./components/sections/Programs/ProgramsSection";
-import GetInvolvedSection from "./components/sections/GetInvolved/GetInvolvedSection";
+
 import ContactFooter from "./components/sections/ContactFooter/ContactFooter";
-// import ProgressiveBlur from "./components/effects/ProgressiveBlur";
+import ProgressiveBlur from "./components/effects/ProgressiveBlur";
 
 function App(): ReactElement {
   const missionRef = useRef<HTMLElement>(null);
@@ -21,8 +21,9 @@ function App(): ReactElement {
 
   return (
     <>
-      <title>JADCS</title>
+      <title>JADCS | Expanding Access to STEM Education</title>
       <Background />
+      <ProgressiveBlur></ProgressiveBlur>
       <Navbar />
       <WelcomeSection />
       <button id="learnMore" onClick={handleLearnMore}>
@@ -31,7 +32,7 @@ function App(): ReactElement {
       <main className="pageSections" ref={missionRef}>
         <MissionSection />
         <ProgramsSection />
-        <GetInvolvedSection />
+        {/*<GetInvolvedSection />*/}
         <ContactFooter />
       </main>
       {/*<ProgressiveBlur />*/}

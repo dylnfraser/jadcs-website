@@ -4,7 +4,7 @@ const contactEmail = "hello@jadcs.org";
 const donationUrl = "https://givebutter.com/laptops-for-stem-students-y64rsa";
 
 const socialLinks = [
-  { label: "Instagram", href: "https://instagram.com/jadcs_org" },
+  { label: "Instagram", href: "https://instagram.com/jadcsfund" },
   { label: "LinkedIn", href: "https://linkedin.com/company/jadcs" },
   { label: "Facebook", href: "https://facebook.com/jadcs.org" },
 ];
@@ -23,6 +23,8 @@ function ContactFooter() {
         </div>
 
         <div className="footerLinks">
+          <br />
+          <br />
           <a href={donationUrl} target="_blank" rel="noreferrer">
             Donate
           </a>

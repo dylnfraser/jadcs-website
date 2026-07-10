@@ -1,9 +1,9 @@
 import "./Navbar.css";
 import React from "react";
-// import bookmark from "../../assets/icon/bookmark.svg";
-// import contact from "../../assets/icon/contact.svg";
+import bookmark from "../../assets/icon/bookmark.svg";
+import contact from "../../assets/icon/contact.svg";
 import link from "../../assets/icon/link.svg";
-// import star from "../../assets/icon/star.svg";
+import star from "../../assets/icon/star.svg";
 
 const Navbar: React.FC = () => {
   const redirect = (): void => {
@@ -12,7 +12,7 @@ const Navbar: React.FC = () => {
 
   return (
     <div>
-      {/*<nav className="navbar navbar-left">
+      <nav className="navbar navbar-left">
         <button>
           <img src={star} /> Events
         </button>
@@ -22,7 +22,7 @@ const Navbar: React.FC = () => {
         <button>
           <img src={contact} /> Contact Us
         </button>
-      </nav>*/}
+      </nav>
 
       <nav className="navbar navbar-right">
         <button onClick={redirect}>

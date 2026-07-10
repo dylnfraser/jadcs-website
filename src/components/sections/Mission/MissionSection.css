@@ -74,10 +74,18 @@
 
     #missionVerticalSeparator {
         width: 200vw;
-        margin-left: -72.5vw;
         position: relative;
-        height: 40vw;
-        background: radial-gradient(circle at 50% -20%, transparent 30%, var(--prim-color) 55%, transparent 80%);
+        left: 50%;
+        transform: translateX(-50%);
+        height: 45vw;
+        background-image:
+            var(--grain-texture),
+            radial-gradient(circle at 50% -20%, transparent 30%, var(--prim-color) 55%, transparent 80%);
+        background-size:
+            140px 140px,
+            cover;
+        background-position: center, center;
+        background-blend-mode: soft-light, normal;
         margin-top: -60%;
 
         opacity: 0.25;
@@ -85,12 +93,83 @@
     }
 }
 
+.missionContent {
+    width: 100ch;
+    margin-left: calc(50% - 50ch);
+}
+@media (max-width: 1100px) {
+    .missionContent {
+        width: 100%;
+        margin-left: 0;
+    }
+}
+
 @media (max-width: 800px) {
+    .missionSection {
+        padding-top: 4rem;
+    }
+
+    .missionContent p {
+        width: 100% !important;
+        margin-left: 0 !important;
+        padding-inline: 0.75rem;
+        font-size: 1.1rem !important;
+        line-height: 2rem;
+    }
+
+    .missionContent p strong {
+        font-size: 2.35rem;
+    }
+
     .missionContent #missionGoals {
+        width: 100%;
+        margin-left: 0;
+        padding-inline: 0.75rem;
         flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .missionContent #missionGoals span {
+        padding: 1rem;
+        border: solid 1px rgba(0, 0, 0, 0.1);
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.55);
+    }
+
+    .missionContent pre {
+        margin: 0;
+        font-size: 1.35rem;
+        white-space: pre-wrap;
+    }
+
+    .missionContent h4 {
+        margin: 0.25rem 0 0;
+        font-size: 1.05rem;
     }
 
     .missionContent .missionGoalSeparator {
         display: none;
+    }
+
+    .missionContent #missionVerticalSeparator {
+        width: 180vw;
+        height: 60vw;
+        margin-top: -30%;
+    }
+}
+
+@media (max-width: 480px) {
+    .missionContent p {
+        padding-inline: 1rem;
+        font-size: 1rem !important;
+        line-height: 1.8rem;
+    }
+
+    .missionContent #missionGoals {
+        padding-inline: 1rem;
+    }
+
+    .missionContent p strong {
+        font-size: 2rem;
     }
 }

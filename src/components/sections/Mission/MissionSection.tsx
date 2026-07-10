@@ -3,7 +3,7 @@ import "./MissionSection.css";
 
 const MissionSection: React.FC = () => {
   return (
-    <section className="siteSection missionSection" id="mission">
+    <section className="missionSection" id="mission">
       <div className="missionContent">
         <h2 style={{ textAlign: "center" }}> Our Mission </h2>
         <p style={{ textAlign: "left", width: "90%", marginLeft: "5%", fontSize: "1.5rem" }}>

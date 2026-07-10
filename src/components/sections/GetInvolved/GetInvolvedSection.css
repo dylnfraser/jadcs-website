@@ -49,5 +49,16 @@
     .involvementOption {
         align-items: flex-start;
         flex-direction: column;
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .involvementOption {
+        padding: 18px;
+    }
+
+    .involvementOption h3 {
+        font-size: 1.2rem;
     }
 }
