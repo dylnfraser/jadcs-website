@@ -12,7 +12,7 @@
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    font-size: clamp(3rem, 7vw, 5.5rem);
+    font-size: clamp(3rem, 7vw, 3.5rem);
     font-weight: 400;
     line-height: 0.95;
     text-align: center;
@@ -33,17 +33,35 @@
 }
 
 .char {
+    display: inline-block;
     cursor: default;
-    transition:
-        1s font-weight,
-        1s margin;
-    font-weight: 400;
+    color: transparent;
+    background: linear-gradient(12deg, var(--prim-color), var(--prim-color2));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 300;
+    animation: welcome-weight-ripple 250ms linear both;
 }
 
-.char:hover {
-    margin: 2px;
-    transition: 0.1s;
-    font-weight: 700;
+@keyframes welcome-weight-ripple {
+    0% {
+        font-weight: 250;
+        transform: translateY(0);
+        opacity: 0;
+    }
+
+    45% {
+        font-weight: 400;
+        transform: translateY(-0.04em);
+        opacity: 1;
+    }
+
+    100% {
+        font-weight: 200;
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 @media (max-width: 700px) {
@@ -64,9 +82,8 @@
         text-align: left;
     }
 
-    .char:hover {
-        margin: 0;
-        font-weight: 400;
+    .char {
+        animation-duration: 520ms;
     }
 }
 

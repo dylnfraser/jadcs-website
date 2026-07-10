@@ -69,6 +69,11 @@ body,
     overflow-x: clip;
 }
 
+#root > :not(.backgroundContainer) {
+    position: relative;
+    z-index: 1;
+}
+
 html,
 body {
     min-height: 100%;
@@ -96,15 +101,6 @@ h4,
 h5,
 h6 {
     font-family: "serif";
-}
-
-@keyframes parallax-scroll {
-    0% {
-        background-position: 0 0;
-    }
-    100% {
-        background-position: 0 20px;
-    }
 }
 
 :where(a, button):focus-visible {

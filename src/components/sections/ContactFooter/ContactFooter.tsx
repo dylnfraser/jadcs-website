@@ -15,7 +15,7 @@ function ContactFooter() {
       <div className="contactFooterMain">
         <div>
           <p className="sectionEyebrow">Contact</p>
-          <h2>Let’s expand STEM access together.</h2>
+          <h2>Let’s expand STEM access, together.</h2>
           <p>
             Have a laptop to donate, want to volunteer, or want to bring JADCS to your school? Contact us at{" "}
             <a href={`mailto:${contactEmail}`}>{contactEmail}</a>.

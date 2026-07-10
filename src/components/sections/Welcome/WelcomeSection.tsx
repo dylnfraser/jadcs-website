@@ -8,8 +8,8 @@ function WelcomeSection(): ReactElement {
     <section className="welcomeSection" aria-labelledby="welcome-title">
       <h1 className="welcomeTitle" id="welcome-title">
         {text.split("").map((char, index) => (
-          <span className="char" key={`${char}-${index}`}>
-            {char}
+          <span className="char" key={`${char}-${index}`} style={{ animationDelay: `${index * 40}ms` }}>
+            {char === " " ? "\u00A0" : char}
           </span>
         ))}
       </h1>
