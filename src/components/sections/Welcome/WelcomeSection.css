@@ -41,7 +41,7 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-weight: 300;
-    animation: welcome-weight-ripple 250ms linear both;
+    animation: welcome-weight-ripple 100ms linear both;
 }
 
 @keyframes welcome-weight-ripple {
@@ -49,16 +49,18 @@
         font-weight: 250;
         transform: translateY(0);
         opacity: 0;
+        filter: blur(4px);
     }
 
     45% {
         font-weight: 400;
         transform: translateY(-0.04em);
-        opacity: 1;
+        opacity: 0.7;
+        filter: blur(2px);
     }
 
     100% {
-        font-weight: 200;
+        font-weight: 250;
         transform: translateY(0);
         opacity: 1;
     }
