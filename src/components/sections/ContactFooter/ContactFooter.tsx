@@ -1,12 +1,12 @@
 import "./ContactFooter.css";
 
-const contactEmail = "hello@jadcs.org";
+const contactEmail = "jadcsfund@gmail.com";
 const donationUrl = "https://givebutter.com/laptops-for-stem-students-y64rsa";
 
 const socialLinks = [
   { label: "Instagram", href: "https://instagram.com/jadcsfund" },
   { label: "LinkedIn", href: "https://linkedin.com/company/jadcs" },
-  { label: "Facebook", href: "https://facebook.com/jadcs.org" },
+  // { label: "Facebook", href: "https://facebook.com/jadcs.org" },
 ];
 
 function ContactFooter() {

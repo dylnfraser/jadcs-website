@@ -42,7 +42,7 @@ a {
 .pageSections {
     position: absolute;
     left: 0;
-    top: 80vh;
+    top: 40vh;
     width: 100%;
     min-height: 100vh;
     padding-bottom: 6rem;

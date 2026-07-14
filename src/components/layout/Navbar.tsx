@@ -9,13 +9,13 @@ const donationUrl = "https://givebutter.com/laptops-for-stem-students-y64rsa";
 
 const Navbar: React.FC = () => {
   return (
-    <div>
+    <div className="navbar-layer">
       <nav className="navbar navbar-left" aria-label="Main navigation">
-        <a href="#programs">
-          <img src={star} alt="" /> Programs
-        </a>
         <a href="#mission">
           <img src={bookmark} alt="" /> Our Mission
+        </a>
+        <a href="#programs">
+          <img src={star} alt="" /> Programs
         </a>
         <a href="#contact">
           <img src={contact} alt="" /> Contact Us

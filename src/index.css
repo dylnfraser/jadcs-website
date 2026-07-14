@@ -20,27 +20,6 @@
     --sec-color: green;
 
     text-align: center;
-    scroll-behavior: smooth;
-    scrollbar-color: var(--prim-color2) rgba(255, 255, 255, 0.55);
-    scrollbar-width: thin;
-}
-
-::-webkit-scrollbar {
-    width: 12px;
-}
-
-::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.55);
-}
-
-::-webkit-scrollbar-thumb {
-    border: solid 3px rgba(255, 255, 255, 0.55);
-    border-radius: 999px;
-    background: linear-gradient(180deg, var(--prim-color2), var(--prim-color));
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(180deg, var(--prim-color), var(--prim-color2));
 }
 
 @media (prefers-reduced-motion: reduce) {

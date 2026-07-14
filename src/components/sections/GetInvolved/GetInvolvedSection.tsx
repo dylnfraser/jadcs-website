@@ -1,6 +1,6 @@
 import "./GetInvolvedSection.css";
 
-const contactEmail = "hello@jadcs.org";
+const contactEmail = "jadcsfund@gmail.com";
 
 const involvementOptions = [
   {

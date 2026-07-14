@@ -56,4 +56,4 @@ https://givebutter.com/laptops-for-stem-students-y64rsa
 
 Have a laptop to donate, want to volunteer, or want to bring JADCS to your school?
 
-Contact: hello@jadcs.org
+Contact: jadcsfund@gmail.com
