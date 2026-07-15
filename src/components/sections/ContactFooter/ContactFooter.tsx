@@ -12,6 +12,7 @@ const socialLinks = [
 function ContactFooter() {
   return (
     <footer className="contactFooter" id="contact">
+      <hr className="contactFooterRule" aria-hidden="true" />
       <div className="contactFooterMain">
         <div>
           <p className="sectionEyebrow">Contact</p>

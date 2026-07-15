@@ -18,12 +18,14 @@ function App(): ReactElement {
     const elements = document.querySelectorAll<HTMLElement>(
       ".missionContent > h2, .missionContent > p, #missionGoals > span, " +
         ".programsSection > .sectionEyebrow, .programsSection > h2, " +
-        ".programsSection > .sectionIntro, .programCard, .contactFooterMain, .footerBottom",
+        ".programsSection > .sectionIntro, .programCard, .contactFooterRule, .contactFooterMain, .footerBottom",
     );
 
     elements.forEach((element, index) => {
-      element.classList.add("scrollReveal");
-      element.style.setProperty("--reveal-delay", `${(index % 3) * 90}ms`);
+      if (!element.classList.contains("contactFooterRule")) {
+        element.classList.add("scrollReveal");
+        element.style.setProperty("--reveal-delay", `${(index % 3) * 90}ms`);
+      }
     });
 
     const observer = new IntersectionObserver(

@@ -25,7 +25,7 @@ a {
     justify-content: center;
     min-height: 39px;
     padding: 9px 24px;
-    border: solid 0.5px rgba(0, 0, 0, 0.15);
+    border: solid 0.5px rgba(0, 0, 0, 0.25);
     border-radius: 12px;
     background: linear-gradient(12deg, var(--prim-color), var(--prim-color1));
     box-shadow: rgba(0, 0, 0, 0.08) 0px 8px 16px;
