@@ -64,37 +64,37 @@
 
 @media (max-width: 700px) {
     .navbar {
-        height: auto;
+        height: 40px;
         min-height: 40px;
     }
 
     .navbar-left {
         left: 8px;
-        right: 8px;
+        right: 92px;
         width: auto;
         justify-content: space-between;
         overflow: hidden;
     }
 
     .navbar-right {
-        top: 56px;
-        left: 8px;
+        top: 8px;
         right: 8px;
-        width: auto;
+        width: 76px;
     }
 
     .navbar a {
         flex: 1 1 0;
         height: 40px;
         min-width: 0;
-        padding: 8px 10px;
-        gap: 7px;
+        padding: 8px 4px;
+        gap: 5px;
         white-space: nowrap;
-        font-size: 14px;
+        font-size: 13px;
     }
 
     .navbar a img {
-        width: 0.95rem;
+        width: 0.85rem;
+        flex: 0 0 auto;
     }
 
     .navbar-right a {
@@ -104,13 +104,28 @@
 }
 
 @media (max-width: 430px) {
+    .navbar-left {
+        right: 82px;
+    }
+
+    .navbar-right {
+        width: 66px;
+    }
+
     .navbar a {
-        padding-inline: 8px;
-        font-size: 13px;
+        padding-inline: 3px;
+        gap: 3px;
+        font-size: 11.5px;
     }
 
     .navbar a img {
-        width: 0.85rem;
+        width: 0.75rem;
+    }
+}
+
+@media (max-width: 350px) {
+    .navbar a img {
+        display: none;
     }
 }
 
