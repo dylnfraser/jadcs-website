@@ -9,7 +9,6 @@ import ProgramsSection from "./components/sections/Programs/ProgramsSection";
 
 import ContactFooter from "./components/sections/ContactFooter/ContactFooter";
 import ProgressiveBlur from "./components/effects/ProgressiveBlur";
-
 function App(): ReactElement {
   const missionRef = useRef<HTMLElement>(null);
 

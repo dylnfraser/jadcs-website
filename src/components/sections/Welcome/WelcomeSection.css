@@ -7,13 +7,8 @@
 .welcomeTitle {
     width: 100%;
     margin: 0;
-    color: transparent;
-    background: linear-gradient(12deg, var(--prim-color), var(--prim-color2));
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-size: clamp(2rem, 7vw, 3.5rem);
-    font-weight: 400;
+    margin-top: 20%;
+    font-size: 6rem;
     line-height: 0.95;
     text-align: center;
     user-select: none;
@@ -22,28 +17,22 @@
 .welcomeQuote {
     opacity: 0;
     animation: move-up 600ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
-    /*animation-delay: 0.2s;*/
 
     width: min(680px, 100%);
     margin: 1rem auto 0;
     color: rgba(0, 0, 0, 1);
     font-family: "default";
-    font-size: clamp(1rem, 2.3vw, 1.25rem);
-    font-weight: 300;
+    font-size: clamp(1.2rem, 2.3vw, 1.35rem);
+    font-weight: 350;
     line-height: 1.65rem;
-    text-align: justify;
-    text-wrap: pretty;
+    text-align: center;
     user-select: none;
 }
 
 .char {
     display: inline-block;
     cursor: default;
-    color: transparent;
-    background: linear-gradient(12deg, var(--prim-color), var(--prim-color2));
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: rgba(0, 0, 0, 0.85);
     font-weight: 300;
     animation: welcome-weight-ripple 300ms linear both;
 }
@@ -94,11 +83,11 @@
         font-size: clamp(1rem, 4vw, 1.25rem);
         font-weight: 350;
         line-height: 1.6;
-        text-align: justify;
+        text-align: center;
     }
 
     .char {
-        animation-duration: 520ms;
+        animation-duration: 100ms;
     }
 }
 

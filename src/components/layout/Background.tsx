@@ -10,7 +10,7 @@ const backgroundGrid: React.CSSProperties = {
   width: "100vw",
   height: "200vh", // double height for smooth parallax
 
-  backgroundImage: "radial-gradient(rgba(0, 0, 0, 0.25) 1px, transparent 1px)",
+  backgroundImage: "radial-gradient(rgba(0, 0, 0, 0.15) 1px, transparent 1px)",
   backgroundSize: "20px 20px",
 
   // fade at edges
@@ -31,7 +31,7 @@ const backgroundGradient: React.CSSProperties = {
   width: "150vw",
   height: "250vh",
 
-  background: "radial-gradient(var(--prim-color), var(--prim-color), white)",
+  background: "radial-gradient(var(--prim-color), var(--prim-color3), white)",
 
   opacity: 0.3,
 };

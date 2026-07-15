@@ -12,7 +12,7 @@
     top: 8px;
     height: 36px;
     background-color: white;
-    border-radius: 12px;
+    border-radius: 9px;
     border: solid 0.5px rgba(0, 0, 0, 0.15);
     box-shadow: rgba(0, 0, 0, 0.08) 0px 8px 16px;
 
@@ -46,7 +46,7 @@
     font-size: 14px;
     font-weight: 500;
     color: rgba(0, 0, 0, 0.9);
-    border-radius: 8px;
+    border-radius: 9px;
     text-decoration: underline;
     text-decoration-thickness: 1.5px;
     text-decoration-color: rgba(0, 0, 0, 0);

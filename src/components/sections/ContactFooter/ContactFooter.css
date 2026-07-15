@@ -23,7 +23,7 @@
 .contactFooter p {
     max-width: 680px;
     margin: 0;
-    font-family: "serif";
+    font-family: "default";
     font-size: 1.1rem;
     line-height: 1.9rem;
 }
@@ -31,8 +31,8 @@
 .contactFooter a {
     text-align: right;
     color: black;
-    text-decoration-color: var(--prim-color2);
-    text-decoration-thickness: 2px;
+    text-decoration-color: var(--prim-color1);
+    text-decoration-thickness: 1.5px;
 }
 
 .contactFooter a:hover {

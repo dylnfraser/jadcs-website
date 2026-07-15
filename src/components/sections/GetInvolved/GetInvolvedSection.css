@@ -16,7 +16,7 @@
     text-align: left;
     padding: 22px 26px;
     border: solid 1px rgba(0, 0, 0, 0.12);
-    border-radius: 20px;
+    border-radius: 9px;
     background: rgba(255, 255, 255, 0.76);
 }
 
@@ -36,8 +36,8 @@
 .involvementOption a {
     flex-shrink: 0;
     color: black;
-    text-decoration-color: var(--prim-color2);
-    text-decoration-thickness: 2px;
+    text-decoration-color: var(--prim-color1);
+    text-decoration-thickness: 1.5px;
     font-weight: 500;
 }
 

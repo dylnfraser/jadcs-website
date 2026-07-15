@@ -15,8 +15,8 @@ function WelcomeSection(): ReactElement {
       </h1>
 
       <p className="welcomeQuote">
-        We're a group of students aiming to provide interactive STEM instruction to children and narrow the digital
-        divide by providing assistive technology access to those in need.
+        Real help shouldn’t come with barriers. We provide hands-on STEM instruction and assistive technology access for
+        children and communities that need it most, making support practical, accessible, and free.
       </p>
     </section>
   );

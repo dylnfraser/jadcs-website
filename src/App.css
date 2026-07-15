@@ -27,7 +27,7 @@ a {
     padding: 9px 24px;
     border: solid 0.5px rgba(0, 0, 0, 0.15);
     border-radius: 12px;
-    background: linear-gradient(12deg, var(--prim-color), var(--prim-color2));
+    background: linear-gradient(12deg, var(--prim-color), var(--prim-color1));
     box-shadow: rgba(0, 0, 0, 0.08) 0px 8px 16px;
     color: white;
     font-weight: 600;
@@ -85,11 +85,14 @@ a {
 .sectionIntro {
     max-width: 720px;
     margin: 1rem auto 0;
-    font-family: "serif";
+    margin-top: 1rem;
+    margin-bottom: 4rem;
+    font-family: "default";
     text-align: left;
     font-size: 1.2rem;
-    border-left: 2px var(--prim-color) solid;
+    /*border-left: 2px var(--prim-color) solid;*/
     padding-left: 1rem;
+    text-align: center;
     line-height: 2rem;
 }
 
