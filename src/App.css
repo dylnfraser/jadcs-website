@@ -4,7 +4,11 @@ button {
 }
 
 a {
-    transition: 0.15s;
+    transition:
+        color 180ms ease,
+        opacity 180ms ease,
+        transform 180ms var(--ease-out),
+        text-decoration-color 180ms ease;
 }
 
 .heroCtas {
@@ -25,10 +29,10 @@ a {
     justify-content: center;
     min-height: 39px;
     padding: 9px 24px;
-    border: solid 0.5px rgba(0, 0, 0, 0.25);
-    border-radius: 12px;
-    background: linear-gradient(12deg, var(--prim-color), var(--prim-color1));
-    box-shadow: rgba(0, 0, 0, 0.08) 0px 8px 16px;
+    border: solid 1px color-mix(in srgb, var(--prim-color1) 68%, black);
+    border-radius: var(--radius-sm);
+    background: linear-gradient(135deg, var(--prim-color), var(--prim-color1));
+    box-shadow: 0 8px 20px rgba(185, 57, 17, 0.2);
     color: white;
     font-weight: 600;
     text-decoration: none;
@@ -54,7 +58,7 @@ a {
         140px 140px,
         cover;
     background-blend-mode: soft-light, normal;
-    border-top: dashed 2px rgba(0, 0, 0, 0.25);
+    border-top: dashed 2px var(--line-strong);
     overflow-x: hidden;
 }
 
@@ -68,8 +72,9 @@ a {
 .siteSection h2 {
     margin: 0;
     font-size: clamp(2.2rem, 5vw, 4rem);
-    font-weight: 400;
-    line-height: 1;
+    font-weight: 420;
+    line-height: 1.05;
+    letter-spacing: -0.025em;
 }
 
 .sectionEyebrow {
@@ -77,32 +82,40 @@ a {
     color: var(--prim-color);
     font-family: "default";
     font-size: 0.9rem;
-    font-weight: 600;
-    letter-spacing: 0.16rem;
+    font-weight: 650;
+    letter-spacing: 0.14rem;
     text-transform: uppercase;
 }
 
 .sectionIntro {
     max-width: 720px;
-    margin: 1rem auto 0;
-    margin-top: 1rem;
-    margin-bottom: 4rem;
+    margin: 1rem auto 4rem;
     font-family: "default";
     text-align: left;
     font-size: 1.2rem;
     /*border-left: 2px var(--prim-color) solid;*/
-    padding-left: 1rem;
+    padding-inline: 0;
     text-align: center;
     line-height: 2rem;
 }
 
 @media (max-width: 800px) {
     .heroCtas {
-        margin-top: 2rem;
+        position: relative;
+        z-index: 2;
+        margin-top: 1.5rem;
+    }
+
+    .heroCtas #learnMore {
+        min-width: 10.5rem;
+        min-height: 46px;
+        border-color: color-mix(in srgb, var(--prim-color) 35%, var(--line));
+        box-shadow: 0 10px 28px rgba(75, 35, 24, 0.12);
+        font-weight: 600;
     }
 
     .pageSections {
-        top: 72vh;
+        top: max(100svh, 43rem);
         padding-bottom: 4rem;
     }
 
@@ -116,6 +129,14 @@ a {
         font-size: clamp(2rem, 11vw, 3.2rem);
     }
 
+    .missionContent .scrollReveal,
+    .missionContent .scrollReveal.isVisible {
+        opacity: 1;
+        transform: none;
+        filter: none;
+        transition: none;
+    }
+
     .sectionIntro {
         font-size: 1.05rem;
         line-height: 1.75rem;
@@ -124,7 +145,7 @@ a {
 
 @media (max-width: 480px) {
     .heroCtas {
-        width: min(92vw, 360px);
+        width: min(calc(100vw - 3rem), 22rem);
         margin-inline: auto;
         flex-direction: column;
     }
@@ -135,7 +156,7 @@ a {
     }
 
     .pageSections {
-        top: 68vh;
+        top: max(100svh, 41rem);
     }
 }
 

@@ -10,6 +10,7 @@
     margin-top: 20%;
     font-size: 6rem;
     line-height: 0.95;
+    letter-spacing: -0.045em;
     text-align: center;
     user-select: none;
 }
@@ -20,7 +21,7 @@
 
     width: min(680px, 100%);
     margin: 1rem auto 0;
-    color: rgba(0, 0, 0, 1);
+    color: var(--ink);
     font-family: "default";
     font-size: clamp(1.2rem, 2.3vw, 1.35rem);
     font-weight: 350;
@@ -32,7 +33,7 @@
 .char {
     display: inline-block;
     cursor: default;
-    color: rgba(0, 0, 0, 0.85);
+    color: var(--ink);
     font-weight: 300;
     animation: welcome-weight-ripple 300ms linear both;
 }
@@ -61,28 +62,34 @@
 
 @media (max-width: 700px) {
     .welcomeSection {
-        width: min(calc(100vw - 2rem), 560px);
-        margin-top: clamp(7.75rem, 18vh, 9rem);
+        width: min(calc(100vw - 2.5rem), 560px);
+        margin-top: clamp(7rem, 15svh, 8.5rem);
         padding: 0;
     }
 
     .welcomeTitle {
-        max-width: 9ch;
+        max-width: 8.5ch;
         margin-inline: auto;
-        font-size: clamp(3.15rem, 14vw, 4.8rem);
-        line-height: 0.88;
-        letter-spacing: -0.045em;
+        font-size: clamp(3.25rem, 14.5vw, 4.8rem);
+        line-height: 0.9;
+        letter-spacing: -0.055em;
         text-wrap: balance;
     }
 
     .welcomeQuote {
         width: 100%;
-        margin-top: 1.5rem;
-        padding: 1rem 1.1rem 1.05rem 1.25rem;
-        border-left: 3px solid var(--prim-color);
-        font-size: clamp(1rem, 4vw, 1.25rem);
-        font-weight: 350;
-        line-height: 1.6;
+        margin-top: 1.75rem;
+        padding: 1.1rem 1.2rem 1.15rem;
+        border: 1px solid var(--line);
+        border-top: 3px solid var(--prim-color);
+        border-radius: var(--radius-md);
+        background: rgba(255, 255, 255, 0.58);
+        box-shadow: var(--shadow-sm);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        font-size: clamp(1rem, 4vw, 1.15rem);
+        font-weight: 380;
+        line-height: 1.55;
         text-align: center;
     }
 
@@ -93,16 +100,18 @@
 
 @media (max-width: 420px) {
     .welcomeSection {
-        width: calc(100vw - 1.5rem);
+        width: calc(100vw - 2rem);
+        margin-top: 6.75rem;
     }
 
     .welcomeTitle {
-        font-size: clamp(2.8rem, 14.5vw, 3.8rem);
+        font-size: clamp(3rem, 15vw, 3.8rem);
     }
 
     .welcomeQuote {
-        padding: 0.9rem 0.9rem 0.95rem 1rem;
-        border-radius: 0 16px 16px 0;
+        margin-top: 1.4rem;
+        padding: 1rem;
+        border-radius: var(--radius-md);
     }
 }
 

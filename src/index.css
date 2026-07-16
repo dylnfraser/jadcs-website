@@ -9,12 +9,28 @@
 }
 
 :root {
-    background: rgb(240, 240, 240);
-    font-family: "default";
+    background: #f6f4f1;
+    color: #211d1b;
+    font-family: "default", sans-serif;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
 
     --prim-color: #fe5924;
+    --prim-color1: #e94716;
     --prim-color2: #fe5924;
     --prim-color3: #ffdcd1;
+    --ink: #211d1b;
+    --ink-muted: rgba(33, 29, 27, 0.68);
+    --line: rgba(54, 39, 33, 0.18);
+    --line-strong: rgba(54, 39, 33, 0.28);
+    --surface: rgba(255, 255, 255, 0.78);
+    --surface-solid: #ffffff;
+    --radius-sm: 10px;
+    --radius-md: 16px;
+    --radius-lg: 22px;
+    --shadow-sm: 0 6px 18px rgba(75, 35, 24, 0.08);
+    --shadow-md: 0 16px 42px rgba(75, 35, 24, 0.1);
+    --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
     --grain-texture: url("data:image/svg+xml,%3Csvg viewBox='0 0 140 140' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.15' numOctaves='5' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='table' tableValues='0 0.85'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.72'/%3E%3C/svg%3E");
 
     --sec-color: green;
@@ -65,6 +81,8 @@ body {
 
 body {
     margin: 0;
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
 }
 
 *,
@@ -83,7 +101,8 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: "serif";
+    font-family: "serif", serif;
+    text-wrap: balance;
 }
 
 :where(a, button):focus-visible {
@@ -93,11 +112,26 @@ h6 {
 
 button {
     cursor: pointer;
-    background-color: white;
-    border-radius: 12px;
-    border: solid 0.5px rgba(0, 0, 0, 0.25);
-    box-shadow: rgba(0, 0, 0, 0.08) 0px 8px 16px;
+    color: var(--ink);
+    background-color: var(--surface-solid);
+    border-radius: var(--radius-sm);
+    border: solid 1px var(--line);
+    box-shadow: var(--shadow-sm);
     padding: 6px 12px;
+    transition:
+        transform 180ms var(--ease-out),
+        border-color 180ms ease,
+        box-shadow 180ms ease;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    border-color: color-mix(in srgb, var(--prim-color) 38%, var(--line));
+    box-shadow: 0 10px 24px rgba(75, 35, 24, 0.12);
+}
+
+button:active {
+    transform: translateY(0);
 }
 
 #learnMore {

@@ -15,9 +15,10 @@
     gap: 24px;
     text-align: left;
     padding: 22px 26px;
-    border: solid 1px rgba(0, 0, 0, 0.25);
-    border-radius: 9px;
-    background: rgba(255, 255, 255, 0.76);
+    border: solid 1px var(--line);
+    border-radius: var(--radius-md);
+    background: var(--surface);
+    box-shadow: var(--shadow-sm);
 }
 
 .involvementOption h3 {
@@ -35,7 +36,7 @@
 
 .involvementOption a {
     flex-shrink: 0;
-    color: black;
+    color: var(--ink);
     text-decoration-color: var(--prim-color1);
     text-decoration-thickness: 1.5px;
     font-weight: 500;

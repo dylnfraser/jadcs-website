@@ -38,9 +38,9 @@ function ProgramsSection() {
             </div>
             <h3>{program.title}</h3>
             <p>{program.description}</p>
-            <span className="programCardArrow" aria-hidden="true">
-              ↗
-            </span>
+            <svg className="programCardArrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M7 17 17 7M8 7h9v9" />
+            </svg>
           </article>
         ))}
       </div>
