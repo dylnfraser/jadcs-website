@@ -54,8 +54,8 @@ function App(): ReactElement {
   return (
     <>
       <title>JADCS | Expanding Access to STEM Education</title>
-      <Background />
       <ProgressiveBlur></ProgressiveBlur>
+      <Background />
       <Navbar />
       <WelcomeSection />
       <div className="heroCtas" aria-label="Primary actions">
