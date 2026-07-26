@@ -73,7 +73,7 @@
     .navbar {
         height: 42px;
         min-height: 42px;
-        box-shadow: 0 6px 20px rgba(75, 35, 24, 0.1);
+        box-shadow: 0 6px 20px rgba(24, 79, 62, 0.1);
     }
 
     .navbar-left {
