@@ -76,6 +76,38 @@ function App(): ReactElement {
     return () => observer.disconnect();
   }, []);
 
+  // the ambient loops (hero washes, grid, wave, goals wash, footer contours) pause while their area is off-screen,
+  // so the page isn't animating things nobody can see. each area flags itself on the root, and the css pauses
+  // only those time-based loops; scroll-linked animations are left alone.
+  useEffect(() => {
+    const areas: [string, string][] = [
+      [".hero", "hero-offscreen"],
+      [".missionGoalsBlock", "goals-offscreen"],
+      [".contactFooter", "footer-offscreen"],
+    ];
+    const root = document.documentElement;
+    const flags = new Map<Element, string>();
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        const flag = flags.get(entry.target);
+        if (flag) root.classList.toggle(flag, !entry.isIntersecting);
+      });
+    });
+
+    areas.forEach(([selector, flag]) => {
+      const element = document.querySelector(selector);
+      if (!element) return;
+      flags.set(element, flag);
+      observer.observe(element);
+    });
+
+    return () => {
+      observer.disconnect();
+      areas.forEach(([, flag]) => root.classList.remove(flag));
+    };
+  }, []);
+
   // light up the grid in a pool that trails the cursor, easing toward it rather than snapping. the same eased
   // pointer also drives a gentle parallax on the hero doodles.
   useEffect(() => {

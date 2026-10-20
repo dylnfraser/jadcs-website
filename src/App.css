@@ -410,3 +410,14 @@ a {
         transition: none;
     }
 }
+
+/* ambient loops pause while their area is scrolled out of view (flags set in App.tsx) */
+.hero-offscreen .heroBackdrop span,
+.hero-offscreen .gridLayer::before,
+.hero-offscreen .welcomeSection .doodle,
+.hero-offscreen .pageSections::before,
+.hero-offscreen .pageSections::after,
+.goals-offscreen .missionGoalsBlock::before,
+.footer-offscreen .footerContours path {
+    animation-play-state: paused;
+}

@@ -37,7 +37,6 @@
     line-height: 0.95;
     letter-spacing: -0.045em;
     text-align: center;
-    user-select: none;
 }
 
 .welcomeName {
@@ -83,7 +82,6 @@
     font-weight: 440;
     line-height: 1.65rem;
     text-align: center;
-    user-select: none;
 }
 
 .char {
