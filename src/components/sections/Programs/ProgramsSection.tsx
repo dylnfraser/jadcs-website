@@ -1,23 +1,20 @@
+import Doodle from "../../effects/Doodle";
 import "./ProgramsSection.css";
 
 const programs = [
   {
-    label: "Learn",
     title: "Computer Science Workshops",
     description: "Hands-on lessons for students learning programming, robotics, and digital literacy.",
   },
   {
-    label: "Equip",
     title: "Laptop & Technology Donations",
     description: "Collect, refurbish, and distribute devices to students who need reliable technology access.",
   },
   {
-    label: "Guide",
     title: "Mentorship",
     description: "Pair students with volunteers who can support STEM learning and career exploration.",
   },
   {
-    label: "Connect",
     title: "School & Community Partnerships",
     description: "Work with schools, libraries, and nonprofits to reach students directly in their communities.",
   },
@@ -26,32 +23,33 @@ const programs = [
 function ProgramsSection() {
   return (
     <section className="siteSection programsSection" id="programs">
-      <p className="sectionEyebrow">What We Do</p>
-      <h2>Programs that turn access into opportunity</h2>
+      <Doodle name="ring" tone="ink" depth={8} style={{ top: "12%", left: "calc(50% - 45vw)", width: 46 }} />
+      <Doodle name="spiral" tone="clay" depth={11} style={{ top: "30%", right: "calc(50% - 44vw)", width: 50 }} />
+      <Doodle name="squiggle" tone="moss" depth={7} style={{ top: "62%", left: "calc(50% - 46vw)", width: 70 }} />
+      <Doodle name="sparkle" tone="clay" depth={13} style={{ top: "80%", right: "calc(50% - 45vw)", width: 40 }} />
+      <div className="programsSpread">
+        <header className="programsHeader">
+          <h2>Four ways we close the gap.</h2>
+          <p className="sectionIntro">
+            JADCS connects students with practical STEM learning, mentorship, and the technology needed to keep building
+            outside the classroom.
+          </p>
+        </header>
 
-      <div className="programCards">
-        {programs.map((program, index) => (
-          <article className="programCard" key={program.title}>
-            <div className="programCardMeta" aria-hidden="true">
-              <span>{program.label}</span>
-              <span>{String(index + 1).padStart(2, "0")}</span>
-            </div>
-            <h3>{program.title}</h3>
-            <p>{program.description}</p>
-            <svg className="programCardArrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-              <path d="M7 17 17 7M8 7h9v9" />
-            </svg>
-          </article>
-        ))}
+        <ol className="programList">
+          {programs.map((program, index) => (
+            <li className="programItem" key={program.title}>
+              <span className="programNumber" aria-hidden="true">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <div>
+                <h3>{program.title}</h3>
+                <p>{program.description}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
       </div>
-      <br />
-      <br />
-      <br />
-      <br />
-      <p className="sectionIntro">
-        JADCS connects students with practical STEM learning, mentorship, and the technology needed to keep building
-        outside the classroom.
-      </p>
     </section>
   );
 }

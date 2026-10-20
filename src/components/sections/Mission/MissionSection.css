@@ -1,138 +1,214 @@
 .missionSection {
-    padding-top: 10%;
+    position: relative;
+    padding-top: 8rem;
 }
 
 .missionContent {
+    width: min(1000px, 86vw);
+    margin: 0 auto;
     text-align: left;
+}
 
-    pre {
-        color: var(--prim-color);
-        font-size: 1.5rem;
+/* a two-page spread: the heading stays pinned on the left while the story scrolls past on the right */
+.missionSpread {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr);
+    gap: 4.5rem;
+    align-items: start;
+}
+
+.missionIntro {
+    position: sticky;
+    top: 7rem;
+    /* keep it on its own layer the whole time, so it doesn't shift by a subpixel when it starts or stops sticking */
+    will-change: transform;
+}
+
+.missionHeading {
+    margin: 0;
+    font-size: clamp(2.2rem, 3.8vw, 3.1rem);
+    font-weight: 420;
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+}
+
+.missionText p {
+    margin: 0;
+    color: var(--ink);
+    font-family: "serif";
+    font-size: 1.35rem;
+    font-weight: 350;
+    line-height: 2.2rem;
+
+    strong {
+        font-size: 2.6rem;
+        font-weight: 300;
+        line-height: 1;
     }
 
-    h1 {
-        font-weight: inherit;
-        margin-bottom: -0.4rem;
+    /* drawn as a background so the line can sweep in as it scrolls into view */
+    u {
+        text-decoration: none;
+        background: linear-gradient(var(--clay), var(--clay)) 0 100% / 100% 1.5px no-repeat;
+        padding-bottom: 0.1em;
+    }
+}
+
+@supports (animation-timeline: view()) {
+    :root:not(.scroll-timelines-off) .missionText u {
+        animation: underline-draw var(--ease-out) both;
+        animation-timeline: view();
+        animation-range: entry 100% cover 30%;
+    }
+}
+
+@keyframes underline-draw {
+    from {
+        background-size: 0% 1.5px;
+    }
+}
+
+.missionText p + p {
+    margin-top: 1.5rem;
+}
+
+.missionGoalsBlock {
+    position: relative;
+    margin-top: 7rem;
+}
+
+/* registered so the wash's shape can be animated smoothly */
+@property --wash-left {
+    syntax: "<percentage>";
+    inherits: false;
+    initial-value: 40%;
+}
+
+@property --wash-right {
+    syntax: "<percentage>";
+    inherits: false;
+    initial-value: 40%;
+}
+
+@property --wash-left-y {
+    syntax: "<percentage>";
+    inherits: false;
+    initial-value: 50%;
+}
+
+@property --wash-right-y {
+    syntax: "<percentage>";
+    inherits: false;
+    initial-value: 50%;
+}
+
+/* a soft, grainy wash in the gap between the story and the goals: sage drifting in from the left, clay from
+   the right, and clear paper through the middle where the text sits */
+.missionGoalsBlock::before {
+    position: absolute;
+    top: -9rem;
+    left: 50%;
+    z-index: -1;
+    width: 100vw;
+    height: 22rem;
+    translate: -50% 0;
+    background-image:
+        var(--grain-texture),
+        radial-gradient(
+            ellipse var(--wash-left) 70% at 0% var(--wash-left-y),
+            color-mix(in srgb, var(--prim-color2) 55%, transparent),
+            transparent
+        ),
+        radial-gradient(
+            ellipse var(--wash-right) 70% at 100% var(--wash-right-y),
+            color-mix(in srgb, var(--clay-soft) 75%, transparent),
+            transparent
+        );
+    background-size:
+        140px 140px,
+        100% 100%,
+        100% 100%;
+    background-blend-mode: soft-light, normal, normal;
+    /* keep both the colour and the grain to the sides, and feather the top and bottom edges */
+    mask-image:
+        linear-gradient(to right, black, transparent 38%, transparent 62%, black),
+        linear-gradient(to bottom, transparent, black 30%, black 70%, transparent);
+    mask-composite: intersect;
+    content: "";
+    pointer-events: none;
+    animation: wash-ripple 14s ease-in-out infinite;
+}
+
+/* the two sides swell and drift out of step with each other, so the colour seems to ripple in from the edges */
+@keyframes wash-ripple {
+    0%,
+    100% {
+        --wash-left: 38%;
+        --wash-right: 44%;
+        --wash-left-y: 46%;
+        --wash-right-y: 56%;
     }
 
-    b {
-        font-weight: 400;
+    33% {
+        --wash-left: 46%;
+        --wash-right: 37%;
+        --wash-left-y: 56%;
+        --wash-right-y: 48%;
     }
 
-    h2 {
-        font-family: "default";
-        font-weight: 400;
-        letter-spacing: 0.075rem;
-        color: var(--ink);
-        opacity: 0.72;
+    66% {
+        --wash-left: 41%;
+        --wash-right: 47%;
+        --wash-left-y: 50%;
+        --wash-right-y: 42%;
     }
+}
 
-    h4 {
-        margin-top: -1rem;
-        margin-bottom: 2rem;
-        font-family: "default";
-        font-weight: inherit;
-        font-size: 1.25rem;
-    }
+.missionGoalsTitle {
+    margin-bottom: 1.25rem;
+}
 
-    #missionGoals {
+/* the goals read like a ledger: hairlines around, a small typewriter label over each figure */
+#missionGoals {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin: 0;
+    /* the top and bottom rules fade out toward both ends rather than stopping abruptly */
+    border-block: solid 1px;
+    border-image: linear-gradient(to right, transparent, var(--line-strong) 18%, var(--line-strong) 82%, transparent) 1;
+
+    > div {
         display: flex;
-        justify-content: space-between;
-
-        width: 90%;
-        margin-left: 5%;
-        margin-top: 2rem;
-        gap: 16px;
-        align-items: stretch;
-
-        span {
-            flex: 1 1 0;
-            padding: 1.5rem 2rem;
-            border: 1px solid transparent;
-            border-radius: var(--radius-md);
-            background: rgba(255, 255, 255, 0.24);
-            text-align: center;
-            transition:
-                background-color 220ms ease,
-                border-color 220ms ease,
-                transform 220ms var(--ease-out);
-        }
-
-        span:hover {
-            background: rgba(255, 255, 255, 0.52);
-            border-color: var(--line);
-            transform: translateY(-3px);
-        }
-
-        .missionGoalSeparator {
-            min-width: 1.5px;
-            min-height: 100%;
-            background: var(--ink);
-            border-radius: 4px;
-            opacity: 0.2;
-        }
+        flex-direction: column;
+        gap: 0.4rem;
+        padding: 1.4rem 1.5rem 1.6rem;
     }
 
-    p {
-        font-size: 1.2rem;
-        color: var(--ink);
+    > div:first-child {
+        padding-left: 0;
+    }
+
+    > div + div {
+        border-left: 1px solid var(--line-strong);
+    }
+
+    dt {
+        color: var(--ink-muted);
+        font-family: ui-monospace, "SF Mono", Menlo, monospace;
+        font-size: 0.75rem;
+        letter-spacing: 0.02em;
+        text-transform: lowercase;
+    }
+
+    dd {
+        margin: 0;
+        color: var(--clay);
         font-family: "serif";
-        strong {
-            font-size: 3rem;
-            font-style: italic;
-            font-weight: 300;
-        }
-        u {
-            text-decoration-color: var(--prim-color1);
-        }
-        line-height: 2.5rem;
+        font-size: clamp(2.4rem, 4.5vw, 3.4rem);
         font-weight: 350;
-    }
-
-    #missionVerticalSeparator {
-        width: 200vw;
-        position: relative;
-        left: 50%;
-        transform: translateX(-50%);
-        height: 45vw;
-        background-image:
-            var(--grain-texture),
-            radial-gradient(circle at 50% -20%, transparent 30%, var(--prim-color) 55%, transparent 80%);
-        background-size:
-            140px 140px,
-            cover;
-        background-position: center, center;
-        background-blend-mode: soft-light, normal;
-        margin-top: -60%;
-
-        opacity: 0.25;
-        mask-image: linear-gradient(to bottom, transparent, black 25%, black 75%, transparent);
-    }
-}
-
-.missionContent {
-    width: 100ch;
-    margin-left: calc(50% - 50ch);
-}
-@media (max-width: 1100px) {
-    .missionContent {
-        width: 100%;
-        margin-left: 0;
-    }
-}
-
-@media (min-width: 801px) {
-    .missionContent #missionGoals > span.scrollReveal {
-        transition:
-            opacity 700ms var(--ease-out) var(--reveal-delay, 0ms),
-            transform 700ms var(--ease-out) var(--reveal-delay, 0ms),
-            filter 700ms ease-out var(--reveal-delay, 0ms),
-            background-color 220ms ease,
-            border-color 220ms ease;
-    }
-
-    .missionContent #missionGoals > span.scrollReveal.isVisible:hover {
-        transform: translateY(-3px);
+        line-height: 1;
+        font-variant-numeric: tabular-nums;
     }
 }
 
@@ -141,68 +217,48 @@
         padding-top: 4rem;
     }
 
-    .missionContent p {
-        width: 100% !important;
-        margin-left: 0 !important;
-        padding-inline: 0.75rem;
-        font-size: 1.1rem !important;
-        line-height: 2rem;
+    .missionContent {
+        width: min(92vw, 680px);
     }
 
-    .missionContent p strong {
-        font-size: 2.35rem;
+    .missionSpread {
+        grid-template-columns: 1fr;
+        gap: 2rem;
     }
 
-    .missionContent #missionGoals {
-        width: 100%;
-        margin-left: 0;
-        padding-inline: 0.75rem;
-        flex-direction: column;
-        gap: 0.75rem;
+    .missionIntro {
+        position: static;
     }
 
-    .missionContent #missionGoals span {
-        padding: 1rem;
-        border: solid 1px var(--line);
-        border-radius: var(--radius-md);
-        background: var(--surface);
-        box-shadow: var(--shadow-sm);
+    .missionText p {
+        font-size: 1.1rem;
+        line-height: 1.85rem;
+
+        strong {
+            font-size: 2rem;
+        }
     }
 
-    .missionContent pre {
-        margin: 0;
-        font-size: 1.35rem;
-        white-space: pre-wrap;
+    .missionGoalsBlock {
+        margin-top: 3.5rem;
     }
 
-    .missionContent h4 {
-        margin: 0.25rem 0 0;
-        font-size: 1.05rem;
-    }
+    #missionGoals {
+        grid-template-columns: 1fr;
 
-    .missionContent .missionGoalSeparator {
-        display: none;
-    }
+        > div,
+        > div:first-child {
+            padding: 1.1rem 0;
+        }
 
-    .missionContent #missionVerticalSeparator {
-        width: 180vw;
-        height: 60vw;
-        margin-top: -30%;
-    }
-}
+        > div + div {
+            border-left: 0;
+            border-top: 1px solid;
+            border-image: linear-gradient(to right, transparent, var(--line) 18%, var(--line) 82%, transparent) 1;
+        }
 
-@media (max-width: 480px) {
-    .missionContent p {
-        padding-inline: 1rem;
-        font-size: 1rem !important;
-        line-height: 1.8rem;
-    }
-
-    .missionContent #missionGoals {
-        padding-inline: 1rem;
-    }
-
-    .missionContent p strong {
-        font-size: 2rem;
+        dd {
+            font-size: 2.3rem;
+        }
     }
 }

@@ -38,7 +38,6 @@ const involvementOptions = [
 function GetInvolvedSection() {
   return (
     <section className="siteSection getInvolvedSection" id="get-involved">
-      <p className="sectionEyebrow">Get Involved</p>
       <h2>Choose the path that fits you</h2>
       <p className="sectionIntro">
         Whether you can donate time, technology, space, or expertise, there are multiple ways to help students access

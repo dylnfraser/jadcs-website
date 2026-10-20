@@ -1,28 +1,79 @@
 .contactFooter {
     width: min(1000px, 86vw);
-    margin: 5rem auto 0;
-    padding: 3rem 0 2rem;
+    margin: 4rem auto 0;
+    padding: 3.5rem 0 2rem;
+    color: var(--paper);
     text-align: left;
+    background: var(--prim-color);
+    /* paint the band edge to edge while keeping content in the column */
+    box-shadow: 0 0 0 100vmax var(--prim-color);
+    clip-path: inset(0 -100vmax -100vmax);
+    position: relative;
+    isolation: isolate;
+    /* keep the contour layer's bleed and parallax from adding scroll space below the page */
+    overflow-y: clip;
+}
+
+/* faint topographic contour lines spanning the full width of the band */
+.footerContours {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    z-index: -1;
+    width: 100vw;
+    translate: -50% 0;
+    opacity: 0.16;
+    pointer-events: none;
+
+    svg {
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+
+    /* each ring slowly grows and shrinks about its hill's peak, a beat behind the ring inside it,
+       so the terrain gently ripples outward (origins and offsets are set per ring in contours.svg) */
+    path {
+        transform-box: view-box;
+        animation: contour-swell 9s ease-in-out infinite alternate;
+    }
+}
+
+@keyframes contour-swell {
+    from {
+        transform: scale(0.95) rotate(-1deg);
+    }
+
+    to {
+        transform: scale(1.05) rotate(1deg);
+    }
+}
+
+.contactFooter .sectionEyebrow {
+    margin-bottom: 1.4rem;
+    /* the same 68% strength as the other labels, in paper rather than ink on the dark band */
+    color: color-mix(in srgb, var(--paper) 68%, transparent);
+    /* undo the footer's paragraph styling so this matches the other running heads */
+    font-family: "serif";
+    font-size: 1rem;
+    line-height: normal;
 }
 
 .contactFooterRule {
-    width: 100%;
-    height: 1px;
-    margin: -3rem 0 3rem;
-    border: 0;
-    background: var(--line-strong);
+    display: none;
 }
 
 .contactFooterMain {
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
     gap: 3rem;
-    align-items: start;
+    align-items: end;
 }
 
 .contactFooter h2 {
     margin: 0 0 1rem;
-    font-size: clamp(2rem, 4vw, 3.4rem);
+    font-size: clamp(2.2rem, 3.8vw, 3.1rem);
     font-weight: 420;
     line-height: 1.05;
     letter-spacing: -0.02em;
@@ -38,19 +89,25 @@
 
 .contactFooter a {
     text-align: right;
-    color: var(--ink);
-    text-decoration-color: var(--prim-color1);
+    color: var(--paper);
+    text-decoration-color: var(--clay-soft);
     text-decoration-thickness: 1.5px;
+    text-underline-offset: 0.2em;
 }
 
 .contactFooter a:hover {
-    color: var(--prim-color);
+    color: var(--clay-soft);
+}
+
+.contactFooter :focus-visible {
+    outline-color: var(--paper);
 }
 
 .footerLinks {
     display: grid;
     gap: 0.85rem;
     min-width: 140px;
+    padding-bottom: 0.35rem;
 }
 
 .footerBottom {
@@ -59,8 +116,8 @@
     gap: 2rem;
     margin-top: 3rem;
     padding-top: 1.5rem;
-    border-top: solid 1px var(--line);
-    color: var(--ink-muted);
+    border-top: solid 1px color-mix(in srgb, var(--paper) 22%, transparent);
+    color: color-mix(in srgb, var(--paper) 72%, transparent);
 }
 
 .footerBottom p {
@@ -73,7 +130,7 @@
     .contactFooter {
         width: min(92vw, 680px);
         margin-top: 2rem;
-        padding-top: 2.25rem;
+        padding-top: 2.75rem;
     }
 
     .contactFooterRule {
@@ -91,7 +148,11 @@
         text-align: left;
     }
 
+    /* the links sit in a row rather than a tall stack */
     .footerLinks {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem 1.5rem;
         min-width: 0;
     }
 }
@@ -99,10 +160,16 @@
 @media (max-width: 480px) {
     .contactFooter p {
         font-size: 1rem;
-        line-height: 1.7rem;
+        line-height: 1.6;
     }
 
     .footerBottom {
-        margin-top: 2rem;
+        gap: 0.75rem;
+        margin-top: 2.25rem;
+    }
+
+    .footerBottom p {
+        font-size: 0.88rem;
+        line-height: 1.5;
     }
 }

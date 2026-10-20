@@ -5,10 +5,165 @@ button {
 
 a {
     transition:
-        color 180ms ease,
-        opacity 180ms ease,
-        transform 180ms var(--ease-out),
-        text-decoration-color 180ms ease;
+        color var(--dur-quick) ease,
+        opacity var(--dur-quick) ease,
+        transform var(--dur-soft) var(--ease-spring),
+        text-decoration-color var(--dur-quick) ease;
+}
+
+/* the hero always fills the first screen, with its content centered in it */
+.hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
+    min-height: 100svh;
+    padding-block: 5rem 8rem;
+    overflow: clip;
+}
+
+/* soft washes of colour that drift slowly behind the hero, like light moving across paper */
+.heroBackdrop {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.heroBackdrop span {
+    position: absolute;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    filter: blur(70px);
+    opacity: 0.42;
+    will-change: transform;
+}
+
+/* a faint drafting grid behind the hero */
+.gridLayer {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.gridLayer::before,
+.gridLayer::after {
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+    background-size: 60px 60px;
+    background-position: center top;
+    content: "";
+}
+
+.gridLayer::before {
+    --grid-line: rgba(84, 66, 40, 0.07);
+    animation: grid-breathe 9s ease-in-out infinite alternate;
+}
+
+/* a stronger copy of the grid, lit up in a soft pool that trails the cursor (positions set from App.tsx) */
+.gridLayer::after {
+    --grid-line: rgba(74, 103, 65, 0.2);
+    background-color: color-mix(in srgb, var(--prim-color2) 7%, transparent);
+    mask-image: radial-gradient(circle var(--grid-radius, 210px) at var(--grid-x, 50%) var(--grid-y, 40%), black, transparent);
+    opacity: var(--grid-glow, 0);
+}
+
+/* in the hero the grid fades out toward the edges and the bottom */
+.heroGrid {
+    mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, black 35%, transparent 100%);
+}
+
+@keyframes grid-breathe {
+    to {
+        opacity: 0.6;
+    }
+}
+
+.heroBackdrop span:nth-child(1) {
+    top: 6%;
+    left: 4%;
+    width: 40vw;
+    background: var(--prim-color2);
+    animation: drift-a 26s ease-in-out infinite alternate;
+}
+
+.heroBackdrop span:nth-child(2) {
+    top: 26%;
+    right: 2%;
+    width: 32vw;
+    background: var(--clay-soft);
+    opacity: 0.55;
+    animation: drift-b 32s ease-in-out infinite alternate;
+}
+
+.heroBackdrop span:nth-child(3) {
+    bottom: -14%;
+    left: 30%;
+    width: 38vw;
+    background: var(--prim-color3);
+    opacity: 0.6;
+    animation: drift-c 38s ease-in-out infinite alternate;
+}
+
+@keyframes drift-a {
+    to {
+        transform: translate(8vw, 6vh) scale(1.12);
+    }
+}
+
+@keyframes drift-b {
+    to {
+        transform: translate(-10vw, 8vh) scale(0.9);
+    }
+}
+
+@keyframes drift-c {
+    to {
+        transform: translate(6vw, -10vh) scale(1.08);
+    }
+}
+
+/* as you scroll away, the hero copy lifts and fades while the colour washes sink, giving a sense of depth */
+@supports (animation-timeline: scroll()) {
+    .heroInner {
+        animation: hero-lift linear both;
+        animation-timeline: scroll(root);
+        animation-range: 0 90vh;
+    }
+
+    .heroBackdrop {
+        animation: hero-sink linear both;
+        animation-timeline: scroll(root);
+        animation-range: 0 100vh;
+    }
+}
+
+@keyframes hero-lift {
+    to {
+        opacity: 0;
+        translate: 0 -10vh;
+        scale: 0.97;
+    }
+}
+
+@keyframes hero-sink {
+    to {
+        translate: 0 20vh;
+    }
+}
+
+/* the highlighter paints selections on mouse/trackpad, so hide the flat native box there */
+@media (pointer: fine) {
+    ::selection {
+        background: transparent;
+    }
+
+    [data-highlight-exclude] ::selection {
+        background: color-mix(in srgb, var(--paper) 28%, transparent);
+    }
 }
 
 .heroCtas {
@@ -16,50 +171,110 @@ a {
     justify-content: center;
     align-items: center;
     gap: 0.75rem;
-    margin-top: 5%;
+    margin-top: 3rem;
+    opacity: 0;
+    animation: move-up 950ms var(--ease-out) 600ms forwards;
 }
 
-.heroCtas #learnMore {
-    margin-top: 0;
-}
-
-.heroDonateCta {
+/* both hero actions share one size so they always line up */
+.heroCtas > * {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-height: 39px;
-    padding: 9px 24px;
-    border: solid 1px color-mix(in srgb, var(--prim-color1) 68%, black);
-    border-radius: var(--radius-sm);
-    background: linear-gradient(135deg, var(--prim-color), var(--prim-color1));
-    box-shadow: 0 8px 20px rgba(185, 57, 17, 0.2);
-    color: white;
+    height: 44px;
+    min-width: 8.5rem;
+    margin: 0;
+    padding: 0 24px;
+    font-size: 1rem;
     font-weight: 600;
+    line-height: 1;
+}
+
+#learnMore {
+    border-color: var(--line-strong);
+    background: var(--surface-solid);
+    color: var(--ink);
+}
+
+/* a darker moss hairline and a faint top highlight give the filled button the same defined edge as the light one */
+.heroDonateCta {
+    border: solid 1px color-mix(in srgb, var(--prim-color) 62%, black);
+    border-radius: var(--radius-sm);
+    background: color-mix(in srgb, var(--prim-color) 92%, black);
+    box-shadow:
+        inset 0 1px 0 rgb(255 255 255 / 0.12),
+        var(--shadow-sm);
+    color: var(--surface-solid);
     text-decoration: none;
+    transition:
+        transform var(--dur-soft) var(--ease-spring),
+        background-color var(--dur-quick) ease,
+        box-shadow var(--dur-soft) var(--ease-out);
+}
+
+.heroDonateCta:active {
+    transform: scale(0.97);
+    transition-duration: 120ms;
 }
 
 .heroDonateCta:hover {
-    transform: translateY(-1px);
-    box-shadow: rgba(0, 0, 0, 0.12) 0px 10px 18px;
+    transform: translateY(-2px);
+    background: color-mix(in srgb, var(--prim-color) 80%, black);
+    box-shadow:
+        inset 0 1px 0 rgb(255 255 255 / 0.12),
+        var(--shadow-lg);
 }
 
 .pageSections {
-    position: absolute;
-    left: 0;
-    top: 40vh;
     width: 100%;
     min-height: 100vh;
-    padding-bottom: 6rem;
-    animation: fade-in linear both;
-    animation-timeline: view();
-    animation-range: entry 20% cover 40%;
-    background-image: var(--grain-texture), linear-gradient(0deg, var(--prim-color3), #eaf8f2, white 35%);
+    background-image: var(--grain-texture), linear-gradient(180deg, var(--surface-solid), var(--paper) 30%, var(--paper-deep));
     background-size:
         140px 140px,
         cover;
     background-blend-mode: soft-light, normal;
-    border-top: dashed 2px var(--line-strong);
-    overflow-x: hidden;
+    overflow-x: clip;
+}
+
+/*
+ * the top edge of the page is cut into a slow-drifting wave: ::before is a strip of the page's own
+ * background masked to the wave's shape, sitting just above the straight edge, and ::after draws the
+ * line along it. both drift by exactly one wave length per loop so they stay locked together.
+ */
+.pageSections::before,
+.pageSections::after {
+    position: absolute;
+    top: -17px;
+    left: 0;
+    right: 0;
+    height: 18px;
+    content: "";
+    pointer-events: none;
+}
+
+.pageSections::before {
+    background: var(--grain-texture) 0 0 / 140px 140px, var(--surface-solid);
+    background-blend-mode: soft-light, normal;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='18' viewBox='0 0 160 18'%3E%3Cpath d='M0 9 Q 40 1 80 9 T 160 9 V 18 H 0 Z'/%3E%3C/svg%3E") 0 0 / 160px 18px repeat-x;
+    animation: wave-drift-fill 14s linear infinite;
+}
+
+.pageSections::after {
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='18' viewBox='0 0 160 18'%3E%3Cpath d='M0 9 Q 40 1 80 9 T 160 9' fill='none' stroke='%23b0623d' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") 0 0 / 160px 18px repeat-x;
+    opacity: 0.6;
+    animation: wave-drift-line 14s linear infinite;
+}
+
+@keyframes wave-drift-fill {
+    to {
+        mask-position: -160px 0;
+    }
+}
+
+@keyframes wave-drift-line {
+    to {
+        background-position: -160px 0;
+    }
 }
 
 .siteSection {
@@ -77,14 +292,14 @@ a {
     letter-spacing: -0.025em;
 }
 
+/* a quiet section label set in the serif, like a running head on a printed page */
 .sectionEyebrow {
-    margin: 0 0 0.75rem;
-    color: var(--prim-color);
-    font-family: "default";
-    font-size: 0.9rem;
-    font-weight: 650;
-    letter-spacing: 0.14rem;
-    text-transform: uppercase;
+    margin: 0 0 1.4rem;
+    color: var(--ink-muted);
+    font-family: "serif";
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: 0;
 }
 
 .sectionIntro {
@@ -103,20 +318,12 @@ a {
     .heroCtas {
         position: relative;
         z-index: 2;
-        margin-top: 1.5rem;
+        margin-top: 2rem;
     }
 
-    .heroCtas #learnMore {
-        min-width: 10.5rem;
-        min-height: 46px;
-        border-color: color-mix(in srgb, var(--prim-color) 35%, var(--line));
-        box-shadow: 0 10px 28px rgba(24, 79, 62, 0.12);
-        font-weight: 600;
-    }
-
-    .pageSections {
-        top: max(100svh, 43rem);
-        padding-bottom: 4rem;
+    .heroCtas > * {
+        height: 46px;
+        min-width: 9rem;
     }
 
     .siteSection {
@@ -129,79 +336,72 @@ a {
         font-size: clamp(2rem, 11vw, 3.2rem);
     }
 
-    .missionContent .scrollReveal,
-    .missionContent .scrollReveal.isVisible {
-        opacity: 1;
-        transform: none;
-        filter: none;
-        transition: none;
-    }
-
     .sectionIntro {
         font-size: 1.05rem;
         line-height: 1.75rem;
     }
 }
 
+/* on phones the two buttons stay side by side as on desktop, sharing the width evenly */
 @media (max-width: 480px) {
     .heroCtas {
-        width: min(calc(100vw - 3rem), 22rem);
+        width: min(92vw, 24rem);
         margin-inline: auto;
-        flex-direction: column;
     }
 
-    .heroCtas #learnMore,
-    .heroDonateCta {
-        width: 100%;
-    }
-
-    .pageSections {
-        top: max(100svh, 41rem);
+    .heroCtas > * {
+        flex: 1 1 0;
+        min-width: 0;
+        padding-inline: 12px;
     }
 }
 
-@keyframes fade-in {
-    0% {
-        opacity: 0;
-        filter: blur(25px);
-    }
-
-    10% {
-        filter: blur(0px);
-    }
-
-    25% {
-        opacity: 1;
-    }
-
-    100% {
-        opacity: 1;
-    }
-}
-
-@keyframes appear-text {
-    from {
-        font-weight: 200;
-    }
-}
-
-.scrollReveal {
-    opacity: 0;
-    transform: translate3d(0, 3rem, 0) scale(0.98);
-    filter: blur(6px);
-    transition:
-        opacity 700ms cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms),
-        transform 700ms cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms),
-        filter 700ms ease-out var(--reveal-delay, 0ms);
-}
-
+.scrollReveal,
 .scrollReveal.isVisible {
+    opacity: 0;
+    transform: translateY(1.5rem) scale(0.985);
+    filter: blur(14px);
+    transition:
+        opacity 900ms var(--ease-out) var(--reveal-delay, 0ms),
+        transform 1100ms var(--ease-out) var(--reveal-delay, 0ms),
+        filter 900ms var(--ease-out) var(--reveal-delay, 0ms);
+}
+
+.scrollReveal.scrollReveal.isVisible {
     opacity: 1;
-    transform: translate3d(0, 0, 0) scale(1);
-    filter: blur(0);
+    transform: none;
+    filter: none;
+}
+
+/* uses translate/scale rather than transform so hover lifts still compose on top */
+.scrollLinked {
+    animation: scroll-rise var(--ease-out) both;
+    animation-timeline: view();
+    animation-range: entry var(--reveal-offset, 0%) cover 32%;
+}
+
+/* content drifts up out of a soft blur as it scrolls in */
+@keyframes scroll-rise {
+    from {
+        opacity: 0;
+        translate: 0 2.5rem;
+        scale: 0.97;
+        filter: blur(14px);
+    }
+
+    to {
+        opacity: 1;
+        translate: 0 0;
+        scale: 1;
+        filter: none;
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {
+    .scrollLinked {
+        animation: none;
+    }
+
     .scrollReveal,
     .scrollReveal.isVisible {
         opacity: 1;

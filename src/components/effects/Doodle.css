@@ -1,0 +1,101 @@
+/* hand-drawn marks: they sketch themselves in, then bob gently and lean toward the cursor */
+.doodle {
+    position: absolute;
+    display: block;
+    width: 44px;
+    pointer-events: none;
+    user-select: none;
+    translate: calc(var(--pointer-x, 0) * var(--depth) * 1px) calc(var(--pointer-y, 0) * var(--depth) * 1px);
+    animation: doodle-float 6s ease-in-out var(--float-offset, 0s) infinite alternate;
+
+    svg {
+        display: block;
+        width: 100%;
+        height: auto;
+        overflow: visible;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 1.6;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-dasharray: 1;
+        vector-effect: non-scaling-stroke;
+    }
+}
+
+.doodle-clay {
+    color: var(--clay);
+    opacity: 0.65;
+}
+
+.doodle-moss {
+    color: var(--prim-color1);
+    opacity: 0.55;
+}
+
+.doodle-ink {
+    color: var(--ink-muted);
+    opacity: 0.4;
+}
+
+/* as the page scrolls, some doodles turn a little; float uses transform, parallax uses translate and this uses
+   rotate, so all three stack */
+@supports (animation-timeline: view()) {
+    :root:not(.scroll-timelines-off) .doodle {
+        animation:
+            doodle-float 6s ease-in-out var(--float-offset, 0s) infinite alternate,
+            doodle-turn linear both;
+        animation-timeline: auto, view();
+    }
+}
+
+@keyframes doodle-turn {
+    from {
+        rotate: calc(var(--turn, 0) * -0.5deg);
+    }
+
+    to {
+        rotate: calc(var(--turn, 0) * 0.5deg);
+    }
+}
+
+.doodle-draw-load svg {
+    stroke-dashoffset: 1;
+    animation: doodle-draw 900ms cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+
+/* further down the page the stroke follows the scroll, drawing in as the doodle comes into view */
+@supports (animation-timeline: view()) {
+    :root:not(.scroll-timelines-off) .doodle-draw-scroll svg {
+        animation: doodle-draw linear both;
+        animation-timeline: view();
+        animation-range: entry 20% cover 45%;
+    }
+}
+
+@keyframes doodle-draw {
+    from {
+        stroke-dashoffset: 1;
+    }
+
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes doodle-float {
+    from {
+        transform: translateY(4px) rotate(-4deg);
+    }
+
+    to {
+        transform: translateY(-6px) rotate(5deg);
+    }
+}
+
+/* page doodles live in the margins, so they step aside once there are no margins left */
+@media (max-width: 1100px) {
+    .doodle-draw-scroll {
+        display: none;
+    }
+}

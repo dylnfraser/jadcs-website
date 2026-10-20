@@ -9,33 +9,67 @@
 }
 
 :root {
-    background: #f4fbf8;
-    color: #17332b;
+    background: var(--paper);
+    color: var(--ink);
     font-family: "default", sans-serif;
     font-synthesis: none;
     text-rendering: optimizeLegibility;
 
-    --prim-color: #287c67;
-    --prim-color1: #3e9f82;
-    --prim-color2: #6fc6aa;
-    --prim-color3: #dff6ed;
-    --ink: #17332b;
-    --ink-muted: rgba(23, 51, 43, 0.68);
-    --line: rgba(27, 76, 61, 0.18);
-    --line-strong: rgba(27, 76, 61, 0.28);
-    --surface: rgba(255, 255, 255, 0.78);
-    --surface-solid: #ffffff;
+    /* earthy palette: cream paper, moss, sage, clay */
+    --paper: #f6f1e6;
+    --paper-deep: #ece3d0;
+    --prim-color: #4a6741;
+    --prim-color1: #5e7d52;
+    --prim-color2: #a7b48c;
+    --prim-color3: #e3e5cf;
+    --clay: #b0623d;
+    --clay-soft: #ecd4c2;
+    --ink: #2d2a22;
+    --ink-muted: rgba(45, 42, 34, 0.68);
+    --line: rgba(84, 66, 40, 0.16);
+    --line-strong: rgba(84, 66, 40, 0.28);
+    --surface: rgba(255, 252, 244, 0.72);
+    --surface-solid: #fffcf4;
     --radius-sm: 10px;
     --radius-md: 16px;
     --radius-lg: 22px;
-    --shadow-sm: 0 6px 18px rgba(24, 79, 62, 0.08);
-    --shadow-md: 0 16px 42px rgba(24, 79, 62, 0.1);
-    --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+    --shadow-sm: 0 6px 18px rgba(70, 52, 28, 0.07);
+    /* the two-tone edge on light surfaces: a highlight along the inside top, a faint shade along the inside bottom */
+    --edge-light: inset 0 1px 0 rgb(255 255 255 / 0.9), inset 0 -1px 0 rgb(84 66 40 / 0.07);
+    --shadow-md: 0 16px 42px rgba(70, 52, 28, 0.09);
+    --shadow-lg: 0 22px 48px rgba(70, 52, 28, 0.13);
+    /* motion: a long, soft deceleration for entrances and a gentle spring for interactions */
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-spring: cubic-bezier(0.34, 1.36, 0.64, 1);
+    --dur-quick: 260ms;
+    --dur-soft: 520ms;
+    --dur-enter: 1000ms;
     --grain-texture: url("data:image/svg+xml,%3Csvg viewBox='0 0 140 140' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.15' numOctaves='5' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='table' tableValues='0 0.85'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.72'/%3E%3C/svg%3E");
 
-    --sec-color: #8ed8c0;
-
     text-align: center;
+}
+
+/* the page-wide colour wash drifts and breathes very slowly, so the background never feels static */
+.backgroundGradient {
+    animation: background-drift 48s ease-in-out infinite alternate;
+    will-change: transform;
+}
+
+@keyframes background-drift {
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 0.55;
+    }
+
+    50% {
+        transform: translate(4vw, -4vh) scale(1.06);
+        opacity: 0.62;
+    }
+
+    100% {
+        transform: translate(-3vw, 3vh) scale(1.03);
+        opacity: 0.5;
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -50,10 +84,6 @@
         animation-iteration-count: 1 !important;
         scroll-behavior: auto !important;
         transition-duration: 0.001ms !important;
-    }
-
-    .animatedBackgroundGrid {
-        animation: none !important;
     }
 }
 
@@ -115,33 +145,24 @@ button {
     color: var(--ink);
     background-color: var(--surface-solid);
     border-radius: var(--radius-sm);
-    border: solid 1px var(--line);
-    box-shadow: var(--shadow-sm);
+    border: solid 1px var(--line-strong);
+    box-shadow:
+        var(--edge-light),
+        var(--shadow-sm);
     padding: 6px 12px;
     transition:
-        transform 180ms var(--ease-out),
-        border-color 180ms ease,
-        box-shadow 180ms ease;
+        transform var(--dur-soft) var(--ease-spring),
+        box-shadow var(--dur-soft) var(--ease-out);
 }
 
 button:hover {
     transform: translateY(-2px);
-    border-color: color-mix(in srgb, var(--prim-color) 38%, var(--line));
-    box-shadow: 0 10px 24px rgba(24, 79, 62, 0.12);
+    box-shadow:
+        var(--edge-light),
+        var(--shadow-lg);
 }
 
 button:active {
-    transform: translateY(0);
-}
-
-#learnMore {
-    margin-top: 5%;
-    padding: 9px 24px;
-}
-
-@media (max-width: 700px) {
-    #learnMore {
-        margin-top: 2rem;
-        padding: 10px 24px;
-    }
+    transform: scale(0.97);
+    transition-duration: 120ms;
 }

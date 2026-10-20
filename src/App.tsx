@@ -1,46 +1,229 @@
 import type { ReactElement } from "react";
 import { useEffect, useRef } from "react";
+import { highlightSelection } from "@highlighters/core";
 import "./App.css";
 import Background from "./components/layout/Background";
 import Navbar from "./components/layout/Navbar";
 import WelcomeSection from "./components/sections/Welcome/WelcomeSection";
 import MissionSection from "./components/sections/Mission/MissionSection";
 import ProgramsSection from "./components/sections/Programs/ProgramsSection";
-
 import ContactFooter from "./components/sections/ContactFooter/ContactFooter";
-import ProgressiveBlur from "./components/effects/ProgressiveBlur";
+
 function App(): ReactElement {
   const missionRef = useRef<HTMLElement>(null);
+  const heroGridRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    const elements = document.querySelectorAll<HTMLElement>(
-      ".missionContent > h2, .missionContent > p, #missionGoals > span, " +
-        ".programsSection > .sectionEyebrow, .programsSection > h2, " +
-        ".programsSection > .sectionIntro, .programCard, .contactFooterRule, .contactFooterMain, .footerBottom",
-    );
+    const linked = [
+      ...document.querySelectorAll<HTMLElement>(
+        ".missionText > p, .missionGoalsTitle, #missionGoals > div, " +
+          ".programItem > *, " +
+          ".contactFooterRule, .contactFooterMain, .footerBottom",
+      ),
+    ];
+    // pinned headings can't follow a scroll-linked reveal: once they stick their position stops tracking
+    // the scroll, so the animation stalls and jumps. they get a one-off timed reveal instead.
+    const timed = [...document.querySelectorAll<HTMLElement>(".missionIntro > *, .programsHeader > *")];
 
-    elements.forEach((element, index) => {
-      element.classList.add("scrollReveal");
-      element.style.setProperty("--reveal-delay", `${(index % 3) * 90}ms`);
-    });
+    // where supported, tie each reveal to scroll position so it eases in continuously as you scroll. that already
+    // reveals things in page order, so the only stagger is for items sharing a row (like the three goals), which
+    // cascade left to right. nothing can come in before the content above it.
+    const scrollLinked =
+      CSS.supports("animation-timeline: view()") &&
+      !document.documentElement.classList.contains("scroll-timelines-off");
+    if (scrollLinked) {
+      const perRow = new Map<number, number>();
+      linked.forEach((element) => {
+        const row = Math.round((element.getBoundingClientRect().top + window.scrollY) / 8);
+        const rank = perRow.get(row) ?? 0;
+        perRow.set(row, rank + 1);
+        element.classList.add("scrollLinked");
+        element.style.setProperty("--reveal-offset", `${Math.min(rank, 3) * 6}%`);
+      });
+    }
+
+    const elements = scrollLinked ? timed : [...timed, ...linked];
+    elements.forEach((element) => element.classList.add("scrollReveal"));
 
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
+        // whatever comes into view together is revealed top to bottom, then left to right
+        const arriving = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort(
+            (a, b) =>
+              a.boundingClientRect.top - b.boundingClientRect.top || a.boundingClientRect.left - b.boundingClientRect.left,
+          );
 
-          entry.target.classList.add("isVisible");
-          observer.unobserve(entry.target);
+        arriving.forEach((entry, order) => {
+          const element = entry.target as HTMLElement;
+          const delay = Math.min(order, 5) * 80;
+          element.style.setProperty("--reveal-delay", `${delay}ms`);
+          element.classList.add("isVisible");
+          observer.unobserve(element);
+
+          // hand the element back to its own hover transitions once the reveal settles
+          window.setTimeout(() => element.classList.remove("scrollReveal", "isVisible"), delay + 1200);
         });
       },
-      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" },
+      { threshold: 0.1, rootMargin: "0px 0px -6% 0px" },
     );
 
     elements.forEach((element) => observer.observe(element));
 
     return () => observer.disconnect();
+  }, []);
+
+  // light up the grid in a pool that trails the cursor, easing toward it rather than snapping. the same eased
+  // pointer also drives a gentle parallax on the hero doodles.
+  useEffect(() => {
+    const grid = heroGridRef.current;
+    if (!grid || !window.matchMedia("(pointer: fine)").matches) return;
+
+    const root = document.documentElement;
+    const target = { x: 0, y: 0, glow: 0 };
+    const current = { x: 0, y: 0, glow: 0 };
+    const written = new Map<string, string>();
+    let frame = 0;
+
+    // only touch the dom when a value actually changes: rewriting the root's custom properties restyles the
+    // whole page, and doing that on every scroll frame made the pinned headings judder
+    const write = (element: HTMLElement, name: string, value: string) => {
+      const key = `${element === root ? "root" : "grid"}${name}`;
+      if (written.get(key) === value) return;
+      written.set(key, value);
+      element.style.setProperty(name, value);
+    };
+
+    const tick = () => {
+      current.x += (target.x - current.x) * 0.12;
+      current.y += (target.y - current.y) * 0.12;
+      current.glow += (target.glow - current.glow) * 0.08;
+
+      // positions are tracked in viewport space and mapped into the grid, so the pool stays put while scrolling.
+      // once the hero has scrolled away there's nothing to update.
+      const rect = grid.getBoundingClientRect();
+      if (rect.bottom > 0) {
+        write(grid, "--grid-x", `${Math.round(current.x - rect.left)}px`);
+        write(grid, "--grid-y", `${Math.round(current.y - rect.top)}px`);
+        write(grid, "--grid-glow", current.glow.toFixed(2));
+      }
+      write(root, "--pointer-x", ((current.x / window.innerWidth) * 2 - 1).toFixed(3));
+      write(root, "--pointer-y", ((current.y / window.innerHeight) * 2 - 1).toFixed(3));
+
+      const settled =
+        Math.abs(target.x - current.x) < 0.5 &&
+        Math.abs(target.y - current.y) < 0.5 &&
+        Math.abs(target.glow - current.glow) < 0.005;
+      frame = settled ? 0 : requestAnimationFrame(tick);
+    };
+
+    const wake = () => {
+      if (!frame) frame = requestAnimationFrame(tick);
+    };
+
+    const handleMove = (event: PointerEvent) => {
+      target.x = event.clientX;
+      target.y = event.clientY;
+      // start the pool where the cursor first appears instead of sliding in from a corner
+      if (current.glow < 0.01) {
+        current.x = target.x;
+        current.y = target.y;
+      }
+      target.glow = 1;
+      wake();
+    };
+
+    const handleLeave = () => {
+      target.glow = 0;
+      wake();
+    };
+
+    window.addEventListener("pointermove", handleMove, { passive: true });
+    window.addEventListener("scroll", wake, { passive: true });
+    root.addEventListener("pointerleave", handleLeave);
+
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("pointermove", handleMove);
+      window.removeEventListener("scroll", wake);
+      root.removeEventListener("pointerleave", handleLeave);
+    };
+  }, []);
+
+  // paint text selections as a soft highlighter stroke (touch devices keep the native selection)
+  useEffect(() => {
+    const handle = highlightSelection({
+      // the same deep moss as the Donate buttons (--prim-color mixed 92% with black), laid on thinly
+      color: "#445f3c",
+      opacity: 0.3,
+      // follow the selection character by character instead of jumping to whole words
+      snap: "none",
+      // looser, wobblier edges than the default ruler-straight band, like a hand-drawn stroke
+      edge: { waviness: 2.6, frequency: 15, roughness: 0.4 },
+      tip: { overshootJitter: 3, angleJitter: 4 },
+    });
+
+    // each line gets its own translucent band, taller than the line spacing, so on multi-line selections
+    // neighbouring bands overlap and the ink doubles up into dark strips. trim each overlapping pair back
+    // to the midpoint between them so the lines meet edge to edge instead.
+    let overlayObserver: MutationObserver | null = null;
+
+    const trimOverlaps = (overlay: Element) => {
+      const bands = [...overlay.children]
+        .filter((el): el is HTMLElement => el instanceof HTMLElement)
+        .map((el) => ({
+          el,
+          left: parseFloat(el.style.left),
+          top: parseFloat(el.style.top),
+          width: parseFloat(el.style.width),
+          height: parseFloat(el.style.height),
+          clipTop: 0,
+          clipBottom: 0,
+        }))
+        .filter((band) => [band.left, band.top, band.width, band.height].every(Number.isFinite))
+        .sort((a, b) => a.top - b.top);
+
+      bands.forEach((upper, i) => {
+        bands.slice(i + 1).forEach((lower) => {
+          const overlap = upper.top + upper.height - lower.top;
+          const sameLine = lower.top + lower.height / 2 - (upper.top + upper.height / 2) < Math.min(upper.height, lower.height) * 0.3;
+          const sideBySide = lower.left > upper.left + upper.width || upper.left > lower.left + lower.width;
+          if (overlap <= 0 || sameLine || sideBySide) return;
+
+          upper.clipBottom = Math.max(upper.clipBottom, overlap / 2);
+          lower.clipTop = Math.max(lower.clipTop, overlap / 2);
+        });
+      });
+
+      bands.forEach(({ el, clipTop, clipBottom }) => {
+        // the generous side insets keep the stroke's overshoot and wavy ends untouched
+        const clip = clipTop || clipBottom ? `inset(${clipTop}px -40px ${clipBottom}px -40px)` : "";
+        if (el.style.clipPath !== clip) el.style.clipPath = clip;
+      });
+    };
+
+    const watchOverlay = () => {
+      const overlay = document.querySelector("[data-highlighters-overlay]");
+      if (!overlay || overlayObserver) return;
+
+      overlayObserver = new MutationObserver(() => trimOverlaps(overlay));
+      overlayObserver.observe(overlay, { childList: true, attributes: true, attributeFilter: ["style"], subtree: true });
+      trimOverlaps(overlay);
+    };
+
+    // the overlay is created lazily on the first selection
+    const bodyObserver = new MutationObserver(watchOverlay);
+    bodyObserver.observe(document.body, { childList: true });
+    watchOverlay();
+
+    return () => {
+      bodyObserver.disconnect();
+      overlayObserver?.disconnect();
+      handle.remove();
+    };
   }, []);
 
   const handleLearnMore = () => {
@@ -53,15 +236,31 @@ function App(): ReactElement {
 
   return (
     <>
-      <title>JADCS | Expanding Access to STEM Education</title>
-      <ProgressiveBlur></ProgressiveBlur>
       <Background />
       <Navbar />
-      <WelcomeSection />
-      <div className="heroCtas" aria-label="Primary actions">
-        <button id="learnMore" onClick={handleLearnMore}>
-          Learn More
-        </button>
+      <div className="hero">
+        <div className="heroBackdrop" aria-hidden="true">
+          <span />
+          <span />
+          <span />
+          <div className="gridLayer heroGrid" ref={heroGridRef} />
+        </div>
+        <div className="heroInner">
+          <WelcomeSection />
+          <div className="heroCtas" aria-label="Primary actions">
+            <a
+              className="heroDonateCta"
+              href="https://givebutter.com/laptops-for-stem-students-y64rsa"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Donate
+            </a>
+            <button id="learnMore" onClick={handleLearnMore}>
+              Learn More
+            </button>
+          </div>
+        </div>
       </div>
       <main className="pageSections" ref={missionRef}>
         <MissionSection />
@@ -69,7 +268,6 @@ function App(): ReactElement {
         {/*<GetInvolvedSection />*/}
         <ContactFooter />
       </main>
-      {/*<ProgressiveBlur />*/}
     </>
   );
 }

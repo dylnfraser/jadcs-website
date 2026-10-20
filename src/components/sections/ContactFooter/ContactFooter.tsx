@@ -1,3 +1,4 @@
+import contours from "../../../assets/contours.svg?raw";
 import "./ContactFooter.css";
 
 const contactEmail = "jadcsfund@gmail.com";
@@ -11,11 +12,13 @@ const socialLinks = [
 
 function ContactFooter() {
   return (
-    <footer className="contactFooter" id="contact">
+    // the highlighter's multiply ink would muddy the dark band, so the footer keeps native selection
+    <footer className="contactFooter" id="contact" data-highlight-exclude>
+      {/* inlined rather than a background image so the rings can be animated from css in every browser */}
+      <div className="footerContours" aria-hidden="true" dangerouslySetInnerHTML={{ __html: contours }} />
       <hr className="contactFooterRule" aria-hidden="true" />
       <div className="contactFooterMain">
         <div>
-          <p className="sectionEyebrow">Contact</p>
           <h2>Let’s expand STEM access, together.</h2>
           <p>
             Have a laptop to donate, want to volunteer, or want to bring JADCS to your school? Contact us at{" "}
@@ -24,8 +27,6 @@ function ContactFooter() {
         </div>
 
         <div className="footerLinks">
-          <br />
-          <br />
           <a href={donationUrl} target="_blank" rel="noreferrer">
             Donate
           </a>
