@@ -67,8 +67,8 @@ const MissionSection: React.FC = () => {
             </p>
             <p>
               Too many students with the talent and drive to succeed in STEM are held back,{" "}
-              <u>not by ability, but by access</u>. Under-resourced schools, outdated equipment, and a lack of exposure to
-              computer science leave entire communities on the sidelines of the technology revolution.
+              <u>not by ability, but by access</u>. Under-resourced schools, outdated equipment, and a lack of exposure
+              to computer science leave entire communities on the sidelines of the technology revolution.
             </p>
             <p>
               We’re working to change that. Through hands-on computer science instruction, mentorship, and the direct
@@ -76,8 +76,8 @@ const MissionSection: React.FC = () => {
               gives them what they need to build toward where they want to go.
             </p>
             <p>
-              We believe that <u>access, not circumstance</u>, should determine who gets to shape the future of technology.
-              Every student deserves the chance to learn, create, and lead.
+              We believe that <u>access, not circumstance</u>, should determine who gets to shape the future of
+              technology. Every student deserves the chance to learn, create, and lead.
             </p>
           </div>
         </div>

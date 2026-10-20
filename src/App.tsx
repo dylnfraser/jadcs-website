@@ -20,7 +20,7 @@ function App(): ReactElement {
       ...document.querySelectorAll<HTMLElement>(
         ".missionText > p, .missionGoalsTitle, #missionGoals > div, " +
           ".programItem > *, " +
-          ".contactFooterRule, .contactFooterMain, .footerBottom",
+          ".contactFooterMain, .footerBottom",
       ),
     ];
     // pinned headings can't follow a scroll-linked reveal: once they stick their position stops tracking
@@ -54,7 +54,8 @@ function App(): ReactElement {
           .filter((entry) => entry.isIntersecting)
           .sort(
             (a, b) =>
-              a.boundingClientRect.top - b.boundingClientRect.top || a.boundingClientRect.left - b.boundingClientRect.left,
+              a.boundingClientRect.top - b.boundingClientRect.top ||
+              a.boundingClientRect.left - b.boundingClientRect.left,
           );
 
         arriving.forEach((entry, order) => {
@@ -221,7 +222,8 @@ function App(): ReactElement {
       bands.forEach((upper, i) => {
         bands.slice(i + 1).forEach((lower) => {
           const overlap = upper.top + upper.height - lower.top;
-          const sameLine = lower.top + lower.height / 2 - (upper.top + upper.height / 2) < Math.min(upper.height, lower.height) * 0.3;
+          const sameLine =
+            lower.top + lower.height / 2 - (upper.top + upper.height / 2) < Math.min(upper.height, lower.height) * 0.3;
           const sideBySide = lower.left > upper.left + upper.width || upper.left > lower.left + lower.width;
           if (overlap <= 0 || sameLine || sideBySide) return;
 
@@ -242,7 +244,12 @@ function App(): ReactElement {
       if (!overlay || overlayObserver) return;
 
       overlayObserver = new MutationObserver(() => trimOverlaps(overlay));
-      overlayObserver.observe(overlay, { childList: true, attributes: true, attributeFilter: ["style"], subtree: true });
+      overlayObserver.observe(overlay, {
+        childList: true,
+        attributes: true,
+        attributeFilter: ["style"],
+        subtree: true,
+      });
       trimOverlaps(overlay);
     };
 
@@ -297,7 +304,6 @@ function App(): ReactElement {
       <main className="pageSections" ref={missionRef}>
         <MissionSection />
         <ProgramsSection />
-        {/*<GetInvolvedSection />*/}
         <ContactFooter />
       </main>
     </>

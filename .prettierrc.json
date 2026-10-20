@@ -1,0 +1,9 @@
+{
+  "printWidth": 120,
+  "overrides": [
+    {
+      "files": ["*.css", "*.html"],
+      "options": { "tabWidth": 4 }
+    }
+  ]
+}

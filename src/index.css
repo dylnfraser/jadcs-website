@@ -98,7 +98,7 @@ body,
     overflow-x: clip;
 }
 
-#root > :not(.backgroundContainer) {
+#root > * {
     position: relative;
     z-index: 1;
 }
@@ -146,9 +146,7 @@ button {
     background-color: var(--surface-solid);
     border-radius: var(--radius-sm);
     border: solid 1px var(--line-strong);
-    box-shadow:
-        var(--edge-light),
-        var(--shadow-sm);
+    box-shadow: var(--edge-light), var(--shadow-sm);
     padding: 6px 12px;
     transition:
         transform var(--dur-soft) var(--ease-spring),
@@ -157,9 +155,7 @@ button {
 
 button:hover {
     transform: translateY(-2px);
-    box-shadow:
-        var(--edge-light),
-        var(--shadow-lg);
+    box-shadow: var(--edge-light), var(--shadow-lg);
 }
 
 button:active {

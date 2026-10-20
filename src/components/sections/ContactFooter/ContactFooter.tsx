@@ -16,7 +16,6 @@ function ContactFooter() {
     <footer className="contactFooter" id="contact" data-highlight-exclude>
       {/* inlined rather than a background image so the rings can be animated from css in every browser */}
       <div className="footerContours" aria-hidden="true" dangerouslySetInnerHTML={{ __html: contours }} />
-      <hr className="contactFooterRule" aria-hidden="true" />
       <div className="contactFooterMain">
         <div>
           <h2>Let’s expand STEM access, together.</h2>

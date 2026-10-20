@@ -67,7 +67,11 @@ a {
 .gridLayer::after {
     --grid-line: rgba(74, 103, 65, 0.2);
     background-color: color-mix(in srgb, var(--prim-color2) 7%, transparent);
-    mask-image: radial-gradient(circle var(--grid-radius, 210px) at var(--grid-x, 50%) var(--grid-y, 40%), black, transparent);
+    mask-image: radial-gradient(
+        circle var(--grid-radius, 210px) at var(--grid-x, 50%) var(--grid-y, 40%),
+        black,
+        transparent
+    );
     opacity: var(--grid-glow, 0);
 }
 
@@ -228,7 +232,8 @@ a {
 .pageSections {
     width: 100%;
     min-height: 100vh;
-    background-image: var(--grain-texture), linear-gradient(180deg, var(--surface-solid), var(--paper) 30%, var(--paper-deep));
+    background-image:
+        var(--grain-texture), linear-gradient(180deg, var(--surface-solid), var(--paper) 30%, var(--paper-deep));
     background-size:
         140px 140px,
         cover;
@@ -253,14 +258,18 @@ a {
 }
 
 .pageSections::before {
-    background: var(--grain-texture) 0 0 / 140px 140px, var(--surface-solid);
+    background:
+        var(--grain-texture) 0 0 / 140px 140px,
+        var(--surface-solid);
     background-blend-mode: soft-light, normal;
-    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='18' viewBox='0 0 160 18'%3E%3Cpath d='M0 9 Q 40 1 80 9 T 160 9 V 18 H 0 Z'/%3E%3C/svg%3E") 0 0 / 160px 18px repeat-x;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='18' viewBox='0 0 160 18'%3E%3Cpath d='M0 9 Q 40 1 80 9 T 160 9 V 18 H 0 Z'/%3E%3C/svg%3E")
+        0 0 / 160px 18px repeat-x;
     animation: wave-drift-fill 14s linear infinite;
 }
 
 .pageSections::after {
-    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='18' viewBox='0 0 160 18'%3E%3Cpath d='M0 9 Q 40 1 80 9 T 160 9' fill='none' stroke='%23b0623d' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") 0 0 / 160px 18px repeat-x;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='18' viewBox='0 0 160 18'%3E%3Cpath d='M0 9 Q 40 1 80 9 T 160 9' fill='none' stroke='%23b0623d' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E")
+        0 0 / 160px 18px repeat-x;
     opacity: 0.6;
     animation: wave-drift-line 14s linear infinite;
 }
@@ -302,18 +311,6 @@ a {
     letter-spacing: 0;
 }
 
-.sectionIntro {
-    max-width: 720px;
-    margin: 1rem auto 4rem;
-    font-family: "default";
-    text-align: left;
-    font-size: 1.2rem;
-    /*border-left: 2px var(--prim-color) solid;*/
-    padding-inline: 0;
-    text-align: center;
-    line-height: 2rem;
-}
-
 @media (max-width: 800px) {
     .heroCtas {
         position: relative;
@@ -334,11 +331,6 @@ a {
 
     .siteSection h2 {
         font-size: clamp(2rem, 11vw, 3.2rem);
-    }
-
-    .sectionIntro {
-        font-size: 1.05rem;
-        line-height: 1.75rem;
     }
 }
 
