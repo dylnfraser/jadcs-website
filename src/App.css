@@ -159,51 +159,8 @@ a {
 
 /* both hero actions share one size so they always line up */
 .heroCtas > * {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    height: 44px;
-    min-width: 8.5rem;
-    margin: 0;
-    padding: 0 24px;
-    font-size: 1rem;
-    font-weight: 600;
-    line-height: 1;
-}
-
-#learnMore {
-    border-color: var(--line-strong);
-    background: var(--surface-solid);
-    color: var(--ink);
-}
-
-/* a darker moss hairline and a faint top highlight give the filled button the same defined edge as the light one */
-.heroDonateCta {
-    border: solid 1px color-mix(in srgb, var(--prim-color) 62%, black);
-    border-radius: var(--radius-sm);
-    background: color-mix(in srgb, var(--prim-color) 92%, black);
-    box-shadow:
-        inset 0 1px 0 rgb(255 255 255 / 0.12),
-        var(--shadow-sm);
-    color: var(--surface-solid);
-    text-decoration: none;
-    transition:
-        transform var(--dur-soft) var(--ease-spring),
-        background-color var(--dur-quick) ease,
-        box-shadow var(--dur-soft) var(--ease-out);
-}
-
-.heroDonateCta:active {
-    transform: scale(0.97);
-    transition-duration: 120ms;
-}
-
-.heroDonateCta:hover {
-    transform: translateY(-2px);
-    background: color-mix(in srgb, var(--prim-color) 80%, black);
-    box-shadow:
-        inset 0 1px 0 rgb(255 255 255 / 0.12),
-        var(--shadow-lg);
+    height: 50px;
+    min-width: 9rem;
 }
 
 .pageSections {
@@ -296,8 +253,7 @@ a {
     }
 
     .heroCtas > * {
-        height: 46px;
-        min-width: 9rem;
+        height: 48px;
     }
 
     .heroInner {
@@ -324,7 +280,7 @@ a {
     .heroCtas > * {
         flex: 1 1 0;
         min-width: 0;
-        padding-inline: 12px;
+        padding-inline: 14px;
     }
 }
 

@@ -33,11 +33,6 @@
     --radius-sm: 10px;
     --radius-md: 16px;
     --radius-lg: 22px;
-    --shadow-sm: 0 6px 18px rgba(70, 52, 28, 0.07);
-    /* the two-tone edge on light surfaces: a highlight along the inside top, a faint shade along the inside bottom */
-    --edge-light: inset 0 1px 0 rgb(255 255 255 / 0.9), inset 0 -1px 0 rgb(84 66 40 / 0.07);
-    --shadow-md: 0 16px 42px rgba(70, 52, 28, 0.09);
-    --shadow-lg: 0 22px 48px rgba(70, 52, 28, 0.13);
     /* motion: a long, soft deceleration for entrances and a gentle spring for interactions */
     --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
     --ease-spring: cubic-bezier(0.34, 1.36, 0.64, 1);
@@ -148,25 +143,68 @@ h6 {
 
 button {
     cursor: pointer;
-    color: var(--ink);
-    background-color: var(--surface-solid);
-    border-radius: var(--radius-sm);
-    border: solid 1px var(--line-strong);
-    box-shadow: var(--edge-light), var(--shadow-sm);
-    padding: 6px 12px;
+    font: inherit;
+}
+
+/*
+ * the site's two actions. flat pills with no drop shadow: the solid one in deep moss, the ghost one a hairline.
+ * on hover the pill brightens a touch and its arrow nudges forward; on press it gives slightly.
+ */
+.pillButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+    margin: 0;
+    padding: 0 26px;
+    border: solid 1px transparent;
+    border-radius: 999px;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1;
+    text-decoration: none;
+    white-space: nowrap;
     transition:
-        transform var(--dur-soft) var(--ease-spring),
-        box-shadow var(--dur-soft) var(--ease-out);
+        background-color var(--dur-quick) ease,
+        border-color var(--dur-quick) ease,
+        color var(--dur-quick) ease,
+        scale var(--dur-soft) var(--ease-spring);
 }
 
-button:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--edge-light), var(--shadow-lg);
-}
-
-button:active {
-    transform: scale(0.97);
+.pillButton:active {
+    scale: 0.97;
     transition-duration: 120ms;
+}
+
+.pillButton-solid {
+    border-color: color-mix(in srgb, var(--prim-color) 62%, black);
+    background: color-mix(in srgb, var(--prim-color) 92%, black);
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.12);
+    color: var(--surface-solid);
+}
+
+.pillButton-solid:hover {
+    background: color-mix(in srgb, var(--prim-color) 78%, black);
+}
+
+.pillButton-ghost {
+    border-color: color-mix(in srgb, var(--ink) 35%, transparent);
+    background: color-mix(in srgb, var(--surface-solid) 55%, transparent);
+    color: var(--ink);
+}
+
+.pillButton-ghost:hover {
+    border-color: var(--ink);
+    background: var(--surface-solid);
+}
+
+.pillArrow {
+    display: inline-block;
+    transition: translate var(--dur-soft) var(--ease-spring);
+}
+
+.pillButton:hover .pillArrow {
+    translate: 4px 0;
 }
 
 /* visible to screen readers only */

@@ -1,7 +1,7 @@
 .contactFooter {
     width: min(1000px, 86vw);
     margin: 4rem auto 0;
-    padding: 3.5rem 0 2rem;
+    padding: 7rem 0 0;
     color: var(--paper);
     text-align: left;
     background: var(--prim-color);
@@ -61,110 +61,149 @@
 }
 
 .contactFooterMain {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    gap: 3rem;
-    align-items: end;
+    max-width: 46rem;
+
+    h2 {
+        margin: 0;
+        font-size: clamp(2.8rem, 6.4vw, 5.2rem);
+        font-weight: 400;
+        line-height: 0.98;
+        letter-spacing: -0.035em;
+        text-wrap: balance;
+    }
+
+    p {
+        max-width: 32rem;
+        margin: 1.5rem 0 0;
+        color: color-mix(in srgb, var(--paper) 86%, transparent);
+        font-family: "default";
+        font-size: 1.15rem;
+        line-height: 1.5;
+    }
 }
 
-.contactFooter h2 {
-    margin: 0 0 1rem;
-    font-size: clamp(2.2rem, 3.8vw, 3.1rem);
-    font-weight: 420;
-    line-height: 1.05;
-    letter-spacing: -0.02em;
+.footerActions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 2.25rem;
+
+    .pillButton {
+        height: 50px;
+    }
 }
 
-.contactFooter p {
-    max-width: 680px;
-    margin: 0;
-    font-family: "default";
-    font-size: 1.1rem;
-    line-height: 1.9rem;
+/* on the moss band the solid action is cream, and the second is a cream hairline */
+.pillButton-cream {
+    border-color: var(--paper);
+    background: var(--paper);
+    color: color-mix(in srgb, var(--prim-color) 70%, black);
 }
 
-.contactFooter a {
-    text-align: right;
+.pillButton-cream:hover {
+    background: var(--surface-solid);
+}
+
+.pillButton-outline {
+    border-color: color-mix(in srgb, var(--paper) 55%, transparent);
     color: var(--paper);
-    text-decoration-color: var(--clay-soft);
-    text-decoration-thickness: 1.5px;
-    text-underline-offset: 0.2em;
 }
 
-.contactFooter a:hover {
-    color: var(--clay-soft);
+.pillButton-outline:hover {
+    border-color: var(--paper);
+    background: color-mix(in srgb, var(--paper) 10%, transparent);
+}
+
+.footerColumns {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr auto;
+    gap: 2rem;
+    margin-top: 5rem;
+    padding-top: 1.5rem;
+    border-top: dashed 1px color-mix(in srgb, var(--paper) 30%, transparent);
+
+    > div {
+        display: grid;
+        align-content: start;
+        gap: 0.45rem;
+    }
+
+    a {
+        width: fit-content;
+        color: var(--paper);
+        font-size: 1rem;
+        text-decoration: underline;
+        text-decoration-color: transparent;
+        text-decoration-thickness: 1px;
+        text-underline-offset: 0.25em;
+        transition: text-decoration-color var(--dur-quick) ease;
+    }
+
+    a:hover {
+        text-decoration-color: currentColor;
+    }
+}
+
+.footerLabel {
+    margin: 0 0 0.25rem;
+    color: color-mix(in srgb, var(--paper) 60%, transparent);
+    font-family: "default";
+    font-size: 0.85rem;
+}
+
+.footerUp {
+    text-align: right;
+    justify-items: end;
 }
 
 .contactFooter :focus-visible {
     outline-color: var(--paper);
 }
 
-.footerLinks {
-    display: grid;
-    gap: 0.85rem;
-    min-width: 140px;
-    padding-bottom: 0.35rem;
-}
-
-.footerBottom {
-    display: flex;
-    justify-content: space-between;
-    gap: 2rem;
-    margin-top: 3rem;
-    padding-top: 1.5rem;
-    border-top: solid 1px color-mix(in srgb, var(--paper) 22%, transparent);
-    align-items: baseline;
-    color: color-mix(in srgb, var(--paper) 72%, transparent);
-}
-
-.footerBottom a {
-    font-size: 0.95rem;
-}
-
-.footerBottom p {
-    font-family: "default";
-    font-size: 0.95rem;
-    line-height: 1.4rem;
+/* the wordmark runs the full width of the band and is cut off by the bottom edge */
+.footerWordmark {
+    margin: 3rem 0 0;
+    margin-inline: calc(50% - 50vw);
+    color: color-mix(in srgb, var(--paper) 92%, transparent);
+    font-family: "serif";
+    font-size: 31vw;
+    font-weight: 400;
+    line-height: 0.72;
+    letter-spacing: -0.055em;
+    text-align: center;
+    white-space: nowrap;
+    user-select: none;
+    translate: 0 0.14em;
 }
 
 @media (max-width: 800px) {
     .contactFooter {
         width: min(92vw, 680px);
         margin-top: 2rem;
-        padding-top: 2.75rem;
+        padding-top: 4.5rem;
     }
 
-    .contactFooterMain {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
+    .footerColumns {
+        grid-template-columns: 1fr 1fr;
+        margin-top: 3.5rem;
     }
 
-    .contactFooter a {
+    .footerUp {
+        grid-column: 1 / -1;
         text-align: left;
-    }
-
-    /* the links sit in a row rather than a tall stack */
-    .footerLinks {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem 1.5rem;
-        min-width: 0;
+        justify-items: start;
     }
 }
 
 @media (max-width: 480px) {
-    .contactFooter p {
-        font-size: 1rem;
-        line-height: 1.6;
+    .contactFooterMain p {
+        font-size: 1.02rem;
     }
 
-    .footerBottom {
-        gap: 0.75rem;
-        margin-top: 2.25rem;
-    }
-
-    .footerBottom p {
-        font-size: 0.88rem;
-        line-height: 1.5;
+    .footerActions .pillButton {
+        flex: 1 1 0;
+        min-width: 0;
+        height: 48px;
+        padding-inline: 14px;
     }
 }

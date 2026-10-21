@@ -75,7 +75,7 @@
 }
 
 .programItem + .programItem {
-    border-top: solid 1px var(--line-strong);
+    border-top: dashed 1px var(--line-strong);
 }
 
 /* line the first title up with the label beside it */

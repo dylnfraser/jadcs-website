@@ -17,30 +17,46 @@ function ContactFooter() {
       {/* inlined rather than a background image so the rings can be animated from css in every browser */}
       <div className="footerContours" aria-hidden="true" dangerouslySetInnerHTML={{ __html: contours }} />
       <div className="contactFooterMain">
-        <div>
-          <h2>Let’s expand STEM access, together.</h2>
-          <p>
-            Have a laptop to donate, want to volunteer, or want to bring JADCS to your school? Contact us at{" "}
-            <a href={`mailto:${contactEmail}`}>{contactEmail}</a>.
-          </p>
-        </div>
-
-        <div className="footerLinks">
-          <a href={donationUrl} target="_blank" rel="noreferrer">
+        <h2>Let’s expand STEM access, together.</h2>
+        <p>
+          Have a laptop to donate, want to volunteer, or want to bring JADCS to your school? We’d love to hear from you.
+        </p>
+        <div className="footerActions">
+          <a className="pillButton pillButton-cream" href={`mailto:${contactEmail}`}>
+            Email us{" "}
+            <span className="pillArrow" aria-hidden="true">
+              →
+            </span>
+          </a>
+          <a className="pillButton pillButton-outline" href={donationUrl} target="_blank" rel="noreferrer">
             Donate
           </a>
+        </div>
+      </div>
+
+      <div className="footerColumns">
+        <div>
+          <p className="footerLabel">Write to us</p>
+          <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
+        </div>
+        <div>
+          <p className="footerLabel">Follow along</p>
           {socialLinks.map((link) => (
             <a href={link.href} target="_blank" rel="noreferrer" key={link.label}>
               {link.label}
             </a>
           ))}
         </div>
+        <div className="footerUp">
+          <p className="footerLabel">© {new Date().getFullYear()} JADCS</p>
+          <a href="#top">Back to top ↑</a>
+        </div>
       </div>
 
-      <div className="footerBottom">
-        <p>© {new Date().getFullYear()} JADCS</p>
-        <a href="#top">Back to top</a>
-      </div>
+      {/* the name set huge and cropped by the bottom of the page, like a signature at the foot of a letter */}
+      <p className="footerWordmark" aria-hidden="true">
+        JADCS
+      </p>
     </footer>
   );
 }

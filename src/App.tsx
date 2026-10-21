@@ -20,7 +20,7 @@ function App(): ReactElement {
       ...document.querySelectorAll<HTMLElement>(
         ".missionText > p, .missionGoalsTitle, #missionGoals > div, " +
           ".programItem > *, " +
-          ".contactFooterMain, .footerBottom",
+          ".contactFooterMain, .footerColumns",
       ),
     ];
     // pinned headings can't follow a scroll-linked reveal: once they stick their position stops tracking
@@ -286,14 +286,17 @@ function App(): ReactElement {
           <WelcomeSection />
           <div className="heroCtas" aria-label="Primary actions">
             <a
-              className="heroDonateCta"
+              className="pillButton pillButton-solid"
               href="https://givebutter.com/laptops-for-stem-students-y64rsa"
               target="_blank"
               rel="noreferrer"
             >
-              Donate
+              Donate{" "}
+              <span className="pillArrow" aria-hidden="true">
+                →
+              </span>
             </a>
-            <button id="learnMore" onClick={handleLearnMore}>
+            <button className="pillButton pillButton-ghost" onClick={handleLearnMore}>
               Read our mission
             </button>
           </div>
