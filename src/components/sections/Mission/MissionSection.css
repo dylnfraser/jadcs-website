@@ -370,6 +370,54 @@
     }
 }
 
+/* stamped again on click; two identical animations so each press restarts it */
+#missionGoals dd {
+    cursor: pointer;
+    user-select: none;
+}
+
+#missionGoals.isIn dd[data-press="a"] {
+    animation: stamp-press-a 420ms cubic-bezier(0.3, 0, 0.2, 1.4) forwards;
+}
+
+#missionGoals.isIn dd[data-press="b"] {
+    animation: stamp-press-b 420ms cubic-bezier(0.3, 0, 0.2, 1.4) forwards;
+}
+
+@keyframes stamp-press-a {
+    0% {
+        opacity: 0.92;
+        scale: 1;
+    }
+
+    35% {
+        opacity: 0.35;
+        scale: 1.18;
+    }
+
+    100% {
+        opacity: 0.92;
+        scale: 1;
+    }
+}
+
+@keyframes stamp-press-b {
+    0% {
+        opacity: 0.92;
+        scale: 1;
+    }
+
+    35% {
+        opacity: 0.35;
+        scale: 1.18;
+    }
+
+    100% {
+        opacity: 0.92;
+        scale: 1;
+    }
+}
+
 @keyframes stamp-down {
     0% {
         opacity: 0;

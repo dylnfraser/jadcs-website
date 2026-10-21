@@ -12,6 +12,17 @@ const goals = [
 
 const formatGoal = (value: number, prefix: string) => `${prefix}${Math.round(value).toLocaleString("en-US")}`;
 
+// press a stamped figure to stamp it again: it lifts, comes down at a new slight angle, and the ink takes a
+// little differently each time
+let pressCount = 0;
+const restamp = (event: React.MouseEvent<HTMLElement>) => {
+  const stamp = event.currentTarget;
+  pressCount += 1;
+  stamp.dataset.press = pressCount % 2 ? "a" : "b";
+  stamp.style.setProperty("--stamp-tilt", `${(Math.random() * 7 - 3.5).toFixed(1)}deg`);
+  stamp.style.filter = `url(#${["ink", "ink-2", "ink-3"][pressCount % 3]})`;
+};
+
 const MissionSection: React.FC = () => {
   const goalsRef = useRef<HTMLDListElement>(null);
 
@@ -54,7 +65,13 @@ const MissionSection: React.FC = () => {
   return (
     <section className="missionSection" id="mission">
       <Doodle name="arrow" tone="clay" depth={12} style={{ top: "15%", left: "calc(50% - 46vw)", width: 60 }} />
-      <Doodle name="bulb" tone="moss" depth={9} style={{ top: "34%", right: "calc(50% - 45vw)", width: 38 }} />
+      <Doodle
+        name="bulb"
+        tone="moss"
+        depth={9}
+        react="flicker"
+        style={{ top: "34%", right: "calc(50% - 45vw)", width: 38 }}
+      />
       <Doodle name="loop" tone="ink" depth={6} style={{ top: "60%", left: "calc(50% - 45vw)", width: 84 }} />
       <Doodle name="sprout" tone="moss" depth={10} style={{ top: "76%", right: "calc(50% - 46vw)", width: 46 }} />
       <div className="missionContent">
@@ -101,7 +118,7 @@ const MissionSection: React.FC = () => {
                 style={{ "--stamp": index, "--stamp-tilt": `${[-4, 2.5, -2][index]}deg` } as React.CSSProperties}
               >
                 <dt>{goal.label}</dt>
-                <dd>{formatGoal(goal.value, goal.prefix)}</dd>
+                <dd onClick={restamp}>{formatGoal(goal.value, goal.prefix)}</dd>
               </div>
             ))}
           </dl>

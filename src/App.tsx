@@ -359,6 +359,45 @@ function App(): ReactElement {
           />
           <feComposite in="edges" in2="blotchMask" operator="in" />
         </filter>
+        {/* the same ink with different noise, so a re-stamped figure takes the ink a little differently */}
+        <filter id="ink-2" x="-10%" y="-20%" width="120%" height="140%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="5" result="rough" />
+          <feDisplacementMap
+            in="SourceGraphic"
+            in2="rough"
+            scale="2.2"
+            xChannelSelector="R"
+            yChannelSelector="G"
+            result="edges"
+          />
+          <feTurbulence type="fractalNoise" baseFrequency="0.35" numOctaves="3" seed="17" result="blotch" />
+          <feColorMatrix
+            in="blotch"
+            type="matrix"
+            values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.4 2.05"
+            result="blotchMask"
+          />
+          <feComposite in="edges" in2="blotchMask" operator="in" />
+        </filter>
+        <filter id="ink-3" x="-10%" y="-20%" width="120%" height="140%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="8" result="rough" />
+          <feDisplacementMap
+            in="SourceGraphic"
+            in2="rough"
+            scale="2.2"
+            xChannelSelector="R"
+            yChannelSelector="G"
+            result="edges"
+          />
+          <feTurbulence type="fractalNoise" baseFrequency="0.35" numOctaves="3" seed="23" result="blotch" />
+          <feColorMatrix
+            in="blotch"
+            type="matrix"
+            values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.4 2.05"
+            result="blotchMask"
+          />
+          <feComposite in="edges" in2="blotchMask" operator="in" />
+        </filter>
       </svg>
       <div className="hero" id="top">
         <div className="heroBackdrop" aria-hidden="true">

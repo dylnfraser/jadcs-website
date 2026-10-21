@@ -115,6 +115,7 @@ function PhotoFan(): ReactElement {
       />
       <Doodle
         name="plane"
+        react="fly"
         tone="moss"
         depth={10}
         draw="load"

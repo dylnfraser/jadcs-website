@@ -99,3 +99,78 @@
         display: none;
     }
 }
+
+.doodleInner {
+    display: block;
+}
+
+/* a couple of doodles answer a click */
+.doodle-react {
+    pointer-events: auto;
+    cursor: pointer;
+}
+
+/* the paper plane loops the loop and glides back into place */
+.doodle-fly .doodleInner.isReacting {
+    animation: plane-loop 1100ms cubic-bezier(0.45, 0, 0.3, 1);
+}
+
+@keyframes plane-loop {
+    0% {
+        transform: none;
+    }
+
+    25% {
+        transform: translate(34px, -26px) rotate(-30deg);
+    }
+
+    50% {
+        transform: translate(10px, -62px) rotate(-170deg);
+    }
+
+    75% {
+        transform: translate(-30px, -30px) rotate(-290deg);
+    }
+
+    100% {
+        transform: translate(0, 0) rotate(-360deg);
+    }
+}
+
+/* the bulb sputters on, glows for a moment, then goes out */
+.doodle-flicker .doodleInner.isReacting {
+    animation: bulb-on 1800ms linear;
+}
+
+@keyframes bulb-on {
+    0%,
+    100% {
+        color: inherit;
+        filter: none;
+    }
+
+    6%,
+    14%,
+    22% {
+        color: #d9a520;
+        filter: drop-shadow(0 0 6px rgb(240 190 60 / 0.8));
+    }
+
+    10%,
+    18% {
+        color: inherit;
+        filter: none;
+    }
+
+    30%,
+    80% {
+        color: #d9a520;
+        filter: drop-shadow(0 0 10px rgb(240 190 60 / 0.9));
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .doodleInner.isReacting {
+        animation: none;
+    }
+}

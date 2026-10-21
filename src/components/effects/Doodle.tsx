@@ -1,4 +1,4 @@
-import type { CSSProperties, ReactElement } from "react";
+import type { CSSProperties, MouseEvent, ReactElement } from "react";
 import "./Doodle.css";
 
 // hand-drawn marks, each drawn as a single stroke so it can sketch itself in. the little sketches (laptop, plane,
@@ -73,6 +73,18 @@ type DoodleProps = {
   turn?: number;
   className?: string;
   style?: CSSProperties;
+  // a small reaction when clicked: the plane flies a loop, the bulb flickers on
+  react?: "fly" | "flicker";
+};
+
+// restart the reaction animation on every click, even mid-way through the last one
+const playReaction = (event: MouseEvent<HTMLElement>) => {
+  event.stopPropagation();
+  const inner = event.currentTarget.querySelector(".doodleInner");
+  if (!inner) return;
+  inner.classList.remove("isReacting");
+  void (inner as HTMLElement).offsetWidth;
+  inner.classList.add("isReacting");
 };
 
 function Doodle({
@@ -83,18 +95,23 @@ function Doodle({
   turn = defaultTurn[name],
   className = "",
   style,
+  react,
 }: DoodleProps): ReactElement {
   const shape = shapes[name];
 
   return (
     <span
-      className={`doodle doodle-${tone} doodle-draw-${draw} ${className}`}
+      className={`doodle doodle-${tone} doodle-draw-${draw} ${react ? `doodle-react doodle-${react}` : ""} ${className}`}
       style={{ "--depth": depth, "--turn": turn, ...style } as CSSProperties}
       aria-hidden="true"
+      onClick={react ? playReaction : undefined}
     >
-      <svg viewBox={shape.viewBox}>
-        <path d={shape.d} pathLength="1" filter="url(#pencil)" />
-      </svg>
+      {/* the reaction animates this wrapper, so it doesn't fight the drawing, bobbing or cursor lean */}
+      <span className="doodleInner" onAnimationEnd={(event) => event.currentTarget.classList.remove("isReacting")}>
+        <svg viewBox={shape.viewBox}>
+          <path d={shape.d} pathLength="1" filter="url(#pencil)" />
+        </svg>
+      </span>
     </span>
   );
 }

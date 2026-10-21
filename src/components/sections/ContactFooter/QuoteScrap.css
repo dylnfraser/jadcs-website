@@ -168,3 +168,26 @@
         scale: 1;
     }
 }
+
+/* hovering the paper peels the tape's right-hand end up a little, catching the light */
+.quoteTape {
+    transform-origin: 0 50%;
+    transition: transform 450ms var(--ease-bubble);
+
+    &::after {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to left, rgb(255 255 255 / 0.55), rgb(255 255 255 / 0.1) 35%, transparent 55%);
+        opacity: 0;
+        transition: opacity 300ms ease;
+        content: "";
+    }
+}
+
+.quoteScrap:hover .quoteTape {
+    transform: perspective(160px) rotateY(-24deg) translateY(-1px);
+
+    &::after {
+        opacity: 1;
+    }
+}
