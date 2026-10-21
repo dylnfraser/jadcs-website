@@ -104,17 +104,17 @@
 /* on hover the prints jump up and fan outward, the outer ones flung a little further, then settle with a bounce */
 .photoFan:hover {
     .photoSlot-0 {
-        translate: 0 -14px;
+        translate: 0 -8px;
     }
 
     .photoSlot-1 {
-        rotate: -15deg;
-        translate: -48px -24px;
+        rotate: -11deg;
+        translate: -22px -12px;
     }
 
     .photoSlot-2 {
-        rotate: 15deg;
-        translate: 48px -24px;
+        rotate: 11deg;
+        translate: 22px -12px;
     }
 }
 
@@ -133,8 +133,8 @@
 
     42% {
         z-index: 4;
-        rotate: 20deg;
-        translate: 150px -34px;
+        rotate: 14deg;
+        translate: 92px -22px;
     }
 
     52% {
@@ -200,8 +200,8 @@
 
         42% {
             z-index: 4;
-            rotate: 16deg;
-            translate: 110px -26px;
+            rotate: 12deg;
+            translate: 70px -18px;
         }
 
         52% {
