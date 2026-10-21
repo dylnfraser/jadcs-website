@@ -16,19 +16,22 @@
     height: 68px;
     padding-inline: max(1.25rem, calc((100vw - min(1000px, 86vw)) / 2));
     border-bottom: dashed 1px transparent;
-    opacity: 0;
-    animation: appear 900ms var(--ease-out) 150ms forwards;
+    /* the frost is on the bar itself and always on, so it never switches on and off as you scroll (which flashed);
+       only the paper tint fades in once the page moves under it */
+    backdrop-filter: blur(10px) saturate(1.15);
+    -webkit-backdrop-filter: blur(10px) saturate(1.15);
+    /* "backwards" so the fade-in lets go of the bar once it has played: an animation held on afterwards turns the bar
+       into a boundary the frosted backing can't see past, which switched its blur off */
+    animation: appear 900ms var(--ease-out) 150ms backwards;
     transition: border-color var(--dur-soft) var(--ease-out);
 
-    /* the frosted paper backing is always present and only fades in: turning a backdrop blur on and off as you
-       scroll past the top makes the bar flash */
+    /* the paper tint behind the bar, faded in once the page scrolls under it */
     &::before {
         position: absolute;
         inset: 0;
         z-index: -1;
-        background-color: color-mix(in srgb, var(--paper) 82%, transparent);
-        backdrop-filter: blur(16px) saturate(1.1);
-        -webkit-backdrop-filter: blur(16px) saturate(1.1);
+        /* light enough that the blurred page shows through, like frosted tracing paper */
+        background-color: color-mix(in srgb, var(--paper) 58%, transparent);
         opacity: 0;
         transition: opacity var(--dur-soft) var(--ease-out);
         content: "";
