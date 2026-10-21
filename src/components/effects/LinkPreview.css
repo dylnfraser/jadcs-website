@@ -21,9 +21,9 @@
     rotate: -0.6deg;
     scale: 0.98;
     transition:
-        opacity 200ms ease,
-        translate 320ms var(--ease-out),
-        scale 320ms var(--ease-out);
+        opacity 110ms ease-out,
+        translate 200ms var(--ease-out),
+        scale 200ms var(--ease-out);
 
     &.isBelow {
         translate: 0 -6px;

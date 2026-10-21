@@ -45,13 +45,13 @@ const previews: { match: (href: string) => boolean; preview: Preview }[] = [
   },
 ];
 
-const SHOW_DELAY = 320;
+const SHOW_DELAY = 0;
 const CARD_WIDTH = 280;
 const GAP = 14;
 
 type Shown = { preview: Preview; left: number; top: number; below: boolean };
 
-// a small paper card that previews where an outside link goes, shown after a short hover (or on keyboard focus)
+// a small paper card that previews where an outside link goes, shown as soon as the link is hovered (or focused)
 function LinkPreview(): ReactElement | null {
   const [shown, setShown] = useState<Shown | null>(null);
   const [visible, setVisible] = useState(false);
