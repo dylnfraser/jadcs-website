@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import Doodle from "../../effects/Doodle";
+import SplitWords from "../../effects/SplitWords";
 import "./MissionSection.css";
 
 const goals = [
@@ -58,7 +59,9 @@ const MissionSection: React.FC = () => {
       <div className="missionContent">
         <div className="missionSpread">
           <div className="missionIntro">
-            <h2 className="missionHeading">Talent is everywhere. Access isn’t.</h2>
+            <h2 className="missionHeading splitWords">
+              <SplitWords text="Talent is everywhere. Access isn’t." />
+            </h2>
           </div>
           <div className="missionText">
             <p>

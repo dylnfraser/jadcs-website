@@ -168,7 +168,10 @@ button {
         background-color var(--dur-quick) ease,
         border-color var(--dur-quick) ease,
         color var(--dur-quick) ease,
-        scale var(--dur-soft) var(--ease-spring);
+        scale var(--dur-soft) var(--ease-spring),
+        translate 600ms var(--ease-spring);
+    /* set by the magnetic effect in App.tsx */
+    translate: var(--mx, 0) var(--my, 0);
 }
 
 .pillButton:active {
@@ -205,6 +208,25 @@ button {
 
 .pillButton:hover .pillArrow {
     translate: 4px 0;
+}
+
+/* headings that rise in word by word, out of a soft blur */
+.splitWords .word {
+    display: inline-block;
+    opacity: 0;
+    translate: 0 0.45em;
+    filter: blur(12px);
+    transition:
+        opacity 900ms var(--ease-out),
+        translate 1100ms var(--ease-out),
+        filter 900ms var(--ease-out);
+    transition-delay: calc(var(--w) * 70ms);
+}
+
+.splitWords.isIn .word {
+    opacity: 1;
+    translate: 0 0;
+    filter: none;
 }
 
 /* visible to screen readers only */

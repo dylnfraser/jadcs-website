@@ -1,4 +1,5 @@
 import Doodle from "../../effects/Doodle";
+import SplitWords from "../../effects/SplitWords";
 import "./ProgramsSection.css";
 
 const programs = [
@@ -29,7 +30,9 @@ function ProgramsSection() {
       <Doodle name="sparkle" tone="clay" depth={13} style={{ top: "80%", right: "calc(50% - 45vw)", width: 40 }} />
       <div className="programsSpread">
         <header className="programsHeader">
-          <h2>Four ways we close the gap.</h2>
+          <h2 className="splitWords">
+            <SplitWords text="Four ways we close the gap." />
+          </h2>
           <p className="sectionIntro">
             JADCS connects students with practical STEM learning, mentorship, and the technology needed to keep building
             outside the classroom.

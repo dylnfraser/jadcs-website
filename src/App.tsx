@@ -25,7 +25,7 @@ function App(): ReactElement {
     ];
     // pinned headings can't follow a scroll-linked reveal: once they stick their position stops tracking
     // the scroll, so the animation stalls and jumps. they get a one-off timed reveal instead.
-    const timed = [...document.querySelectorAll<HTMLElement>(".missionIntro > *, .programsHeader > *")];
+    const timed = [...document.querySelectorAll<HTMLElement>(".programsHeader > p")];
 
     // where supported, tie each reveal to scroll position so it eases in continuously as you scroll. that already
     // reveals things in page order, so the only stagger is for items sharing a row (like the three goals), which
@@ -107,6 +107,57 @@ function App(): ReactElement {
       observer.disconnect();
       areas.forEach(([, flag]) => root.classList.remove(flag));
     };
+  }, []);
+
+  // headings rise in word by word and the footer wordmark letter by letter, once, as each comes into view
+  useEffect(() => {
+    const targets = document.querySelectorAll(".splitWords, .footerWordmark");
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      targets.forEach((target) => target.classList.add("isIn"));
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("isIn");
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.35 },
+    );
+    targets.forEach((target) => observer.observe(target));
+    return () => observer.disconnect();
+  }, []);
+
+  // pill buttons lean a little toward the cursor while it's over them, and spring back when it leaves
+  useEffect(() => {
+    if (!window.matchMedia("(pointer: fine)").matches) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const buttons = [...document.querySelectorAll<HTMLElement>(".pillButton")];
+    const cleanups = buttons.map((button) => {
+      const move = (event: PointerEvent) => {
+        const rect = button.getBoundingClientRect();
+        const x = (event.clientX - rect.left - rect.width / 2) * 0.1;
+        const y = (event.clientY - rect.top - rect.height / 2) * 0.18;
+        button.style.setProperty("--mx", `${x.toFixed(1)}px`);
+        button.style.setProperty("--my", `${y.toFixed(1)}px`);
+      };
+      const leave = () => {
+        button.style.removeProperty("--mx");
+        button.style.removeProperty("--my");
+      };
+      button.addEventListener("pointermove", move);
+      button.addEventListener("pointerleave", leave);
+      return () => {
+        button.removeEventListener("pointermove", move);
+        button.removeEventListener("pointerleave", leave);
+      };
+    });
+
+    return () => cleanups.forEach((cleanup) => cleanup());
   }, []);
 
   // light up the grid in a pool that trails the cursor, easing toward it rather than snapping. the same eased

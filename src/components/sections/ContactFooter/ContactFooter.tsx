@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import contours from "../../../assets/contours.svg?raw";
 import "./ContactFooter.css";
 
@@ -55,7 +56,11 @@ function ContactFooter() {
 
       {/* the name set huge and cropped by the bottom of the page, like a signature at the foot of a letter */}
       <p className="footerWordmark" aria-hidden="true">
-        JADCS
+        {"JADCS".split("").map((letter, index) => (
+          <span key={index} style={{ "--l": index } as CSSProperties}>
+            {letter}
+          </span>
+        ))}
       </p>
     </footer>
   );
