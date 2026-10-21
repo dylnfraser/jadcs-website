@@ -12,7 +12,8 @@ const goals = [
 
 const formatGoal = (value: number, prefix: string) => `${prefix}${Math.round(value).toLocaleString("en-US")}`;
 
-// press a stamped figure to stamp it again: a rubber stamp drops in over it, presses down, and lifts away, and
+// press a stamped figure to stamp it again: a rubber stamp drops toward the page from above the screen, presses
+// down, and lifts back up, and
 // the figure is re-inked at the moment of contact, at a new slight angle and taking the ink a little differently
 const CONTACT_MS = 300;
 let pressCount = 0;
@@ -20,10 +21,12 @@ const restamp = (event: React.MouseEvent<HTMLElement>) => {
   const figure = event.currentTarget;
   const tool = figure.parentElement?.querySelector<HTMLElement>(".stampTool");
   if (tool) {
-    // the rubber face is sized to cover the figure, and its bottom comes down onto the figure's face
-    tool.style.width = `${Math.max(80, figure.offsetWidth + 16)}px`;
+    // a square stamp, seen from above, big enough to cover the figure and centred on it
+    const side = Math.max(figure.offsetWidth, figure.offsetHeight) + 18;
+    tool.style.width = `${side}px`;
+    tool.style.height = `${side}px`;
     tool.style.left = `${figure.offsetLeft + figure.offsetWidth / 2}px`;
-    tool.style.top = `${figure.offsetTop + figure.offsetHeight}px`;
+    tool.style.top = `${figure.offsetTop + figure.offsetHeight / 2}px`;
     // restart the press even if the last one is still playing
     tool.classList.remove("isStamping");
     void tool.offsetWidth;
@@ -126,17 +129,12 @@ const MissionSection: React.FC = () => {
               >
                 <dt>{goal.label}</dt>
                 <dd onClick={restamp}>{formatGoal(goal.value, goal.prefix)}</dd>
-                {/* the rubber stamp that comes down when a figure is clicked */}
+                {/* the rubber stamp, seen from above, that drops onto a figure when it's clicked */}
                 <span
                   className="stampTool"
                   aria-hidden="true"
                   onAnimationEnd={(event) => event.currentTarget.classList.remove("isStamping")}
-                >
-                  <span className="stampKnob" />
-                  <span className="stampHandle" />
-                  <span className="stampBlock" />
-                  <span className="stampRubber" />
-                </span>
+                />
               </div>
             ))}
           </dl>
