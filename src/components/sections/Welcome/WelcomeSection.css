@@ -86,10 +86,11 @@
 
 .char {
     display: inline-block;
-    /* extra room for descenders like the J's tail: while a letter is blurring in, its blur is clipped to its
-       own box, so the box is padded to cover the whole glyph and the padding cancelled by negative margins */
-    padding-block: 0.12em 0.3em;
-    margin-block: -0.12em -0.3em;
+    /* while a letter is blurring in, Safari clips the blur to the letter's own box, cutting off anything that
+       pokes outside it: the J's tail below, and the A's slanted sides, which overhang its tightly spaced box.
+       the box is padded on every side to cover the whole glyph, and the padding cancelled by negative margins */
+    padding: 0.12em 0.15em 0.3em;
+    margin: -0.12em -0.15em -0.3em;
     color: var(--ink);
     font-weight: 400;
     animation: char-rise 1150ms var(--ease-out) both;
