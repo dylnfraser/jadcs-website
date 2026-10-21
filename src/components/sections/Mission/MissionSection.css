@@ -450,37 +450,39 @@
     0% {
         opacity: 0;
         scale: 1.7;
-        filter: drop-shadow(26px 38px 26px rgb(60 44 22 / 0.18));
+        filter: blur(9px) drop-shadow(26px 38px 26px rgb(60 44 22 / 0.18));
     }
 
+    /* close to the screen it's out of focus, sharpening as it reaches the page */
     18% {
         opacity: 0.95;
+        filter: blur(5px) drop-shadow(18px 26px 20px rgb(60 44 22 / 0.2));
     }
 
     /* contact: full size, shadow tucked in right beneath it */
     40% {
         opacity: 1;
         scale: 1;
-        filter: drop-shadow(2px 3px 3px rgb(60 44 22 / 0.35));
+        filter: blur(0px) drop-shadow(2px 3px 3px rgb(60 44 22 / 0.35));
     }
 
     /* pressed in */
     50% {
         opacity: 1;
         scale: 0.97;
-        filter: drop-shadow(1px 1px 1px rgb(60 44 22 / 0.4));
+        filter: blur(0px) drop-shadow(1px 1px 1px rgb(60 44 22 / 0.4));
     }
 
     78% {
         opacity: 0.9;
         scale: 1.35;
-        filter: drop-shadow(18px 26px 20px rgb(60 44 22 / 0.2));
+        filter: blur(4px) drop-shadow(18px 26px 20px rgb(60 44 22 / 0.2));
     }
 
     100% {
         opacity: 0;
         scale: 1.7;
-        filter: drop-shadow(26px 38px 26px rgb(60 44 22 / 0.14));
+        filter: blur(9px) drop-shadow(26px 38px 26px rgb(60 44 22 / 0.14));
     }
 }
 
