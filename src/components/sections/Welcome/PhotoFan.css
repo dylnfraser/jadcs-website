@@ -1,9 +1,13 @@
 /*
- * three prints fanned out like photos dealt onto a table. --i runs -1, 0, 1 across the cards (--a is its size); each card turns
- * about its bottom edge, and on hover the fan opens a little wider and the cards spread apart.
+ * three prints fanned out like photos dealt onto a table: one at the front, one tucked behind on each side. each
+ * card turns about a point below its bottom edge. PhotoFan.tsx moves cards between the slots to shuffle them, and
+ * on hover the fan opens wider.
  */
 .photoFan {
     position: relative;
+    cursor: pointer;
+    border-radius: 8px;
+    -webkit-tap-highlight-color: transparent;
     width: 250px;
     height: 320px;
     opacity: 0;
@@ -21,16 +25,9 @@
         0 1px 2px rgb(70 52 28 / 0.12),
         0 14px 30px rgb(70 52 28 / 0.12);
     transform-origin: 50% 120%;
-    rotate: calc(var(--i) * 9deg);
-    translate: calc(var(--i) * 18px) calc(var(--a) * 6px);
     transition:
         rotate 650ms var(--ease-bubble),
         translate 650ms var(--ease-bubble);
-
-    /* the middle print sits on top */
-    &:nth-of-type(2) {
-        z-index: 1;
-    }
 
     img,
     .photoPlaceholder {
@@ -81,10 +78,74 @@
     width: 58px;
 }
 
+.photoFan:focus-visible {
+    outline: solid 3px var(--prim-color1);
+    outline-offset: 12px;
+}
+
+.photoSlot-0 {
+    z-index: 3;
+    rotate: 0deg;
+    translate: 0 0;
+}
+
+.photoSlot-1 {
+    z-index: 2;
+    rotate: -9deg;
+    translate: -18px 6px;
+}
+
+.photoSlot-2 {
+    z-index: 1;
+    rotate: 9deg;
+    translate: 18px 6px;
+}
+
 /* on hover the prints jump up and fan outward, the outer ones flung a little further, then settle with a bounce */
-.photoFan:hover .photoCard {
-    rotate: calc(var(--i) * 15deg);
-    translate: calc(var(--i) * 48px) calc(-14px - var(--a) * 10px);
+.photoFan:hover {
+    .photoSlot-0 {
+        translate: 0 -14px;
+    }
+
+    .photoSlot-1 {
+        rotate: -15deg;
+        translate: -48px -24px;
+    }
+
+    .photoSlot-2 {
+        rotate: 15deg;
+        translate: 48px -24px;
+    }
+}
+
+/* the shuffle: the front print swipes up and out to the right (away from the title), drops behind the stack, and
+   settles into the back */
+.photoCard.isLeaving {
+    animation: fan-shuffle 950ms cubic-bezier(0.45, 0, 0.2, 1) both;
+}
+
+@keyframes fan-shuffle {
+    0% {
+        z-index: 4;
+        rotate: 0deg;
+        translate: 0 0;
+    }
+
+    42% {
+        z-index: 4;
+        rotate: 20deg;
+        translate: 150px -34px;
+    }
+
+    52% {
+        z-index: 0;
+    }
+
+    100% {
+        z-index: 1;
+        rotate: 9deg;
+        translate: 18px 6px;
+    }
 }
 
 /* smaller screens: the fan shrinks so its outer prints stay on screen */
@@ -126,5 +187,31 @@
 @media (prefers-reduced-motion: reduce) {
     .photoCard {
         transition: none;
+    }
+}
+
+@media (max-width: 900px) {
+    @keyframes fan-shuffle {
+        0% {
+            z-index: 4;
+            rotate: 0deg;
+            translate: 0 0;
+        }
+
+        42% {
+            z-index: 4;
+            rotate: 16deg;
+            translate: 110px -26px;
+        }
+
+        52% {
+            z-index: 0;
+        }
+
+        100% {
+            z-index: 1;
+            rotate: 9deg;
+            translate: 18px 6px;
+        }
     }
 }
