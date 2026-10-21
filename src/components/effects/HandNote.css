@@ -26,6 +26,7 @@
         stroke-linejoin: round;
         stroke-dasharray: 1;
         stroke-dashoffset: 1;
+        stroke-opacity: 0;
         vector-effect: non-scaling-stroke;
     }
 }
@@ -44,5 +45,6 @@
 @media (prefers-reduced-motion: reduce) {
     .handNote svg {
         stroke-dashoffset: 0;
+        stroke-opacity: 1;
     }
 }

@@ -339,6 +339,7 @@ button {
         stroke-linecap: round;
         stroke-dasharray: 1;
         stroke-dashoffset: 1;
+        stroke-opacity: 0;
         vector-effect: non-scaling-stroke;
     }
 }
@@ -368,6 +369,7 @@ button {
 
     .splitWords .struck .strike {
         stroke-dashoffset: 0;
+        stroke-opacity: 1;
     }
 }
 

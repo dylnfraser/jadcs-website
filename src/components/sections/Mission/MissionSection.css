@@ -64,7 +64,7 @@
        a 3D layer as you scroll past it, which made it flicker */
     transform: none;
     /* the folded corner is cut away from the sheet... */
-    --fold: 36px;
+    --fold: 48px;
     clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--fold)), calc(100% - var(--fold)) 100%, 0 100%);
 
     /* ...and lies back over it as a flap: the paper's back is a shade paler, darker toward the crease, and casts a
@@ -132,7 +132,7 @@
     }
 
     to {
-        --fold: 36px;
+        --fold: 48px;
     }
 }
 
