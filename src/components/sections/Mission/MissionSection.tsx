@@ -65,7 +65,7 @@ const MissionSection: React.FC = () => {
             <div className="stickyNote">
               <h2 className="missionHeading splitWords handwritten">
                 {/* written in once the note has swung down into place */}
-                <SplitWords text="Talent is everywhere. Access isn’t." startDelay={750} />
+                <SplitWords text="Talent is ~rare~ everywhere. Access isn’t." startDelay={750} />
               </h2>
             </div>
           </div>

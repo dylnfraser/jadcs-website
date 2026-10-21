@@ -273,6 +273,32 @@ button {
     animation: pen-write var(--write-duration) linear var(--write-start) forwards;
 }
 
+/* a correction: the word is written, then two quick pen strokes cross it out */
+.splitWords .struck {
+    position: relative;
+    opacity: 0.85;
+
+    .strike {
+        position: absolute;
+        top: 38%;
+        left: 2%;
+        width: 102%;
+        height: 0.4em;
+        overflow: visible;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 2.6;
+        stroke-linecap: round;
+        stroke-dasharray: 1;
+        stroke-dashoffset: 1;
+        vector-effect: non-scaling-stroke;
+    }
+}
+
+.splitWords.isIn .struck .strike {
+    animation: doodle-draw 380ms cubic-bezier(0.5, 0, 0.3, 1) var(--strike-start) forwards;
+}
+
 @keyframes pen-write {
     97% {
         clip-path: inset(-40% -25% -40% -25%);
@@ -286,6 +312,10 @@ button {
 @media (prefers-reduced-motion: reduce) {
     .splitWords.handwritten .word {
         clip-path: none;
+    }
+
+    .splitWords .struck .strike {
+        stroke-dashoffset: 0;
     }
 }
 
