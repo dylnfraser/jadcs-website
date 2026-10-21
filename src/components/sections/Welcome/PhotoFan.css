@@ -78,6 +78,19 @@
     width: 58px;
 }
 
+/* an invisible margin around the prints that still counts as the fan, so the pointer cursor and the hover state hold
+   steady while a print swipes out from under the cursor */
+.photoFan::before {
+    position: absolute;
+    inset: -36px -48px -24px;
+    content: "";
+}
+
+/* no text cursor or selection on the captions; the whole fan is a control */
+.photoFan {
+    user-select: none;
+}
+
 .photoFan:focus-visible {
     outline: solid 3px var(--prim-color1);
     outline-offset: 12px;

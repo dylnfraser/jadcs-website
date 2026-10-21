@@ -32,7 +32,9 @@ const photos: Photo[] = [
 ];
 
 // how long each photo stays at the front before the next one is shuffled forward
-const SHUFFLE_EVERY = 3600;
+const SHUFFLE_EVERY = 2600;
+// the first shuffle comes right as the fan finishes fading in, so the motion is seen straight away
+const FIRST_SHUFFLE = 1500;
 const SHUFFLE_DURATION = 950;
 
 function PhotoFan(): ReactElement {
@@ -67,7 +69,7 @@ function PhotoFan(): ReactElement {
     const observer = new IntersectionObserver(([entry]) => (visible = entry.isIntersecting));
     observer.observe(fan);
 
-    lastShuffle.current = performance.now();
+    lastShuffle.current = performance.now() - SHUFFLE_EVERY + FIRST_SHUFFLE;
     const timer = window.setInterval(() => {
       if (!visible || document.hidden || fan.matches(":hover")) {
         lastShuffle.current = performance.now();
