@@ -63,8 +63,9 @@ const MissionSection: React.FC = () => {
             {/* the shadow is its own layer under the note, so it can sit behind it while the note folds in */}
             <span className="stickyShadow" aria-hidden="true" />
             <div className="stickyNote">
-              <h2 className="missionHeading splitWords">
-                <SplitWords text="Talent is everywhere. Access isn’t." />
+              <h2 className="missionHeading splitWords handwritten">
+                {/* written in once the note has swung down into place */}
+                <SplitWords text="Talent is everywhere. Access isn’t." startDelay={750} />
               </h2>
             </div>
           </div>

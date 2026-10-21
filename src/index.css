@@ -256,6 +256,39 @@ button {
     filter: none;
 }
 
+/*
+ * handwritten headings are written in rather than risen: each word is uncovered left to right over its own
+ * duration, one after another, like a pen moving across the page. the reveal box reaches well past each word so
+ * the slant and loops of the handwriting are never cut, and once a word is written the clip is dropped entirely.
+ */
+.splitWords.handwritten .word {
+    opacity: 1;
+    translate: 0 0;
+    filter: none;
+    transition: none;
+    clip-path: inset(-40% 100% -40% -25%);
+}
+
+.splitWords.handwritten.isIn .word {
+    animation: pen-write var(--write-duration) linear var(--write-start) forwards;
+}
+
+@keyframes pen-write {
+    97% {
+        clip-path: inset(-40% -25% -40% -25%);
+    }
+
+    100% {
+        clip-path: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .splitWords.handwritten .word {
+        clip-path: none;
+    }
+}
+
 /* visible to screen readers only */
 .srOnly {
     position: absolute;

@@ -9,21 +9,16 @@ const renderChars = (text: string, offset = 0) =>
   ));
 
 function WelcomeSection(): ReactElement {
-  const lead = "Welcome to ";
   const name = "JADCS";
 
   return (
     <section className="welcomeSection" aria-labelledby="welcome-title">
       {/* screen readers get the title as one phrase; the per-letter spans are only there for the animation */}
       <h1 className="welcomeTitle" id="welcome-title">
-        <span className="srOnly">
-          {lead}
-          {name}
-        </span>
+        <span className="srOnly">{name}</span>
         <span aria-hidden="true">
-          {renderChars(lead)}
           <span className="welcomeName">
-            {renderChars(name, lead.length)}
+            {renderChars(name)}
             <svg className="welcomeScribble" viewBox="0 0 240 20" preserveAspectRatio="none">
               <path d="M4 15 C 58 6.5, 150 4, 236 8" pathLength="1" />
             </svg>
