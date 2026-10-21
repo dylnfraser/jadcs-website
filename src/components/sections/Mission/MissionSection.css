@@ -80,8 +80,16 @@
         content: "";
     }
 
+    /* written on the note by hand, in marker */
     .missionHeading {
         position: relative;
+        color: #2b2a2e;
+        font-family: var(--font-hand);
+        font-size: clamp(2.6rem, 4.2vw, 3.5rem);
+        font-weight: 600;
+        line-height: 1;
+        letter-spacing: 0;
+        rotate: -1deg;
     }
 }
 
