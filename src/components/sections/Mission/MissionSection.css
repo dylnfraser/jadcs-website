@@ -328,6 +328,7 @@
     border-image: linear-gradient(to right, transparent, var(--goal-rule) 18%, var(--goal-rule) 82%, transparent) 1;
 
     > div {
+        position: relative;
         display: flex;
         flex-direction: column;
         gap: 0.4rem;
@@ -374,29 +375,24 @@
     }
 }
 
-/* stamped again on click; two identical animations so each press restarts it */
+/* re-inked under the rubber stamp at the moment of contact; two identical animations so each press restarts it */
 #missionGoals dd {
     cursor: pointer;
     user-select: none;
 }
 
 #missionGoals.isIn dd[data-press="a"] {
-    animation: stamp-press-a 420ms cubic-bezier(0.3, 0, 0.2, 1.4) forwards;
+    animation: stamp-press-a 380ms ease-out forwards;
 }
 
 #missionGoals.isIn dd[data-press="b"] {
-    animation: stamp-press-b 420ms cubic-bezier(0.3, 0, 0.2, 1.4) forwards;
+    animation: stamp-press-b 380ms ease-out forwards;
 }
 
 @keyframes stamp-press-a {
     0% {
-        opacity: 0.92;
-        scale: 1;
-    }
-
-    35% {
-        opacity: 0.35;
-        scale: 1.18;
+        opacity: 0.3;
+        scale: 0.97;
     }
 
     100% {
@@ -407,13 +403,8 @@
 
 @keyframes stamp-press-b {
     0% {
-        opacity: 0.92;
-        scale: 1;
-    }
-
-    35% {
-        opacity: 0.35;
-        scale: 1.18;
+        opacity: 0.3;
+        scale: 0.97;
     }
 
     100% {
@@ -423,6 +414,93 @@
 }
 
 /* the stamp comes down from just above the page, its shadow-soft ink fading up as it presses */
+/* the rubber stamp: a wooden knob and handle on a block as wide as the figure, with a red rubber face. JS places
+   its bottom on the figure's bottom edge and sizes it to the figure */
+.stampTool {
+    position: absolute;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    translate: -50% -100%;
+    pointer-events: none;
+    opacity: 0;
+    filter: drop-shadow(0 8px 8px rgb(60 44 22 / 0.22));
+    /* squash about the rubber face, where it meets the page */
+    transform-origin: 50% 100%;
+
+    span {
+        display: block;
+    }
+}
+
+.stampKnob {
+    width: 30px;
+    height: 26px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #c08a5d, #9a6b44 70%);
+}
+
+.stampHandle {
+    width: 18px;
+    height: 34px;
+    margin-top: -3px;
+    clip-path: polygon(22% 0, 78% 0, 100% 100%, 0 100%);
+    background: linear-gradient(to right, #7b5233, #9a6a43 50%, #7b5233);
+}
+
+.stampBlock {
+    width: 100%;
+    height: 20px;
+    border-radius: 4px;
+    background: linear-gradient(to bottom, #c9976a, #ad7e52);
+}
+
+.stampRubber {
+    width: calc(100% - 6px);
+    height: 7px;
+    border-radius: 0 0 2px 2px;
+    background: #9b3b2a;
+}
+
+/* drops in from above, presses down onto the page (squashing a little), then lifts away */
+.stampTool.isStamping {
+    animation: stamp-tool 760ms cubic-bezier(0.4, 0, 0.3, 1);
+}
+
+@keyframes stamp-tool {
+    0% {
+        opacity: 0;
+        transform: translateY(-70px) rotate(-6deg);
+    }
+
+    22% {
+        opacity: 1;
+        transform: translateY(-58px) rotate(-4deg);
+    }
+
+    /* contact: the rubber face meets the figure */
+    40% {
+        opacity: 1;
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        opacity: 1;
+        transform: translateY(3px) scale(1.03, 0.94);
+    }
+
+    80% {
+        opacity: 1;
+        transform: translateY(-52px) rotate(3deg);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-70px) rotate(4deg);
+    }
+}
+
 @keyframes stamp-down {
     0% {
         opacity: 0;

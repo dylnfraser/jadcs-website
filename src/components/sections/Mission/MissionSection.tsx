@@ -12,15 +12,29 @@ const goals = [
 
 const formatGoal = (value: number, prefix: string) => `${prefix}${Math.round(value).toLocaleString("en-US")}`;
 
-// press a stamped figure to stamp it again: it lifts, comes down at a new slight angle, and the ink takes a
-// little differently each time
+// press a stamped figure to stamp it again: a rubber stamp drops in over it, presses down, and lifts away, and
+// the figure is re-inked at the moment of contact, at a new slight angle and taking the ink a little differently
+const CONTACT_MS = 300;
 let pressCount = 0;
 const restamp = (event: React.MouseEvent<HTMLElement>) => {
-  const stamp = event.currentTarget;
-  pressCount += 1;
-  stamp.dataset.press = pressCount % 2 ? "a" : "b";
-  stamp.style.setProperty("--stamp-tilt", `${(Math.random() * 7 - 3.5).toFixed(1)}deg`);
-  stamp.style.filter = `url(#${["ink", "ink-2", "ink-3"][pressCount % 3]})`;
+  const figure = event.currentTarget;
+  const tool = figure.parentElement?.querySelector<HTMLElement>(".stampTool");
+  if (tool) {
+    // the rubber face is sized to cover the figure, and its bottom comes down onto the figure's face
+    tool.style.width = `${Math.max(80, figure.offsetWidth + 16)}px`;
+    tool.style.left = `${figure.offsetLeft + figure.offsetWidth / 2}px`;
+    tool.style.top = `${figure.offsetTop + figure.offsetHeight}px`;
+    // restart the press even if the last one is still playing
+    tool.classList.remove("isStamping");
+    void tool.offsetWidth;
+    tool.classList.add("isStamping");
+  }
+  window.setTimeout(() => {
+    pressCount += 1;
+    figure.dataset.press = pressCount % 2 ? "a" : "b";
+    figure.style.setProperty("--stamp-tilt", `${(Math.random() * 7 - 3.5).toFixed(1)}deg`);
+    figure.style.filter = `url(#${["ink", "ink-2", "ink-3"][pressCount % 3]})`;
+  }, CONTACT_MS);
 };
 
 const MissionSection: React.FC = () => {
@@ -112,6 +126,17 @@ const MissionSection: React.FC = () => {
               >
                 <dt>{goal.label}</dt>
                 <dd onClick={restamp}>{formatGoal(goal.value, goal.prefix)}</dd>
+                {/* the rubber stamp that comes down when a figure is clicked */}
+                <span
+                  className="stampTool"
+                  aria-hidden="true"
+                  onAnimationEnd={(event) => event.currentTarget.classList.remove("isStamping")}
+                >
+                  <span className="stampKnob" />
+                  <span className="stampHandle" />
+                  <span className="stampBlock" />
+                  <span className="stampRubber" />
+                </span>
               </div>
             ))}
           </dl>
