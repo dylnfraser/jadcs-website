@@ -5,7 +5,8 @@
     width: 44px;
     pointer-events: none;
     user-select: none;
-    translate: calc(var(--pointer-x, 0) * var(--depth) * 1px) calc(var(--pointer-y, 0) * var(--depth) * 1px);
+    /* a faint lean toward the cursor: about a third of a pixel per unit of depth, so even the deepest moves ~5px */
+    translate: calc(var(--pointer-x, 0) * var(--depth) * 0.35px) calc(var(--pointer-y, 0) * var(--depth) * 0.35px);
     animation: doodle-float 6s ease-in-out var(--float-offset, 0s) infinite alternate;
 
     svg {
@@ -51,11 +52,11 @@
 
 @keyframes doodle-turn {
     from {
-        rotate: calc(var(--turn, 0) * -0.5deg);
+        rotate: calc(var(--turn, 0) * -0.25deg);
     }
 
     to {
-        rotate: calc(var(--turn, 0) * 0.5deg);
+        rotate: calc(var(--turn, 0) * 0.25deg);
     }
 }
 

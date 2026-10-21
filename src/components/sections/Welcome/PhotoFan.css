@@ -330,23 +330,22 @@
     }
 }
 
-/* hovering the paper peels the tape's right-hand end up a little, catching the light */
+/* hovering the paper lifts the tape very slightly off it, bowing up in the middle and catching a little light */
 .photoTape {
-    transform-origin: 0 50%;
-    transition: transform 450ms var(--ease-bubble);
+    transition: transform 500ms var(--ease-out);
 
     &::after {
         position: absolute;
         inset: 0;
-        background: linear-gradient(to left, rgb(255 255 255 / 0.55), rgb(255 255 255 / 0.1) 35%, transparent 55%);
+        background: radial-gradient(ellipse 60% 90% at 50% 40%, rgb(255 255 255 / 0.32), transparent 70%);
         opacity: 0;
-        transition: opacity 300ms ease;
+        transition: opacity 400ms ease;
         content: "";
     }
 }
 
-.photoCard:hover .photoTape {
-    transform: perspective(160px) rotateY(-24deg) translateY(-1px);
+.photoCard:hover > .photoTape {
+    transform: perspective(220px) rotateX(8deg) translateY(-1px);
 
     &::after {
         opacity: 1;
