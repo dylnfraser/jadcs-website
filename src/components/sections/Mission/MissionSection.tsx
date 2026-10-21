@@ -15,7 +15,8 @@ const formatGoal = (value: number, prefix: string) => `${prefix}${Math.round(val
 // press a stamped figure to stamp it again: a rubber stamp drops toward the page from above the screen, presses
 // down, and lifts back up, and
 // the figure is re-inked at the moment of contact, at a new slight angle and taking the ink a little differently
-const CONTACT_MS = 300;
+// the press is 480ms with contact 40% of the way in
+const CONTACT_MS = 190;
 let pressCount = 0;
 const restamp = (event: React.MouseEvent<HTMLElement>) => {
   const figure = event.currentTarget;

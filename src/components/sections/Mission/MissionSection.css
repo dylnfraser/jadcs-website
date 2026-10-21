@@ -443,7 +443,7 @@
 }
 
 .stampTool.isStamping {
-    animation: stamp-tool 760ms cubic-bezier(0.45, 0, 0.3, 1);
+    animation: stamp-tool 480ms cubic-bezier(0.45, 0, 0.3, 1);
 }
 
 @keyframes stamp-tool {
