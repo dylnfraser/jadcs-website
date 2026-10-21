@@ -52,20 +52,32 @@
 /* a ruled index card: cream stock, a red line under the heading, blue rules for the detail */
 .programItem {
     position: relative;
+    isolation: isolate;
     display: flex;
     flex-direction: column;
-    border-radius: 3px;
-    background:
-        var(--grain-texture) 0 0 / 140px 140px,
-        var(--paper-age),
-        #fdfbf4;
-    background-blend-mode: soft-light, normal, normal;
-    box-shadow: var(--shadow-paper);
     rotate: var(--tilt, 0deg);
     transition:
         transform 450ms var(--ease-bubble),
-        box-shadow 450ms var(--ease-out),
         rotate 450ms var(--ease-bubble);
+
+    /*
+     * the card stock is its own layer behind the text, so its edges can be frayed (roughened by the #fray filter)
+     * without the writing on it wobbling too; the shadow is drawn after the fraying, so it follows the rough edge
+     */
+    &::before {
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        border-radius: 2px;
+        background:
+            var(--grain-texture) 0 0 / 140px 140px,
+            var(--paper-age),
+            #fdfbf4;
+        background-blend-mode: soft-light, normal, normal;
+        filter: url(#fray) var(--shadow-paper-drop);
+        content: "";
+        transition: filter 450ms var(--ease-out);
+    }
 
     /* dealt out overlapping a little, each one landing on the last */
     & + & {
@@ -87,7 +99,11 @@
     z-index: 2;
     rotate: 0deg;
     transform: translateY(-4px);
-    box-shadow: var(--shadow-paper-lifted);
+
+    &::before {
+        filter: url(#fray) drop-shadow(0 2px 2px rgb(60 44 22 / 0.1)) drop-shadow(0 10px 12px rgb(60 44 22 / 0.1))
+            drop-shadow(0 24px 26px rgb(60 44 22 / 0.12));
+    }
 }
 
 .cardHead {
