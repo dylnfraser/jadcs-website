@@ -1,5 +1,4 @@
 import type { ReactElement } from "react";
-import Doodle from "../../effects/Doodle";
 import "./WelcomeSection.css";
 
 const renderChars = (text: string, offset = 0) =>
@@ -9,33 +8,12 @@ const renderChars = (text: string, offset = 0) =>
     </span>
   ));
 
-// little hand-drawn marks scattered around the title; depth sets how far each leans with the cursor
-const doodles = [
-  { name: "laptop", depth: 14, tone: "clay" },
-  { name: "plane", depth: 10, tone: "moss" },
-  { name: "squiggle", depth: 6, tone: "moss" },
-] as const;
-
 function WelcomeSection(): ReactElement {
   const lead = "Welcome to ";
   const name = "JADCS";
 
   return (
     <section className="welcomeSection" aria-labelledby="welcome-title">
-      {doodles.map((doodle, index) => (
-        <Doodle
-          key={doodle.name}
-          name={doodle.name}
-          depth={doodle.depth}
-          tone={doodle.tone}
-          draw="load"
-          className={`welcomeDoodle-${doodle.name}`}
-          style={
-            { "--float-offset": `${index * -1.7}s`, "--draw-delay": `${700 + index * 380}ms` } as React.CSSProperties
-          }
-        />
-      ))}
-
       {/* screen readers get the title as one phrase; the per-letter spans are only there for the animation */}
       <h1 className="welcomeTitle" id="welcome-title">
         <span className="srOnly">

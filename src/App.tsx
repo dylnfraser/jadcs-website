@@ -5,6 +5,7 @@ import "./App.css";
 import Background from "./components/layout/Background";
 import Navbar from "./components/layout/Navbar";
 import WelcomeSection from "./components/sections/Welcome/WelcomeSection";
+import PhotoFan from "./components/sections/Welcome/PhotoFan";
 import MissionSection from "./components/sections/Mission/MissionSection";
 import ProgramsSection from "./components/sections/Programs/ProgramsSection";
 import ContactFooter from "./components/sections/ContactFooter/ContactFooter";
@@ -317,20 +318,23 @@ function App(): ReactElement {
         </div>
         <div className="heroEdge" aria-hidden="true" />
         <div className="heroInner">
-          <WelcomeSection />
-          <div className="heroCtas" aria-label="Primary actions">
-            <a
-              className="pillButton pillButton-solid"
-              href="https://givebutter.com/laptops-for-stem-students-y64rsa"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Donate
-            </a>
-            <button className="pillButton pillButton-ghost" onClick={handleLearnMore}>
-              Read our mission
-            </button>
+          <div className="heroCopy">
+            <WelcomeSection />
+            <div className="heroCtas" aria-label="Primary actions">
+              <a
+                className="pillButton pillButton-solid"
+                href="https://givebutter.com/laptops-for-stem-students-y64rsa"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Donate
+              </a>
+              <button className="pillButton pillButton-ghost" onClick={handleLearnMore}>
+                Read our mission
+              </button>
+            </div>
           </div>
+          <PhotoFan />
         </div>
       </div>
       <main className="pageSections" ref={missionRef}>

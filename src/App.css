@@ -158,9 +158,21 @@ a {
     }
 }
 
+/* copy on the left, the photo fan on the right */
 .heroInner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 3rem;
+    align-items: center;
     width: min(1000px, 86vw);
     margin-inline: auto;
+}
+
+@media (max-width: 900px) {
+    .heroInner {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
 }
 
 .heroCtas {
@@ -370,7 +382,7 @@ a {
 /* ambient loops pause while their area is scrolled out of view (flags set in App.tsx) */
 .hero-offscreen .heroBackdrop span,
 .hero-offscreen .gridLayer::before,
-.hero-offscreen .welcomeSection .doodle,
+.hero-offscreen .photoFan .doodle,
 .hero-offscreen .heroEdge::before,
 .hero-offscreen .heroEdge::after,
 .goals-offscreen .missionGoalsBlock::before,
