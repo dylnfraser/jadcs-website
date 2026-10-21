@@ -18,14 +18,16 @@ function App(): ReactElement {
 
     const linked = [
       ...document.querySelectorAll<HTMLElement>(
-        ".missionText > p, .missionGoalsTitle, #missionGoals > div, " +
-          ".programItem > *, " +
-          ".contactFooterMain, .footerColumns",
+        ".missionText > p, .missionGoalsTitle, #missionGoals > div, " + ".programItem > *",
       ),
     ];
     // pinned headings can't follow a scroll-linked reveal: once they stick their position stops tracking
     // the scroll, so the animation stalls and jumps. they get a one-off timed reveal instead.
-    const timed = [...document.querySelectorAll<HTMLElement>(".programsHeader > p")];
+    // the footer holds the main actions, so it fades in once rather than drifting with the scroll, which made
+    // its buttons slide and shrink while the footer arrived
+    const timed = [
+      ...document.querySelectorAll<HTMLElement>(".programsHeader > p, .contactFooterMain, .footerColumns"),
+    ];
 
     // where supported, tie each reveal to scroll position so it eases in continuously as you scroll. that already
     // reveals things in page order, so the only stagger is for items sharing a row (like the three goals), which
