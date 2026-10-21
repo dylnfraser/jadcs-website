@@ -36,7 +36,7 @@ const photos: Photo[] = [
 const SHUFFLE_EVERY = 2600;
 // the first shuffle comes right as the fan finishes fading in, so the motion is seen straight away
 const FIRST_SHUFFLE = 1500;
-const SHUFFLE_DURATION = 950;
+const SHUFFLE_DURATION = 1050;
 
 function PhotoFan(): ReactElement {
   // which photo is at the front; the others sit behind it, fanned out to either side

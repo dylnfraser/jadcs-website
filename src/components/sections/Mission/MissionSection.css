@@ -366,7 +366,7 @@
 
     /* thunk: each stamp drops onto the page in turn when the row comes into view */
     &.isIn dd {
-        animation: stamp-down 420ms cubic-bezier(0.3, 0, 0.2, 1.4) calc(var(--stamp) * 220ms) forwards;
+        animation: stamp-down 620ms cubic-bezier(0.25, 0.1, 0.25, 1.25) calc(var(--stamp) * 240ms) forwards;
     }
 }
 
@@ -418,14 +418,15 @@
     }
 }
 
+/* the stamp comes down from just above the page, its shadow-soft ink fading up as it presses */
 @keyframes stamp-down {
     0% {
         opacity: 0;
-        scale: 1.35;
+        scale: 1.18;
     }
 
-    60% {
-        opacity: 0.92;
+    45% {
+        opacity: 0.6;
     }
 
     100% {

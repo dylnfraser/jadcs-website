@@ -219,7 +219,7 @@
 /* the shuffle: the front print swipes up and out to the right (away from the title), drops behind the stack, and
    settles into the back */
 .photoCard.isLeaving {
-    animation: fan-shuffle 950ms cubic-bezier(0.45, 0, 0.2, 1) both;
+    animation: fan-shuffle 1050ms cubic-bezier(0.45, 0, 0.25, 1) both;
 }
 
 @keyframes fan-shuffle {
@@ -233,10 +233,22 @@
         z-index: 4;
         rotate: 14deg;
         translate: 92px -22px;
+        opacity: 1;
+    }
+
+    /* it dims as it slips behind the stack, so the change in stacking reads as a smooth tuck rather than a pop */
+    50% {
+        z-index: 4;
+        opacity: 0.55;
     }
 
     52% {
         z-index: 0;
+        opacity: 0.55;
+    }
+
+    70% {
+        opacity: 1;
     }
 
     100% {
@@ -301,10 +313,21 @@
             z-index: 4;
             rotate: 12deg;
             translate: 70px -18px;
+            opacity: 1;
+        }
+
+        50% {
+            z-index: 4;
+            opacity: 0.55;
         }
 
         52% {
             z-index: 0;
+            opacity: 0.55;
+        }
+
+        70% {
+            opacity: 1;
         }
 
         100% {

@@ -252,12 +252,16 @@
     /* each letter rises out of the bottom edge in turn as the footer arrives, settling slightly cropped */
     span {
         display: inline-block;
+        opacity: 0;
         translate: 0 75%;
-        transition: translate 1400ms var(--ease-out);
+        transition:
+            translate 1400ms var(--ease-out),
+            opacity 900ms ease;
         transition-delay: calc(var(--l) * 90ms);
     }
 
     &.isIn span {
+        opacity: 1;
         translate: 0 16%;
     }
 }

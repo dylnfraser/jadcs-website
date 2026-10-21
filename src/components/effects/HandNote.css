@@ -30,37 +30,18 @@
     }
 }
 
-/* hidden until written: the reveal box is generous on every side so loops, descenders and the slant all fit */
-.handNoteText {
-    clip-path: inset(-50% 100% -50% -20%);
-}
-
+/* the words fade in left to right as if being written (the soft reveal is .inkReveal in index.css) */
 .handNote-load .handNoteText,
 .handNote-view.isIn .handNoteText {
-    animation: note-write 560ms steps(12, end) var(--note-delay, 0ms) forwards;
+    animation: ink-in 720ms cubic-bezier(0.35, 0.1, 0.45, 1) var(--note-delay, 0ms) forwards;
 }
 
 .handNote-load svg,
 .handNote-view.isIn svg {
-    animation: doodle-draw 380ms cubic-bezier(0.65, 0, 0.35, 1) calc(var(--note-delay, 0ms) + 480ms) forwards;
-}
-
-@keyframes note-write {
-    96% {
-        clip-path: inset(-50% -20% -50% -20%);
-    }
-
-    /* once written, the clip is dropped entirely so nothing can ever be cut off */
-    100% {
-        clip-path: none;
-    }
+    animation: doodle-draw 380ms cubic-bezier(0.65, 0, 0.35, 1) calc(var(--note-delay, 0ms) + 560ms) forwards;
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .handNoteText {
-        clip-path: none;
-    }
-
     .handNote svg {
         stroke-dashoffset: 0;
     }

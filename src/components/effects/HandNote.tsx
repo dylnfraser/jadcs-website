@@ -29,7 +29,7 @@ function HandNote({ text, arrow, className = "", reveal = "view", delay = 0 }: H
       <svg viewBox={shape.viewBox}>
         <path d={shape.d} pathLength="1" filter="url(#pencil)" />
       </svg>
-      <span className="handNoteText">{text}</span>
+      <span className="handNoteText inkReveal">{text}</span>
     </span>
   );
 }
