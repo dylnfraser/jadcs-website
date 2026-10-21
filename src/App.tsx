@@ -7,6 +7,7 @@ import Navbar from "./components/layout/Navbar";
 import WelcomeSection from "./components/sections/Welcome/WelcomeSection";
 import PhotoFan from "./components/sections/Welcome/PhotoFan";
 import HandNote from "./components/effects/HandNote";
+import LinkPreview from "./components/effects/LinkPreview";
 import MissionSection from "./components/sections/Mission/MissionSection";
 import ProgramsSection from "./components/sections/Programs/ProgramsSection";
 import ContactFooter from "./components/sections/ContactFooter/ContactFooter";
@@ -315,6 +316,7 @@ function App(): ReactElement {
     <>
       <Background />
       <Navbar />
+      <LinkPreview />
       {/*
        * a pencil texture for the doodles: the stroke is nudged off its perfect line by low-level noise, then
        * eaten into by a finer noise so it looks like graphite dragged across paper
