@@ -425,23 +425,19 @@
     z-index: 2;
     translate: -50% -50%;
     border-radius: 6px;
-    /* the knob (a fixed size, whatever the block's shape), wood grain and a dark stained finish */
+    /* the knob (a fixed size, whatever the block's shape), then dark streaky wood grain, film grain and a deep
+       walnut stain */
     background:
-        radial-gradient(circle at 50% 50%, #6e4a2e 0 15px, #3e2716 16px 18px, transparent 19px),
-        radial-gradient(circle at calc(50% - 4px) calc(50% - 5px), rgb(255 230 200 / 0.28), transparent 9px),
-        var(--grain-texture) 0 0 / 140px 140px,
-        repeating-linear-gradient(
-            92deg,
-            transparent 0 7px,
-            rgb(0 0 0 / 0.06) 7px 8px,
-            transparent 8px 13px,
-            rgb(255 255 255 / 0.04) 13px 14px
-        ),
-        linear-gradient(135deg, #6f4b2f, #573822 55%, #47301d);
-    background-blend-mode: normal, normal, soft-light, normal, normal;
+        radial-gradient(circle at 50% 50%, #4a2f1b 0 15px, #1f130a 16px 18px, transparent 19px),
+        radial-gradient(circle at calc(50% - 4px) calc(50% - 5px), rgb(255 225 190 / 0.22), transparent 9px),
+        var(--grain-texture) 0 0 / 120px 120px,
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='120'%3E%3Cfilter id='w'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.012 0.42' numOctaves='3' seed='3'/%3E%3CfeColorMatrix values='0 0 0 0 0.1  0 0 0 0 0.06  0 0 0 0 0.03  0 0 0 2.2 -0.85'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23w)'/%3E%3C/svg%3E")
+            0 0 / 240px 120px,
+        linear-gradient(135deg, #4c311d, #3a2414 55%, #2c1b0e);
+    background-blend-mode: normal, normal, overlay, multiply, normal;
     box-shadow:
-        inset 0 0 0 1.5px rgb(255 255 255 / 0.08),
-        inset 0 -3px 0 rgb(0 0 0 / 0.2);
+        inset 0 0 0 1.5px rgb(255 255 255 / 0.07),
+        inset 0 -3px 0 rgb(0 0 0 / 0.3);
     pointer-events: none;
     opacity: 0;
 }

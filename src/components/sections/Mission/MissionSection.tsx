@@ -20,7 +20,10 @@ let pressCount = 0;
 const restamp = (event: React.MouseEvent<HTMLElement>) => {
   const figure = event.currentTarget;
   const tool = figure.parentElement?.querySelector<HTMLElement>(".stampTool");
+  // the new angle is picked now, so the stamp comes down already turned to it and leaves the print at that angle
+  const tilt = `${(Math.random() * 7 - 3.5).toFixed(1)}deg`;
   if (tool) {
+    tool.style.rotate = tilt;
     // the stamp's block matches the figure it stamps, with a little margin all round, and sits centred on it
     tool.style.width = `${figure.offsetWidth + 14}px`;
     tool.style.height = `${figure.offsetHeight + 14}px`;
@@ -34,7 +37,7 @@ const restamp = (event: React.MouseEvent<HTMLElement>) => {
   window.setTimeout(() => {
     pressCount += 1;
     figure.dataset.press = pressCount % 2 ? "a" : "b";
-    figure.style.setProperty("--stamp-tilt", `${(Math.random() * 7 - 3.5).toFixed(1)}deg`);
+    figure.style.setProperty("--stamp-tilt", tilt);
     figure.style.filter = `url(#${["ink", "ink-2", "ink-3"][pressCount % 3]})`;
   }, CONTACT_MS);
 };
