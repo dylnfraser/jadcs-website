@@ -60,9 +60,13 @@ const MissionSection: React.FC = () => {
       <div className="missionContent">
         <div className="missionSpread">
           <div className="missionIntro">
-            <h2 className="missionHeading splitWords">
-              <SplitWords text="Talent is everywhere. Access isn’t." />
-            </h2>
+            {/* the shadow is its own layer under the note, so it can sit behind it while the note folds in */}
+            <span className="stickyShadow" aria-hidden="true" />
+            <div className="stickyNote">
+              <h2 className="missionHeading splitWords">
+                <SplitWords text="Talent is everywhere. Access isn’t." />
+              </h2>
+            </div>
           </div>
           <div className="missionText">
             <p>

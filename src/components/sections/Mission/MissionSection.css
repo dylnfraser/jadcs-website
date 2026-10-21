@@ -17,26 +17,111 @@
     align-items: start;
 }
 
-/* the mission line is written on a sticky note, stuck on slightly crooked with its bottom corner lifting */
 .missionIntro {
     position: sticky;
+    max-width: 21rem;
     top: 7rem;
-    max-width: 22rem;
-    padding: 2rem 1.75rem 2.4rem;
-    background:
-        var(--grain-texture) 0 0 / 140px 140px,
-        /* the sticky strip along the top is a shade darker, and the lifted corner catches a little shadow */
-        linear-gradient(to bottom, rgb(0 0 0 / 0.04), transparent 18%),
-        linear-gradient(135deg, transparent 72%, rgb(70 52 28 / 0.07)),
-        #f4e3a1;
-    background-blend-mode: soft-light, normal, normal, normal;
-    box-shadow:
-        0 1px 1px rgb(70 52 28 / 0.12),
-        0 10px 18px -8px rgb(70 52 28 / 0.25),
-        /* the curl: the shadow is deepest under the bottom-right corner */ 14px 18px 20px -16px rgb(70 52 28 / 0.35);
-    rotate: -2.5deg;
     /* keep it on its own layer the whole time, so it doesn't shift by a subpixel when it starts or stops sticking */
     will-change: transform;
+    /* room for the note's tilt, curl and shadow */
+    padding: 0.5rem 0 2rem;
+    perspective: 1100px;
+}
+
+/*
+ * the mission line on a sticky note. like a real one it's glued flat along the top, while the rest of the sheet
+ * lifts a little toward the bottom: the colour lightens where it catches the light, and the shadow underneath
+ * grows toward the bottom corner.
+ */
+.stickyNote {
+    position: relative;
+    max-width: 21rem;
+    aspect-ratio: 1 / 0.95;
+    display: flex;
+    align-items: center;
+    padding: 1.75rem 1.6rem 2rem;
+    border-radius: 1px 1px 2px 3px;
+    background:
+        var(--grain-texture) 0 0 / 140px 140px,
+        /* the glue strip: a hair darker and flatter */
+        linear-gradient(to bottom, rgb(120 90 20 / 0.07), transparent 16%),
+        /* the lifted lower part catches the light, and the very edge turns away from it */
+        linear-gradient(to bottom, transparent 55%, rgb(255 255 255 / 0.22) 88%, rgb(120 90 20 / 0.1)),
+        #f3e09a;
+    background-blend-mode: soft-light, normal, normal, normal;
+    box-shadow:
+        0 0 0 0.5px rgb(120 90 20 / 0.12),
+        0 1px 1px rgb(70 52 28 / 0.1);
+    rotate: -2.5deg;
+    transform-origin: 50% 0;
+    transform: rotateX(6deg);
+
+    .missionHeading {
+        position: relative;
+    }
+}
+
+/* the shadow under the lifted bottom edge, widest and softest at the right-hand corner. it fades in as the note
+   lands */
+.stickyShadow {
+    position: absolute;
+    right: 5%;
+    bottom: 2.4rem;
+    left: 9%;
+    height: 38%;
+    border-radius: 0 0 40% 20%;
+    box-shadow: 0 16px 22px rgb(70 52 28 / 0.32);
+    rotate: -0.5deg;
+    transform: skewX(-6deg);
+    opacity: 0;
+    transition: opacity 700ms ease 500ms;
+}
+
+.missionIntro:has(.stickyNote.isIn) .stickyShadow {
+    opacity: 1;
+}
+
+/* scrolled into view: the note swings down from its glued top edge, overshoots a touch and settles with its curl */
+.stickyNote.isIn {
+    animation: note-stick 1100ms cubic-bezier(0.2, 0.9, 0.3, 1.15) both;
+}
+
+.stickyNote:not(.isIn) {
+    transform: rotateX(78deg);
+    opacity: 0;
+}
+
+@keyframes note-stick {
+    0% {
+        opacity: 0;
+        transform: rotateX(78deg);
+    }
+
+    30% {
+        opacity: 1;
+    }
+
+    70% {
+        transform: rotateX(-5deg);
+    }
+
+    100% {
+        opacity: 1;
+        transform: rotateX(6deg);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .stickyShadow {
+        opacity: 1;
+    }
+
+    .stickyNote,
+    .stickyNote:not(.isIn) {
+        opacity: 1;
+        transform: rotateX(6deg);
+        animation: none;
+    }
 }
 
 .missionHeading {
@@ -284,7 +369,6 @@
 
     .missionIntro {
         position: static;
-        max-width: none;
     }
 
     .missionText p {
