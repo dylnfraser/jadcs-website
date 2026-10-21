@@ -48,10 +48,11 @@
     }
 
     /* drawn as a background so the line can sweep in as it scrolls into view */
+    /* a gentle hand-drawn wave rather than a ruled line */
     u {
+        padding-bottom: 0.32em;
+        background: var(--wave-clay) 0 100% / 100% 7px no-repeat;
         text-decoration: none;
-        background: linear-gradient(var(--clay), var(--clay)) 0 100% / 100% 1.5px no-repeat;
-        padding-bottom: 0.1em;
     }
 }
 
@@ -63,9 +64,10 @@
     }
 }
 
+/* the wave draws in from the left as the phrase scrolls into view */
 @keyframes underline-draw {
     from {
-        background-size: 0% 1.5px;
+        background-size: 0% 7px;
     }
 }
 

@@ -132,15 +132,15 @@
         width: fit-content;
         color: var(--paper);
         font-size: 1rem;
-        text-decoration: underline;
-        text-decoration-color: transparent;
-        text-decoration-thickness: 1px;
-        text-underline-offset: 0.25em;
-        transition: text-decoration-color var(--dur-quick) ease;
+        padding-bottom: 6px;
+        background: var(--wave-paper) 0 100% / 0% 7px no-repeat;
+        text-decoration: none;
+        transition: background-size var(--dur-soft) var(--ease-out);
     }
 
+    /* the wave draws in under the link on hover */
     a:hover {
-        text-decoration-color: currentColor;
+        background-size: 100% 7px;
     }
 }
 
@@ -160,17 +160,18 @@
     outline-color: var(--paper);
 }
 
-/* the wordmark runs the full width of the band and is cut off by the bottom edge */
+/* the wordmark spans the full width of the band, its letters spread edge to edge, and is cut off by the bottom */
 .footerWordmark {
+    display: flex;
+    justify-content: space-between;
     margin: 3rem 0 0;
     margin-inline: calc(50% - 50vw);
+    padding-inline: 3vw;
     color: color-mix(in srgb, var(--paper) 92%, transparent);
     font-family: "serif";
-    font-size: 31vw;
+    font-size: 21vw;
     font-weight: 400;
-    line-height: 0.72;
-    letter-spacing: -0.055em;
-    text-align: center;
+    line-height: 0.74;
     white-space: nowrap;
     user-select: none;
     translate: 0 0.14em;
