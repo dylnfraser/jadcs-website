@@ -5,26 +5,26 @@
 /* where the doodles sit around the title (the marks themselves are styled in Doodle.css) */
 /* scattered through the open space to the right of the copy */
 .welcomeDoodle-laptop {
-    top: 0;
-    left: 66%;
+    top: -6%;
+    left: 74%;
     width: 72px;
 }
 
 .welcomeDoodle-plane {
-    top: 20%;
-    right: 2%;
+    top: 24%;
+    right: -4%;
     width: 64px;
 }
 
 .welcomeDoodle-squiggle {
-    bottom: 6%;
-    right: 20%;
+    bottom: 0;
+    right: 8%;
     width: 72px;
 }
 
 .welcomeDoodle-ring {
-    top: 52%;
-    right: 6%;
+    top: 56%;
+    right: -2%;
     width: 46px;
 }
 
@@ -61,29 +61,6 @@
     vector-effect: non-scaling-stroke;
     /* ease-in-out reads like a pen stroke: a soft start, steady middle, gentle lift-off */
     animation: draw-scribble 950ms cubic-bezier(0.65, 0, 0.35, 1) 900ms forwards;
-}
-
-/* the circled word: the loop is drawn once the intro has settled */
-.handCircle {
-    position: relative;
-    white-space: nowrap;
-
-    svg {
-        position: absolute;
-        inset: -0.4em -0.3em -0.35em -0.22em;
-        width: calc(100% + 0.52em);
-        height: calc(100% + 0.75em);
-        overflow: visible;
-        fill: none;
-        stroke: var(--clay);
-        stroke-width: 1.6;
-        stroke-linecap: round;
-        stroke-dasharray: 1;
-        stroke-dashoffset: 1;
-        vector-effect: non-scaling-stroke;
-        pointer-events: none;
-        animation: draw-scribble 900ms cubic-bezier(0.65, 0, 0.35, 1) 1500ms forwards;
-    }
 }
 
 @keyframes draw-scribble {
@@ -142,14 +119,14 @@
     }
 
     .welcomeDoodle-laptop {
-        top: -14%;
+        top: -36%;
         left: auto;
-        right: 24%;
+        right: 26%;
         width: 46px;
     }
 
     .welcomeDoodle-plane {
-        top: -10%;
+        top: -31%;
         right: 2%;
         width: 40px;
     }

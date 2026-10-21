@@ -54,18 +54,7 @@ function WelcomeSection(): ReactElement {
 
       <p className="welcomeQuote">
         Real help shouldn’t come with barriers. We provide hands-on STEM instruction and assistive technology access for
-        children and communities that need it most, making support practical, accessible, and{" "}
-        <span className="handCircle">
-          free
-          {/* a loose pen loop around the word, like someone circling it on a printout */}
-          <svg viewBox="0 0 100 44" preserveAspectRatio="none" aria-hidden="true">
-            <path
-              d="M14 30 C 4 20, 18 6, 50 5 C 80 4, 98 12, 96 23 C 94 35, 64 41, 38 39 C 16 37, 4 30, 10 19 C 13 14, 18 11, 24 9"
-              pathLength="1"
-            />
-          </svg>
-        </span>
-        .
+        children and communities that need it most, making support practical, accessible, and free.
       </p>
     </section>
   );
