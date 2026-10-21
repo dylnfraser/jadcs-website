@@ -15,10 +15,20 @@
     scale: 1.04;
 }
 
+/*
+ * the handwriting sits on the rules: every line box is one rule tall, and the rules are shifted so each one falls
+ * just under a baseline. Caveat's baseline sits 0.33em below the middle of its line box, so a rule belongs at
+ * pad-top + rule/2 + 0.33em (+ a hair, so the ink rests on the line), and the gradient draws its rule at the
+ * bottom of each repeat, hence the - rule.
+ */
 .quotePaper {
     --rule: 2.1rem;
+    --pad-top: 2.4rem;
+    --rules-at: calc(var(--pad-top) + var(--rule) / 2 + 0.33em + 2px - var(--rule));
     margin: 0;
-    padding: 2.4rem 1.6rem 1.2rem 3.4rem;
+    padding: var(--pad-top) 1.6rem 1.2rem 3.4rem;
+    /* the quote's size; the rule maths above is in this em */
+    font-size: 1.45rem;
     background:
         var(--grain-texture) 0 0 / 140px 140px,
         /* the red margin line */
@@ -41,7 +51,7 @@
     background-position:
         0 0,
         0 0,
-        0 1.7rem,
+        0 var(--rules-at),
         0 0;
     background-blend-mode: soft-light, normal, normal, normal;
     /* the top edge is torn out of the notebook */
@@ -77,16 +87,17 @@
         margin: 0;
         color: #2b3550;
         font-family: var(--font-hand);
-        font-size: 1.45rem;
+        font-size: 1em;
         font-weight: 500;
         line-height: var(--rule);
     }
 
+    /* slightly smaller, but still one rule per line so it stays on the lines below the quote */
     figcaption {
-        margin-top: 0.2rem;
+        margin: 0;
         color: color-mix(in srgb, #2b3550 75%, transparent);
         font-family: var(--font-hand);
-        font-size: 1.3rem;
+        font-size: 0.9em;
         line-height: var(--rule);
         text-align: right;
     }
@@ -144,20 +155,9 @@
 @media (max-width: 600px) {
     .quotePaper {
         --rule: 1.75rem;
-        padding: 1.7rem 1.2rem 0.7rem 3rem;
-        background-position:
-            0 0,
-            0 0,
-            0 1.25rem,
-            0 0;
-
-        p {
-            font-size: 1.25rem;
-        }
-
-        figcaption {
-            font-size: 1.1rem;
-        }
+        --pad-top: 1.7rem;
+        padding: var(--pad-top) 1.2rem 0.7rem 3rem;
+        font-size: 1.25rem;
     }
 }
 
