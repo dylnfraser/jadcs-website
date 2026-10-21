@@ -82,35 +82,36 @@ function App(): ReactElement {
   }, []);
 
   // the ambient loops (hero washes, grid, wave, goals wash, footer contours) pause while their area is off-screen,
-  // so the page isn't animating things nobody can see. each area flags itself on the root, and the css pauses
-  // only those time-based loops; scroll-linked animations are left alone.
+  // so the page isn't animating things nobody can see. the flag goes on the area itself rather than the root:
+  // toggling a class on <html> restyles the whole page at once, which flashed as you scrolled across a boundary.
   useEffect(() => {
-    const areas: [string, string][] = [
-      [".hero", "hero-offscreen"],
-      [".missionGoalsBlock", "goals-offscreen"],
-      [".contactFooter", "footer-offscreen"],
+    // each area, plus anything outside it that is only visible behind it (the page wash shows only behind the hero)
+    const areas: [string, string[]][] = [
+      [".hero", [".backgroundGradient"]],
+      [".missionGoalsBlock", []],
+      [".contactFooter", []],
     ];
-    const root = document.documentElement;
-    const flags = new Map<Element, string>();
+    const linked = new Map<Element, Element[]>();
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
-        const flag = flags.get(entry.target);
-        if (flag) root.classList.toggle(flag, !entry.isIntersecting);
+        [entry.target, ...(linked.get(entry.target) ?? [])].forEach((element) =>
+          element.classList.toggle("isOffscreen", !entry.isIntersecting),
+        );
       });
     });
 
-    areas.forEach(([selector, flag]) => {
+    areas.forEach(([selector, alsoPause]) => {
       const element = document.querySelector(selector);
       if (!element) return;
-      flags.set(element, flag);
+      linked.set(
+        element,
+        alsoPause.flatMap((other) => [...document.querySelectorAll(other)]),
+      );
       observer.observe(element);
     });
 
-    return () => {
-      observer.disconnect();
-      areas.forEach(([, flag]) => root.classList.remove(flag));
-    };
+    return () => observer.disconnect();
   }, []);
 
   // headings rise in word by word, the footer wordmark letter by letter, and the page doodles and mission

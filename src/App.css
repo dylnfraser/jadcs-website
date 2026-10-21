@@ -362,7 +362,9 @@ a {
         opacity: 1;
         translate: 0 0;
         scale: 1;
-        filter: none;
+        /* blur(0), not none: switching between the two creates and drops a layer, which flashes the text every
+           time the scroll crosses the end of the reveal */
+        filter: blur(0px);
     }
 }
 
@@ -380,14 +382,15 @@ a {
     }
 }
 
-/* ambient loops pause while their area is scrolled out of view (flags set in App.tsx) */
-.hero-offscreen .heroBackdrop span,
-.hero-offscreen .gridLayer::before,
-.hero-offscreen .photoFan .doodle,
-.hero-offscreen .heroEdge::before,
-.hero-offscreen .heroEdge::after,
-.goals-offscreen .missionGoalsBlock::before,
-.footer-offscreen .footerContours path {
+/* ambient loops pause while their area is scrolled out of view (.isOffscreen is set in App.tsx) */
+.hero.isOffscreen .heroBackdrop span,
+.hero.isOffscreen .gridLayer::before,
+.hero.isOffscreen .photoFan .doodle,
+.hero.isOffscreen .heroEdge::before,
+.hero.isOffscreen .heroEdge::after,
+.backgroundGradient.isOffscreen,
+.missionGoalsBlock.isOffscreen::before,
+.contactFooter.isOffscreen .footerContours path {
     animation-play-state: paused;
 }
 
