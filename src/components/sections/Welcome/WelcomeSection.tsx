@@ -14,7 +14,6 @@ const doodles = [
   { name: "laptop", depth: 14, tone: "clay" },
   { name: "plane", depth: 10, tone: "moss" },
   { name: "squiggle", depth: 6, tone: "moss" },
-  { name: "ring", depth: 8, tone: "ink" },
 ] as const;
 
 function WelcomeSection(): ReactElement {
