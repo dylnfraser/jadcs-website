@@ -1,47 +1,46 @@
 .welcomeSection {
     position: relative;
-    width: min(900px, 88vw);
-    margin: 0 auto;
-    padding: 0 0.5rem;
 }
 
 /* where the doodles sit around the title (the marks themselves are styled in Doodle.css) */
+/* scattered through the open space to the right of the copy */
 .welcomeDoodle-sparkle {
-    top: -32%;
-    left: -2%;
+    top: 2%;
+    left: 66%;
     width: 46px;
 }
 
 .welcomeDoodle-burst {
-    top: -24%;
-    right: 0;
+    top: 18%;
+    right: 2%;
     width: 40px;
 }
 
 .welcomeDoodle-squiggle {
-    bottom: 18%;
-    left: -9%;
+    bottom: 6%;
+    right: 20%;
     width: 72px;
 }
 
 .welcomeDoodle-ring {
-    right: -7%;
-    bottom: 4%;
+    top: 52%;
+    right: 6%;
     width: 46px;
 }
 
 .welcomeTitle {
-    width: 100%;
     margin: 0;
-    font-size: 6rem;
-    line-height: 0.95;
+    font-size: clamp(4rem, 8.6vw, 7.5rem);
+    line-height: 0.92;
     letter-spacing: -0.045em;
-    text-align: center;
+    text-align: left;
 }
 
+/* the name gets a line of its own */
 .welcomeName {
     position: relative;
-    display: inline-block;
+    display: block;
+    width: fit-content;
     white-space: nowrap;
 }
 
@@ -74,14 +73,15 @@
     opacity: 0;
     animation: move-up 950ms var(--ease-out) 450ms forwards;
 
-    width: min(680px, 100%);
-    margin: 1rem auto 0;
+    max-width: 34rem;
+    margin: 2rem 0 0;
     color: var(--ink);
     font-family: "default";
-    font-size: clamp(1.2rem, 2.3vw, 1.35rem);
+    font-size: clamp(1.15rem, 1.8vw, 1.3rem);
     font-weight: 440;
-    line-height: 1.65rem;
-    text-align: center;
+    line-height: 1.45;
+    text-align: left;
+    text-wrap: pretty;
 }
 
 .char {
@@ -114,36 +114,29 @@
     }
 
     .welcomeDoodle-sparkle {
-        top: -16%;
-        left: 4%;
+        top: -14%;
+        left: auto;
+        right: 22%;
         width: 32px;
     }
 
     .welcomeDoodle-burst {
-        top: -12%;
+        top: -10%;
         right: 4%;
         width: 28px;
     }
 
-    .welcomeSection {
-        width: min(92vw, 560px);
-        padding: 0;
-    }
-
     .welcomeTitle {
-        max-width: 8.5ch;
-        margin-inline: auto;
-        font-size: clamp(3rem, 14.5vw, 4.8rem);
+        font-size: clamp(3.2rem, 16vw, 4.8rem);
         line-height: 0.92;
         letter-spacing: -0.05em;
         text-wrap: balance;
     }
 
     .welcomeQuote {
-        width: 100%;
         margin-top: 1.5rem;
         font-size: clamp(1.02rem, 4.2vw, 1.15rem);
-        line-height: 1.55;
+        line-height: 1.45;
         text-wrap: pretty;
     }
 }

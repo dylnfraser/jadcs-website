@@ -11,7 +11,7 @@ a {
         text-decoration-color var(--dur-quick) ease;
 }
 
-/* the hero always fills the first screen, with its content centered in it */
+/* the hero always fills the first screen; its copy sits in the same left-aligned column as the sections */
 .hero {
     display: flex;
     flex-direction: column;
@@ -86,47 +86,19 @@ a {
     }
 }
 
-.heroBackdrop span:nth-child(1) {
-    top: 6%;
-    left: 4%;
-    width: 40vw;
+/* a single sage wash on the open right-hand side, balancing the left-aligned copy */
+.heroBackdrop span {
+    top: 4%;
+    right: -8%;
+    width: 52vw;
     background: var(--prim-color2);
+    opacity: 0.32;
     animation: drift-a 26s ease-in-out infinite alternate;
-}
-
-.heroBackdrop span:nth-child(2) {
-    top: 26%;
-    right: 2%;
-    width: 32vw;
-    background: var(--clay-soft);
-    opacity: 0.55;
-    animation: drift-b 32s ease-in-out infinite alternate;
-}
-
-.heroBackdrop span:nth-child(3) {
-    bottom: -14%;
-    left: 30%;
-    width: 38vw;
-    background: var(--prim-color3);
-    opacity: 0.6;
-    animation: drift-c 38s ease-in-out infinite alternate;
 }
 
 @keyframes drift-a {
     to {
-        transform: translate(8vw, 6vh) scale(1.12);
-    }
-}
-
-@keyframes drift-b {
-    to {
-        transform: translate(-10vw, 8vh) scale(0.9);
-    }
-}
-
-@keyframes drift-c {
-    to {
-        transform: translate(6vw, -10vh) scale(1.08);
+        transform: translate(-6vw, 8vh) scale(1.1);
     }
 }
 
@@ -170,9 +142,14 @@ a {
     }
 }
 
+.heroInner {
+    width: min(1000px, 86vw);
+    margin-inline: auto;
+}
+
 .heroCtas {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     gap: 0.75rem;
     margin-top: 3rem;
@@ -323,6 +300,10 @@ a {
         min-width: 9rem;
     }
 
+    .heroInner {
+        width: min(92vw, 680px);
+    }
+
     .siteSection {
         width: min(92vw, 680px);
         min-height: auto;
@@ -337,8 +318,7 @@ a {
 /* on phones the two buttons stay side by side as on desktop, sharing the width evenly */
 @media (max-width: 480px) {
     .heroCtas {
-        width: min(92vw, 24rem);
-        margin-inline: auto;
+        width: 100%;
     }
 
     .heroCtas > * {

@@ -113,7 +113,12 @@
     margin-top: 3rem;
     padding-top: 1.5rem;
     border-top: solid 1px color-mix(in srgb, var(--paper) 22%, transparent);
+    align-items: baseline;
     color: color-mix(in srgb, var(--paper) 72%, transparent);
+}
+
+.footerBottom a {
+    font-size: 0.95rem;
 }
 
 .footerBottom p {
@@ -129,10 +134,8 @@
         padding-top: 2.75rem;
     }
 
-    .contactFooterMain,
-    .footerBottom {
+    .contactFooterMain {
         grid-template-columns: 1fr;
-        flex-direction: column;
         gap: 1.5rem;
     }
 

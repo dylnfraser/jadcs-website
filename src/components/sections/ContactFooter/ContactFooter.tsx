@@ -38,11 +38,8 @@ function ContactFooter() {
       </div>
 
       <div className="footerBottom">
-        <p>
-          JADCS helps close the STEM opportunity gap through computer science instruction, mentorship, and technology
-          donations.
-        </p>
-        <p>© {new Date().getFullYear()} JADCS. All rights reserved.</p>
+        <p>© {new Date().getFullYear()} JADCS</p>
+        <a href="#top">Back to top</a>
       </div>
     </footer>
   );

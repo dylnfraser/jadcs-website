@@ -277,10 +277,8 @@ function App(): ReactElement {
     <>
       <Background />
       <Navbar />
-      <div className="hero">
+      <div className="hero" id="top">
         <div className="heroBackdrop" aria-hidden="true">
-          <span />
-          <span />
           <span />
           <div className="gridLayer heroGrid" ref={heroGridRef} />
         </div>
@@ -296,7 +294,7 @@ function App(): ReactElement {
               Donate
             </a>
             <button id="learnMore" onClick={handleLearnMore}>
-              Learn More
+              Read our mission
             </button>
           </div>
         </div>
