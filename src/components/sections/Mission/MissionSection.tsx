@@ -21,10 +21,9 @@ const restamp = (event: React.MouseEvent<HTMLElement>) => {
   const figure = event.currentTarget;
   const tool = figure.parentElement?.querySelector<HTMLElement>(".stampTool");
   if (tool) {
-    // a square stamp, seen from above, big enough to cover the figure and centred on it
-    const side = Math.max(figure.offsetWidth, figure.offsetHeight) + 18;
-    tool.style.width = `${side}px`;
-    tool.style.height = `${side}px`;
+    // the stamp's block matches the figure it stamps, with a little margin all round, and sits centred on it
+    tool.style.width = `${figure.offsetWidth + 14}px`;
+    tool.style.height = `${figure.offsetHeight + 14}px`;
     tool.style.left = `${figure.offsetLeft + figure.offsetWidth / 2}px`;
     tool.style.top = `${figure.offsetTop + figure.offsetHeight / 2}px`;
     // restart the press even if the last one is still playing

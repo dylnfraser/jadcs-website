@@ -415,7 +415,8 @@
 
 /* the stamp comes down from just above the page, its shadow-soft ink fading up as it presses */
 /*
- * the rubber stamp, seen from directly above: a flat square wooden block with a round knob in the middle. it drops
+ * the rubber stamp, seen from directly above: a dark, grainy wooden block the shape of the figure it stamps, with a
+ * round knob in the middle. it drops
  * toward the page from above the screen, so it shrinks as it falls, its shadow drawing in tight beneath it, and grows
  * and fades again as it lifts away. JS centres it on the figure and sizes it to cover it.
  */
@@ -424,13 +425,23 @@
     z-index: 2;
     translate: -50% -50%;
     border-radius: 6px;
+    /* the knob (a fixed size, whatever the block's shape), wood grain and a dark stained finish */
     background:
-        radial-gradient(circle at 50% 50%, #b98455 0 13%, #8f6240 14% 16%, transparent 17%),
-        radial-gradient(circle at 46% 45%, rgb(255 255 255 / 0.35), transparent 14%),
-        linear-gradient(135deg, #cfa071, #b0804f 55%, #9c6e43);
+        radial-gradient(circle at 50% 50%, #6e4a2e 0 15px, #3e2716 16px 18px, transparent 19px),
+        radial-gradient(circle at calc(50% - 4px) calc(50% - 5px), rgb(255 230 200 / 0.28), transparent 9px),
+        var(--grain-texture) 0 0 / 140px 140px,
+        repeating-linear-gradient(
+            92deg,
+            transparent 0 7px,
+            rgb(0 0 0 / 0.06) 7px 8px,
+            transparent 8px 13px,
+            rgb(255 255 255 / 0.04) 13px 14px
+        ),
+        linear-gradient(135deg, #6f4b2f, #573822 55%, #47301d);
+    background-blend-mode: normal, normal, soft-light, normal, normal;
     box-shadow:
-        inset 0 0 0 2px rgb(255 255 255 / 0.12),
-        inset 0 -3px 0 rgb(0 0 0 / 0.12);
+        inset 0 0 0 1.5px rgb(255 255 255 / 0.08),
+        inset 0 -3px 0 rgb(0 0 0 / 0.2);
     pointer-events: none;
     opacity: 0;
 }
