@@ -362,6 +362,141 @@
     }
 }
 
+/* the laptop hops and its screen lights up for a moment */
+.doodle-hop .doodleInner.isReacting {
+    animation: laptop-hop 700ms cubic-bezier(0.3, 0, 0.3, 1);
+}
+
+@keyframes laptop-hop {
+    0%,
+    100% {
+        transform: none;
+        filter: none;
+    }
+
+    30% {
+        transform: translateY(-9px) rotate(-4deg);
+        filter: drop-shadow(0 0 6px rgb(150 190 230 / 0.8));
+    }
+
+    55% {
+        transform: translateY(0) scale(1.04, 0.94);
+        filter: drop-shadow(0 0 4px rgb(150 190 230 / 0.6));
+    }
+
+    75% {
+        transform: translateY(-2px);
+    }
+}
+
+/* the arrow jabs forward twice, as if pointing insistently */
+.doodle-nudge .doodleInner.isReacting {
+    animation: arrow-nudge 650ms cubic-bezier(0.3, 0, 0.3, 1);
+}
+
+@keyframes arrow-nudge {
+    0%,
+    50%,
+    100% {
+        transform: none;
+    }
+
+    25%,
+    75% {
+        transform: translate(9px, -2px);
+    }
+}
+
+/* the book flips its pages over */
+.doodle-flip .doodleInner.isReacting {
+    animation: book-flip 800ms cubic-bezier(0.45, 0, 0.25, 1);
+}
+
+@keyframes book-flip {
+    from {
+        transform: perspective(200px) rotateY(0deg);
+    }
+
+    to {
+        transform: perspective(200px) rotateY(360deg);
+    }
+}
+
+/* the spiral winds round once, overshooting a little */
+.doodle-spin .doodleInner.isReacting {
+    animation: spiral-spin 900ms cubic-bezier(0.3, 0, 0.2, 1.25);
+}
+
+@keyframes spiral-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* the brackets squeeze together and spring apart */
+.doodle-squeeze .doodleInner.isReacting {
+    animation: code-squeeze 600ms cubic-bezier(0.3, 0, 0.3, 1);
+}
+
+@keyframes code-squeeze {
+    0%,
+    100% {
+        transform: none;
+    }
+
+    35% {
+        transform: scaleX(0.72);
+    }
+
+    65% {
+        transform: scaleX(1.12);
+    }
+}
+
+/* the pencil scribbles back and forth */
+.doodle-scribble .doodleInner.isReacting {
+    animation: pencil-scribble 700ms ease-in-out;
+}
+
+@keyframes pencil-scribble {
+    0%,
+    100% {
+        transform: none;
+    }
+
+    15%,
+    45%,
+    75% {
+        transform: translate(-6px, 2px) rotate(-6deg);
+    }
+
+    30%,
+    60%,
+    90% {
+        transform: translate(6px, -2px) rotate(4deg);
+    }
+}
+
+/* anything else gives a little wiggle */
+.doodle-wiggle .doodleInner.isReacting {
+    animation: doodle-wiggle 600ms ease-in-out;
+}
+
+@keyframes doodle-wiggle {
+    0%,
+    100% {
+        transform: none;
+    }
+
+    25% {
+        transform: rotate(-8deg) scale(1.05);
+    }
+
+    60% {
+        transform: rotate(6deg);
+    }
+}
+
 @media (prefers-reduced-motion: reduce) {
     .doodleInner.isReacting::before,
     .doodleInner.isReacting {

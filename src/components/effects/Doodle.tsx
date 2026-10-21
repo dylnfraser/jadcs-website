@@ -73,8 +73,26 @@ type DoodleProps = {
   turn?: number;
   className?: string;
   style?: CSSProperties;
-  // a small reaction when clicked: the plane flies a loop, the bulb flickers on, the sprout grows
-  react?: "fly" | "flicker" | "grow";
+  // override the shape's own click reaction (see defaultReaction)
+  react?: Reaction;
+};
+
+type Reaction = "fly" | "flicker" | "grow" | "hop" | "nudge" | "flip" | "spin" | "squeeze" | "scribble" | "wiggle";
+
+// every doodle answers a click with a small reaction that suits what it is
+const defaultReaction: Record<DoodleName, Reaction> = {
+  plane: "fly",
+  bulb: "flicker",
+  sprout: "grow",
+  laptop: "hop",
+  arrow: "nudge",
+  book: "flip",
+  spiral: "spin",
+  code: "squeeze",
+  pencil: "scribble",
+  squiggle: "wiggle",
+  ring: "wiggle",
+  loop: "wiggle",
 };
 
 // restart the reaction animation on every click, even mid-way through the last one
@@ -95,16 +113,17 @@ function Doodle({
   turn = defaultTurn[name],
   className = "",
   style,
-  react,
+  react: reactOverride,
 }: DoodleProps): ReactElement {
+  const react = reactOverride ?? defaultReaction[name];
   const shape = shapes[name];
 
   return (
     <span
-      className={`doodle doodle-${tone} doodle-draw-${draw} ${react ? `doodle-react doodle-${react}` : ""} ${className}`}
+      className={`doodle doodle-${tone} doodle-draw-${draw} doodle-react doodle-${react} ${className}`}
       style={{ "--depth": depth, "--turn": turn, ...style } as CSSProperties}
       aria-hidden="true"
-      onClick={react ? playReaction : undefined}
+      onClick={playReaction}
     >
       {/* the reaction animates this wrapper, so it doesn't fight the drawing, bobbing or cursor lean */}
       <span className="doodleInner" onAnimationEnd={(event) => event.currentTarget.classList.remove("isReacting")}>

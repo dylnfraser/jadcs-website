@@ -7,10 +7,12 @@
     z-index: 1000;
 }
 
+/* one gap between every item, so the space before the Donate pill matches the space between the links */
 .navbar {
+    --nav-gap: 1.75rem;
     display: flex;
     align-items: center;
-    gap: 2rem;
+    gap: var(--nav-gap);
     height: 68px;
     padding-inline: max(1.25rem, calc((100vw - min(1000px, 86vw)) / 2));
     border-bottom: dashed 1px transparent;
@@ -53,7 +55,7 @@
 
 .navbarLinks {
     display: flex;
-    gap: 1.75rem;
+    gap: var(--nav-gap);
 
     a {
         color: var(--ink);
@@ -82,14 +84,12 @@
 
 @media (max-width: 700px) {
     .navbar {
-        gap: 1.1rem;
+        --nav-gap: 1rem;
         height: 60px;
         padding-inline: 4vw;
     }
 
     .navbarLinks {
-        gap: 1rem;
-
         a {
             font-size: 0.85rem;
         }
