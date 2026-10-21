@@ -1,0 +1,148 @@
+/*
+ * a scrap torn from a lined notebook: faint blue rules, a red margin line, a torn top edge, and a strip of tape.
+ * the handwriting sits on the rules. it drops into place, a little crooked, when it scrolls into view.
+ */
+.quoteScrap {
+    position: relative;
+    width: min(26rem, 100%);
+    margin: 3.25rem 0 0 auto;
+    /* drawn on the wrapper, after the paper's torn-edge clip, so the shadow isn't cut away */
+    filter: drop-shadow(0 1px 1px rgb(70 52 28 / 0.14)) drop-shadow(0 10px 14px rgb(70 52 28 / 0.12));
+    rotate: 1.8deg;
+    opacity: 0;
+    translate: 0 -14px;
+    scale: 1.04;
+}
+
+.quotePaper {
+    --rule: 2.1rem;
+    margin: 0;
+    padding: 2.4rem 1.6rem 1.2rem 3.4rem;
+    background:
+        var(--grain-texture) 0 0 / 140px 140px,
+        /* the red margin line */
+        linear-gradient(
+                to right,
+                transparent 2.35rem,
+                rgb(205 96 86 / 0.45) 2.35rem,
+                rgb(205 96 86 / 0.45) calc(2.35rem + 1.5px),
+                transparent calc(2.35rem + 1.5px)
+            ),
+        /* blue rules, lined up with the handwriting */
+        repeating-linear-gradient(
+                to bottom,
+                transparent 0,
+                transparent calc(var(--rule) - 1px),
+                rgb(110 140 190 / 0.32) calc(var(--rule) - 1px),
+                rgb(110 140 190 / 0.32) var(--rule)
+            ),
+        #fdfaf1;
+    background-position:
+        0 0,
+        0 0,
+        0 1.7rem,
+        0 0;
+    background-blend-mode: soft-light, normal, normal, normal;
+    /* the top edge is torn out of the notebook */
+    clip-path: polygon(
+        0 6px,
+        4% 2px,
+        9% 7px,
+        14% 3px,
+        19% 8px,
+        25% 2px,
+        31% 6px,
+        37% 1px,
+        43% 7px,
+        49% 3px,
+        55% 8px,
+        61% 2px,
+        67% 6px,
+        73% 1px,
+        79% 7px,
+        85% 3px,
+        91% 8px,
+        96% 2px,
+        100% 5px,
+        100% 100%,
+        0 100%
+    );
+
+    blockquote {
+        margin: 0;
+    }
+
+    p {
+        margin: 0;
+        color: #2b3550;
+        font-family: var(--font-hand);
+        font-size: 1.55rem;
+        font-weight: 500;
+        line-height: var(--rule);
+    }
+
+    figcaption {
+        margin-top: 0.2rem;
+        color: color-mix(in srgb, #2b3550 75%, transparent);
+        font-family: var(--font-hand);
+        font-size: 1.3rem;
+        line-height: var(--rule);
+        text-align: right;
+    }
+}
+
+.quoteTape {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    z-index: 1;
+    width: 92px;
+    height: 26px;
+    translate: -50% 0;
+    rotate: -4deg;
+    background:
+        var(--grain-texture) 0 0 / 140px 140px,
+        color-mix(in srgb, #f3e6c4 75%, transparent);
+    background-blend-mode: soft-light, normal;
+    clip-path: polygon(
+        3% 0,
+        97% 4%,
+        100% 22%,
+        96% 40%,
+        100% 60%,
+        97% 80%,
+        100% 100%,
+        2% 96%,
+        0 78%,
+        4% 58%,
+        0 38%,
+        3% 18%
+    );
+    opacity: 0.9;
+}
+
+.quoteScrap.isIn {
+    animation: scrap-drop 700ms cubic-bezier(0.25, 0.9, 0.3, 1.2) 250ms forwards;
+}
+
+@keyframes scrap-drop {
+    to {
+        opacity: 1;
+        translate: 0 0;
+        scale: 1;
+    }
+}
+
+@media (max-width: 800px) {
+    .quoteScrap {
+        margin: 2.5rem auto 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .quoteScrap {
+        opacity: 1;
+        translate: 0 0;
+        scale: 1;
+    }
+}
