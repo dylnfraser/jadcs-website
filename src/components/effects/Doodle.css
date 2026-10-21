@@ -61,7 +61,7 @@
 
 .doodle-draw-load svg {
     stroke-dashoffset: 1;
-    animation: doodle-draw 900ms cubic-bezier(0.65, 0, 0.35, 1) forwards;
+    animation: doodle-draw 900ms cubic-bezier(0.65, 0, 0.35, 1) var(--draw-delay, 0ms) forwards;
 }
 
 /* further down the page each doodle sketches itself in once, as it comes into view (App.tsx adds .isIn) */
@@ -70,7 +70,7 @@
 }
 
 .doodle-draw-scroll.isIn svg {
-    animation: doodle-draw 1100ms cubic-bezier(0.65, 0, 0.35, 1) 150ms forwards;
+    animation: doodle-draw 1100ms cubic-bezier(0.65, 0, 0.35, 1) calc(150ms + var(--draw-delay, 0ms)) forwards;
 }
 
 @keyframes doodle-draw {

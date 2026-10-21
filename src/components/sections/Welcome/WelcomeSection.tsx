@@ -31,7 +31,9 @@ function WelcomeSection(): ReactElement {
           tone={doodle.tone}
           draw="load"
           className={`welcomeDoodle-${doodle.name}`}
-          style={{ "--float-offset": `${index * -1.7}s` } as React.CSSProperties}
+          style={
+            { "--float-offset": `${index * -1.7}s`, "--draw-delay": `${700 + index * 380}ms` } as React.CSSProperties
+          }
         />
       ))}
 

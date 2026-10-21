@@ -120,11 +120,19 @@ function App(): ReactElement {
 
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          entry.target.classList.add("isIn");
-          observer.unobserve(entry.target);
-        });
+        // doodles that come into view together sketch themselves in one at a time, top to bottom
+        let doodleOrder = 0;
+        entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)
+          .forEach((entry) => {
+            const target = entry.target as HTMLElement;
+            if (target.classList.contains("doodle")) {
+              target.style.setProperty("--draw-delay", `${doodleOrder++ * 380}ms`);
+            }
+            target.classList.add("isIn");
+            observer.unobserve(target);
+          });
       },
       { threshold: 0.35 },
     );
