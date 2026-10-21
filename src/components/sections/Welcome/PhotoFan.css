@@ -29,10 +29,11 @@
     background-blend-mode: soft-light, normal, normal;
     box-shadow: var(--shadow-paper);
     transform-origin: 50% 120%;
+    /* a long, even ease-out with no overshoot, so prints glide between places rather than bouncing */
     transition:
-        rotate 650ms var(--ease-bubble),
-        translate 650ms var(--ease-bubble),
-        box-shadow 650ms var(--ease-out);
+        rotate 750ms cubic-bezier(0.22, 1, 0.36, 1),
+        translate 750ms cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 750ms cubic-bezier(0.22, 1, 0.36, 1);
 
     .photoWindow,
     .photoPlaceholder {
@@ -172,59 +173,74 @@
 }
 
 /* the front print sits highest off the table, so its shadow is softer and falls further */
+/*
+ * where each print sits. every position is a variable on the fan, and hovering only changes the variables, so the
+ * shuffle animation (which reads the same variables) always starts and ends exactly where the prints are: there's
+ * no snap between the resting, hovered and shuffling positions.
+ */
+.photoFan {
+    --s0-r: 0deg;
+    --s0-x: 0px;
+    --s0-y: 0px;
+    --s1-r: -9deg;
+    --s1-x: -18px;
+    --s1-y: 6px;
+    --s2-r: 9deg;
+    --s2-x: 18px;
+    --s2-y: 6px;
+    /* the furthest point of the swipe, out to the right and away from the title */
+    --out-r: 14deg;
+    --out-x: 92px;
+    --out-y: -22px;
+}
+
+/* hovered: the prints lift a little and the fan opens */
+.photoFan:hover {
+    --s0-y: -8px;
+    --s1-r: -11deg;
+    --s1-x: -22px;
+    --s1-y: -12px;
+    --s2-r: 11deg;
+    --s2-x: 22px;
+    --s2-y: -12px;
+}
+
 .photoSlot-0 {
     box-shadow: var(--shadow-paper-lifted);
     z-index: 3;
-    rotate: 0deg;
-    translate: 0 0;
+    rotate: var(--s0-r);
+    translate: var(--s0-x) var(--s0-y);
 }
 
 .photoSlot-1 {
     z-index: 2;
-    rotate: -9deg;
-    translate: -18px 6px;
+    rotate: var(--s1-r);
+    translate: var(--s1-x) var(--s1-y);
 }
 
 .photoSlot-2 {
     z-index: 1;
-    rotate: 9deg;
-    translate: 18px 6px;
-}
-
-/* on hover the prints jump up and fan outward, the outer ones flung a little further, then settle with a bounce */
-.photoFan:hover {
-    .photoSlot-0 {
-        translate: 0 -8px;
-    }
-
-    .photoSlot-1 {
-        rotate: -11deg;
-        translate: -22px -12px;
-    }
-
-    .photoSlot-2 {
-        rotate: 11deg;
-        translate: 22px -12px;
-    }
+    rotate: var(--s2-r);
+    translate: var(--s2-x) var(--s2-y);
 }
 
 /* the shuffle: the front print swipes up and out to the right (away from the title), drops behind the stack, and
    settles into the back */
 .photoCard.isLeaving {
-    animation: fan-shuffle 1050ms cubic-bezier(0.45, 0, 0.25, 1) both;
+    animation: fan-shuffle 1050ms cubic-bezier(0.4, 0, 0.2, 1) both;
 }
 
 @keyframes fan-shuffle {
     0% {
         z-index: 4;
-        rotate: 0deg;
-        translate: 0 0;
+        rotate: var(--s0-r);
+        translate: var(--s0-x) var(--s0-y);
     }
 
     42% {
         z-index: 4;
-        rotate: 14deg;
-        translate: 92px -22px;
+        rotate: var(--out-r);
+        translate: var(--out-x) var(--out-y);
         opacity: 1;
     }
 
@@ -245,8 +261,8 @@
 
     100% {
         z-index: 1;
-        rotate: 9deg;
-        translate: 18px 6px;
+        rotate: var(--s2-r);
+        translate: var(--s2-x) var(--s2-y);
     }
 }
 
@@ -294,39 +310,10 @@
 }
 
 @media (max-width: 900px) {
-    @keyframes fan-shuffle {
-        0% {
-            z-index: 4;
-            rotate: 0deg;
-            translate: 0 0;
-        }
-
-        42% {
-            z-index: 4;
-            rotate: 12deg;
-            translate: 70px -18px;
-            opacity: 1;
-        }
-
-        50% {
-            z-index: 4;
-            opacity: 0.55;
-        }
-
-        52% {
-            z-index: 0;
-            opacity: 0.55;
-        }
-
-        70% {
-            opacity: 1;
-        }
-
-        100% {
-            z-index: 1;
-            rotate: 9deg;
-            translate: 18px 6px;
-        }
+    .photoFan {
+        --out-r: 12deg;
+        --out-x: 70px;
+        --out-y: -18px;
     }
 }
 
