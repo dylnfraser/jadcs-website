@@ -48,16 +48,35 @@ function PhotoFan(): ReactElement {
   const lastShuffle = useRef(0);
   const clearLeaving = useRef(0);
 
-  // swipe the front print off the stack and bring the next one forward
+  // swipe the front print off the stack and bring the next one forward. one swipe runs at a time: cutting a swipe
+  // off part-way made the print snap into its new place, so a click during a swipe is queued instead, and any
+  // further clicks while one is waiting fold into it (spamming the fan never builds up a backlog)
+  const busy = useRef(false);
+  const queued = useRef(false);
   const shuffle = useCallback(() => {
+    if (busy.current) {
+      queued.current = true;
+      return;
+    }
+    busy.current = true;
     const current = frontRef.current;
     frontRef.current = (current + 1) % photos.length;
     lastShuffle.current = performance.now();
     setLeaving(current);
     setFront(frontRef.current);
     window.clearTimeout(clearLeaving.current);
-    clearLeaving.current = window.setTimeout(() => setLeaving(null), SHUFFLE_DURATION);
+    clearLeaving.current = window.setTimeout(() => {
+      setLeaving(null);
+      busy.current = false;
+      if (queued.current) {
+        queued.current = false;
+        // let the print that just landed settle into place for a moment first; starting the next swipe in the same
+        // instant made it skip its glide to its new spot
+        window.setTimeout(() => shuffleRef.current(), 90);
+      }
+    }, SHUFFLE_DURATION);
   }, []);
+  const shuffleRef = useRef(shuffle);
 
   // like the photo stack in Messages: every few seconds the front print swipes out to the side and tucks in
   // behind the others. it waits while the fan is hovered, off screen, or the tab is hidden, a click restarts the
