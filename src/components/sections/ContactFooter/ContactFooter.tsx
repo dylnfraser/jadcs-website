@@ -13,8 +13,7 @@ const socialLinks = [
 
 function ContactFooter() {
   return (
-    // the highlighter's multiply ink would muddy the dark band, so the footer keeps native selection
-    <footer className="contactFooter" id="contact" data-highlight-exclude>
+    <footer className="contactFooter" id="contact">
       {/* inlined rather than a background image so the rings can be animated from css in every browser */}
       <div className="footerContours" aria-hidden="true" dangerouslySetInnerHTML={{ __html: contours }} />
       <div className="contactFooterMain">

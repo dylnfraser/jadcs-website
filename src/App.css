@@ -143,6 +143,19 @@ a {
     [data-highlight-exclude] ::selection {
         background: color-mix(in srgb, var(--paper) 28%, transparent);
     }
+
+    /* on the dark moss footer, dark ink would vanish, so the same stroke is laid down in cream instead */
+    .contactFooter [data-highlighters-overlay] {
+        mix-blend-mode: normal !important;
+        filter: brightness(0) invert(1) sepia(0.25);
+        opacity: 0.28;
+    }
+
+    /* the bands carry their own translucency; make them solid here so the layer's opacity alone sets the
+       strength (the library sets these inline, hence !important) */
+    .contactFooter [data-highlighters-overlay] > div > div {
+        opacity: 1 !important;
+    }
 }
 
 .heroInner {

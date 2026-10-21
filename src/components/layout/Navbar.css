@@ -46,7 +46,8 @@
         color: var(--ink);
         font-size: 0.92rem;
         font-weight: 500;
-        padding-bottom: 6px;
+        /* equal room above and below, so the wave sits under the text without lifting it off-centre */
+        padding-block: 6px;
         background: var(--wave-ink) 0 100% / 0% 7px no-repeat;
         text-decoration: none;
         transition:

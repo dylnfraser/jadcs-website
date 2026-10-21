@@ -10,8 +10,6 @@
     clip-path: inset(0 -100vmax -100vmax);
     position: relative;
     isolation: isolate;
-    /* keep the contour layer's bleed and parallax from adding scroll space below the page */
-    overflow-y: clip;
 }
 
 /* faint topographic contour lines spanning the full width of the band */
@@ -174,18 +172,21 @@
     line-height: 0.74;
     white-space: nowrap;
     user-select: none;
-    translate: 0 0.14em;
+    /* the wordmark crops itself (rather than relying on the footer's edge, which safari also clips at the
+       sides), with a little headroom so the tops of the letters aren't cut */
+    overflow: hidden;
+    padding-top: 0.12em;
 
-    /* each letter rises out of the bottom edge in turn as the footer arrives */
+    /* each letter rises out of the bottom edge in turn as the footer arrives, settling slightly cropped */
     span {
         display: inline-block;
-        translate: 0 60%;
+        translate: 0 75%;
         transition: translate 1400ms var(--ease-out);
         transition-delay: calc(var(--l) * 90ms);
     }
 
     &.isIn span {
-        translate: 0 0;
+        translate: 0 16%;
     }
 }
 
