@@ -282,6 +282,7 @@ function App(): ReactElement {
           <span />
           <div className="gridLayer heroGrid" ref={heroGridRef} />
         </div>
+        <div className="heroEdge" aria-hidden="true" />
         <div className="heroInner">
           <WelcomeSection />
           <div className="heroCtas" aria-label="Primary actions">
