@@ -131,35 +131,6 @@ function App(): ReactElement {
     return () => observer.disconnect();
   }, []);
 
-  // pill buttons lean a little toward the cursor while it's over them, and spring back when it leaves
-  useEffect(() => {
-    if (!window.matchMedia("(pointer: fine)").matches) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    const buttons = [...document.querySelectorAll<HTMLElement>(".pillButton")];
-    const cleanups = buttons.map((button) => {
-      const move = (event: PointerEvent) => {
-        const rect = button.getBoundingClientRect();
-        const x = (event.clientX - rect.left - rect.width / 2) * 0.1;
-        const y = (event.clientY - rect.top - rect.height / 2) * 0.18;
-        button.style.setProperty("--mx", `${x.toFixed(1)}px`);
-        button.style.setProperty("--my", `${y.toFixed(1)}px`);
-      };
-      const leave = () => {
-        button.style.removeProperty("--mx");
-        button.style.removeProperty("--my");
-      };
-      button.addEventListener("pointermove", move);
-      button.addEventListener("pointerleave", leave);
-      return () => {
-        button.removeEventListener("pointermove", move);
-        button.removeEventListener("pointerleave", leave);
-      };
-    });
-
-    return () => cleanups.forEach((cleanup) => cleanup());
-  }, []);
-
   // light up the grid in a pool that trails the cursor, easing toward it rather than snapping. the same eased
   // pointer also drives a gentle parallax on the hero doodles.
   useEffect(() => {

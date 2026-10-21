@@ -40,6 +40,8 @@
     /* motion: a long, soft deceleration for entrances and a gentle spring for interactions */
     --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
     --ease-spring: cubic-bezier(0.34, 1.36, 0.64, 1);
+    /* overshoots further and settles back, for a playful, bubbly feel */
+    --ease-bubble: cubic-bezier(0.34, 1.8, 0.5, 1);
     --dur-quick: 260ms;
     --dur-soft: 520ms;
     --dur-enter: 1000ms;
@@ -172,15 +174,18 @@ button {
         background-color var(--dur-quick) ease,
         border-color var(--dur-quick) ease,
         color var(--dur-quick) ease,
-        scale var(--dur-soft) var(--ease-spring),
-        translate 600ms var(--ease-spring);
-    /* set by the magnetic effect in App.tsx */
-    translate: var(--mx, 0) var(--my, 0);
+        scale 550ms var(--ease-bubble);
+}
+
+/* a soft, bubbly swell on hover that settles with a little bounce, and a squish when pressed */
+.pillButton:hover {
+    scale: 1.045;
 }
 
 .pillButton:active {
-    scale: 0.97;
-    transition-duration: 120ms;
+    scale: 0.96;
+    transition-duration: 140ms;
+    transition-timing-function: ease-out;
 }
 
 .pillButton-solid {
