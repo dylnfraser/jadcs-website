@@ -315,10 +315,7 @@ function App(): ReactElement {
               target="_blank"
               rel="noreferrer"
             >
-              Donate{" "}
-              <span className="pillArrow" aria-hidden="true">
-                →
-              </span>
+              Donate
             </a>
             <button className="pillButton pillButton-ghost" onClick={handleLearnMore}>
               Read our mission

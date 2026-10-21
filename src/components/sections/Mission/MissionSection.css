@@ -194,10 +194,8 @@
 
     dt {
         color: var(--ink-muted);
-        font-family: ui-monospace, "SF Mono", Menlo, monospace;
-        font-size: 0.75rem;
-        letter-spacing: 0.02em;
-        text-transform: lowercase;
+        font-family: "default";
+        font-size: 0.95rem;
     }
 
     dd {

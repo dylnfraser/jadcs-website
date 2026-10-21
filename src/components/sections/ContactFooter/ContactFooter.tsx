@@ -52,10 +52,7 @@ function ContactFooter() {
         </p>
         <div className="footerActions">
           <a className="pillButton pillButton-cream" href={`mailto:${contactEmail}`}>
-            Email us{" "}
-            <span className="pillArrow" aria-hidden="true">
-              →
-            </span>
+            Email us
           </a>
           <a className="pillButton pillButton-outline" href={donationUrl} target="_blank" rel="noreferrer">
             Donate
@@ -68,7 +65,7 @@ function ContactFooter() {
           <p className="footerLabel">Write to us</p>
           <a href={`mailto:${contactEmail}`}>
             <MailIcon />
-            {contactEmail}
+            <span className="linkText">{contactEmail}</span>
           </a>
         </div>
         <div>
@@ -76,14 +73,14 @@ function ContactFooter() {
           {socialLinks.map((link) => (
             <a href={link.href} target="_blank" rel="noreferrer" key={link.label}>
               <link.Icon />
-              {link.label}
+              <span className="linkText">{link.label}</span>
             </a>
           ))}
         </div>
         <div className="footerUp">
           <p className="footerLabel">© {new Date().getFullYear()} JADCS</p>
           <a href="#top">
-            Back to top
+            <span className="linkText">Back to top</span>
             <ArrowUpIcon />
           </a>
         </div>

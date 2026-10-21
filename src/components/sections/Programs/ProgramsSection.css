@@ -87,11 +87,12 @@
     padding-bottom: 0;
 }
 
+/* the item numbers are set in the heading serif, in clay, like a numbered list in a printed booklet */
 .programNumber {
-    color: var(--ink-muted);
-    font-family: ui-monospace, "SF Mono", Menlo, monospace;
-    font-size: 0.75rem;
-    letter-spacing: 0.04em;
+    color: var(--clay);
+    font-family: "serif";
+    font-size: clamp(1.35rem, 2.2vw, 1.6rem);
+    line-height: 1.2;
 }
 
 @media (max-width: 800px) {

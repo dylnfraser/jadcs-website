@@ -53,9 +53,9 @@ const MissionSection: React.FC = () => {
   return (
     <section className="missionSection" id="mission">
       <Doodle name="arrow" tone="clay" depth={12} style={{ top: "15%", left: "calc(50% - 46vw)", width: 60 }} />
-      <Doodle name="sparkle" tone="moss" depth={9} style={{ top: "36%", right: "calc(50% - 44vw)", width: 34 }} />
+      <Doodle name="bulb" tone="moss" depth={9} style={{ top: "34%", right: "calc(50% - 45vw)", width: 38 }} />
       <Doodle name="loop" tone="ink" depth={6} style={{ top: "60%", left: "calc(50% - 45vw)", width: 84 }} />
-      <Doodle name="burst" tone="clay" depth={10} style={{ top: "78%", right: "calc(50% - 46vw)", width: 40 }} />
+      <Doodle name="sprout" tone="moss" depth={10} style={{ top: "76%", right: "calc(50% - 46vw)", width: 46 }} />
       <div className="missionContent">
         <div className="missionSpread">
           <div className="missionIntro">

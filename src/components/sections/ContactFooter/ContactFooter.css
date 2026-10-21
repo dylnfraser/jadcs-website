@@ -133,14 +133,19 @@
         width: fit-content;
         color: var(--paper);
         font-size: 1rem;
-        padding-bottom: 6px;
-        background: var(--wave-paper) 0 100% / 0% 7px no-repeat;
         text-decoration: none;
+    }
+
+    /* the wave draws in under the link's text (not its icon) on hover */
+    /* the room for the wave is cancelled out of the layout, so the icon centres on the text alone */
+    .linkText {
+        padding-bottom: 6px;
+        margin-bottom: -6px;
+        background: var(--wave-paper) 0 100% / 0% 7px no-repeat;
         transition: background-size var(--dur-soft) var(--ease-out);
     }
 
-    /* the wave draws in under the link on hover */
-    a:hover {
+    a:hover .linkText {
         background-size: 100% 7px;
     }
 }
@@ -179,11 +184,10 @@
     margin: 3rem 0 0;
     margin-inline: calc(50% - 50vw);
     letter-spacing: -0.04em;
-    color: color-mix(in srgb, var(--paper) 72%, transparent);
+    /* solid and slightly see-through, so the contour lines show faintly through the letters */
+    color: color-mix(in srgb, var(--paper) 70%, transparent);
     font-family: "serif";
     font-size: 23vw;
-    /* fades softly toward the bottom edge, as if sinking into the band */
-    mask-image: linear-gradient(to bottom, black 25%, rgb(0 0 0 / 0.35));
     font-weight: 400;
     line-height: 0.74;
     white-space: nowrap;

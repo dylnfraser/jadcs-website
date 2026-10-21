@@ -24,10 +24,10 @@ const programs = [
 function ProgramsSection() {
   return (
     <section className="siteSection programsSection" id="programs">
-      <Doodle name="ring" tone="ink" depth={8} style={{ top: "12%", left: "calc(50% - 45vw)", width: 46 }} />
+      <Doodle name="book" tone="ink" depth={8} style={{ top: "12%", left: "calc(50% - 46vw)", width: 62 }} />
       <Doodle name="spiral" tone="clay" depth={11} style={{ top: "30%", right: "calc(50% - 44vw)", width: 50 }} />
-      <Doodle name="squiggle" tone="moss" depth={7} style={{ top: "62%", left: "calc(50% - 46vw)", width: 70 }} />
-      <Doodle name="sparkle" tone="clay" depth={13} style={{ top: "80%", right: "calc(50% - 45vw)", width: 40 }} />
+      <Doodle name="code" tone="moss" depth={7} style={{ top: "60%", left: "calc(50% - 46vw)", width: 58 }} />
+      <Doodle name="pencil" tone="clay" depth={13} style={{ top: "80%", right: "calc(50% - 46vw)", width: 66 }} />
       <div className="programsSpread">
         <header className="programsHeader">
           <h2 className="splitWords">
@@ -43,7 +43,7 @@ function ProgramsSection() {
           {programs.map((program, index) => (
             <li className="programItem" key={program.title}>
               <span className="programNumber" aria-hidden="true">
-                {String(index + 1).padStart(2, "0")}
+                {index + 1}.
               </span>
               <div>
                 <h3>{program.title}</h3>

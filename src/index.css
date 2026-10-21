@@ -154,7 +154,7 @@ button {
 
 /*
  * the site's two actions. flat pills with no drop shadow: the solid one in deep moss, the ghost one a hairline.
- * on hover the pill brightens a touch and its arrow nudges forward; on press it gives slightly.
+ * on hover the pill brightens a touch and swells; on press it gives slightly.
  */
 .pillButton {
     display: inline-flex;
@@ -180,6 +180,12 @@ button {
 /* a soft, bubbly swell on hover that settles with a little bounce, and a squish when pressed */
 .pillButton:hover {
     scale: 1.045;
+}
+
+/* the big hero and footer pills grow by a smaller fraction, so every pill gains about the same few pixels */
+.heroCtas .pillButton:hover,
+.footerActions .pillButton:hover {
+    scale: 1.025;
 }
 
 .pillButton:active {
@@ -208,15 +214,6 @@ button {
 .pillButton-ghost:hover {
     border-color: var(--ink);
     background: var(--surface-solid);
-}
-
-.pillArrow {
-    display: inline-block;
-    transition: translate var(--dur-soft) var(--ease-spring);
-}
-
-.pillButton:hover .pillArrow {
-    translate: 4px 0;
 }
 
 /* headings that rise in word by word, out of a soft blur */
