@@ -73,8 +73,8 @@ type DoodleProps = {
   turn?: number;
   className?: string;
   style?: CSSProperties;
-  // a small reaction when clicked: the plane flies a loop, the bulb flickers on
-  react?: "fly" | "flicker";
+  // a small reaction when clicked: the plane flies a loop, the bulb flickers on, the sprout grows
+  react?: "fly" | "flicker" | "grow";
 };
 
 // restart the reaction animation on every click, even mid-way through the last one

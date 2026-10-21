@@ -73,7 +73,13 @@ const MissionSection: React.FC = () => {
         style={{ top: "34%", right: "calc(50% - 45vw)", width: 38 }}
       />
       <Doodle name="loop" tone="ink" depth={6} style={{ top: "60%", left: "calc(50% - 45vw)", width: 84 }} />
-      <Doodle name="sprout" tone="moss" depth={10} style={{ top: "76%", right: "calc(50% - 46vw)", width: 46 }} />
+      <Doodle
+        name="sprout"
+        tone="moss"
+        react="grow"
+        depth={10}
+        style={{ top: "76%", right: "calc(50% - 46vw)", width: 46 }}
+      />
       <div className="missionContent">
         <div className="missionSpread">
           <div className="missionIntro">
