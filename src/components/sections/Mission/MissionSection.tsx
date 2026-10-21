@@ -72,7 +72,6 @@ const MissionSection: React.FC = () => {
         react="flicker"
         style={{ top: "34%", right: "calc(50% - 45vw)", width: 38 }}
       />
-      <Doodle name="loop" tone="ink" depth={6} style={{ top: "60%", left: "calc(50% - 45vw)", width: 84 }} />
       <Doodle
         name="sprout"
         tone="moss"
