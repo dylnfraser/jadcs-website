@@ -206,6 +206,7 @@
     height: 150px;
     background: var(--coffee-ring) center / contain no-repeat;
     mix-blend-mode: multiply;
+    opacity: 0.75;
     rotate: 24deg;
     content: "";
     pointer-events: none;
