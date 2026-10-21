@@ -127,10 +127,20 @@ function PhotoFan(): ReactElement {
           <figure
             className={`photoCard photoSlot-${slot}${leaving === index ? " isLeaving" : ""}`}
             key={photo.caption}
-            style={{ "--tint": photo.tint } as CSSProperties}
+            style={
+              {
+                "--tint": photo.tint,
+                "--tape-tilt": `${[-4, 3, -2][index]}deg`,
+                "--tape-x": `${[-6, 8, 2][index]}px`,
+              } as CSSProperties
+            }
           >
+            {/* a strip of tape holding the print, placed a little differently on each one */}
+            <span className="photoTape" aria-hidden="true" />
             {photo.src ? (
-              <img src={photo.src} alt={photo.alt} loading="lazy" />
+              <div className="photoWindow">
+                <img src={photo.src} alt={photo.alt} loading="lazy" />
+              </div>
             ) : (
               <div className="photoPlaceholder">
                 <span>Photo coming soon</span>
