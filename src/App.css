@@ -176,17 +176,18 @@ a {
 }
 
 /*
- * the top edge of the page is cut into a slow-drifting wave: ::before is a strip of the page's own
- * background masked to the wave's shape, sitting just above the straight edge, and ::after draws the
- * line along it. both drift by exactly one wave length per loop so they stay locked together.
+ * the hero is cut off by a hand-drawn squiggle: ::before is a strip of the page's own background masked to
+ * the squiggle's shape, sitting just above the straight edge, and ::after inks the line along it. the tile's
+ * two ends meet at the same height and angle so it repeats without a seam, and both layers drift by exactly
+ * one tile per loop so they stay locked together.
  */
 .pageSections::before,
 .pageSections::after {
     position: absolute;
-    top: -17px;
+    top: -35px;
     left: 0;
     right: 0;
-    height: 18px;
+    height: 36px;
     content: "";
     pointer-events: none;
 }
@@ -196,27 +197,27 @@ a {
         var(--grain-texture) 0 0 / 140px 140px,
         var(--surface-solid);
     background-blend-mode: soft-light, normal;
-    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='18' viewBox='0 0 160 18'%3E%3Cpath d='M0 9 Q 40 1 80 9 T 160 9 V 18 H 0 Z'/%3E%3C/svg%3E")
-        0 0 / 160px 18px repeat-x;
-    animation: wave-drift-fill 14s linear infinite;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='36' viewBox='0 0 320 36'%3E%3Cpath d='M0 17 C 10 9, 26 5, 40 5 C 62 5, 78 30, 100 30 C 120 30, 132 8, 150 8 C 172 8, 184 27, 205 27 C 226 27, 236 4, 255 4 C 272 4, 280 28, 295 28 C 306 28, 310 25, 320 17 V 36 H 0 Z'/%3E%3C/svg%3E")
+        0 0 / 320px 36px repeat-x;
+    animation: wave-drift-fill 24s linear infinite;
 }
 
 .pageSections::after {
-    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='18' viewBox='0 0 160 18'%3E%3Cpath d='M0 9 Q 40 1 80 9 T 160 9' fill='none' stroke='%23b0623d' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E")
-        0 0 / 160px 18px repeat-x;
-    opacity: 0.6;
-    animation: wave-drift-line 14s linear infinite;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='36' viewBox='0 0 320 36'%3E%3Cpath d='M0 17 C 10 9, 26 5, 40 5 C 62 5, 78 30, 100 30 C 120 30, 132 8, 150 8 C 172 8, 184 27, 205 27 C 226 27, 236 4, 255 4 C 272 4, 280 28, 295 28 C 306 28, 310 25, 320 17' fill='none' stroke='%23b0623d' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+        0 0 / 320px 36px repeat-x;
+    opacity: 0.85;
+    animation: wave-drift-line 24s linear infinite;
 }
 
 @keyframes wave-drift-fill {
     to {
-        mask-position: -160px 0;
+        mask-position: -320px 0;
     }
 }
 
 @keyframes wave-drift-line {
     to {
-        background-position: -160px 0;
+        background-position: -320px 0;
     }
 }
 
