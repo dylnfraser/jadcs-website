@@ -49,50 +49,129 @@
     list-style: none;
 }
 
+/* a ruled index card: cream stock, a red line under the heading, blue rules for the detail */
 .programItem {
-    display: grid;
-    grid-template-columns: 2.75rem minmax(0, 1fr);
-    align-items: baseline;
-    padding: 1.6rem 0 1.9rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border-radius: 3px;
+    background:
+        var(--grain-texture) 0 0 / 140px 140px,
+        #fdfbf4;
+    background-blend-mode: soft-light, normal;
+    box-shadow:
+        0 0 0 0.5px rgb(70 52 28 / 0.12),
+        0 1px 1.5px rgb(70 52 28 / 0.14),
+        0 10px 18px -10px rgb(70 52 28 / 0.25);
+    rotate: var(--tilt, 0deg);
+    transition:
+        transform 450ms var(--ease-bubble),
+        box-shadow 450ms var(--ease-out),
+        rotate 450ms var(--ease-bubble);
+
+    /* dealt out overlapping a little, each one landing on the last */
+    & + & {
+        margin-top: 1.1rem;
+    }
 
     h3 {
-        margin: 0 0 0.5rem;
-        font-size: clamp(1.35rem, 2.2vw, 1.6rem);
-        font-weight: 420;
+        margin: 0;
+        font-size: clamp(1.25rem, 2vw, 1.45rem);
+        font-weight: 450;
         line-height: 1.2;
         letter-spacing: -0.015em;
         text-wrap: balance;
     }
+}
+
+/* picked up: it straightens and lifts off the pile */
+.programItem:hover {
+    z-index: 2;
+    rotate: 0deg;
+    transform: translateY(-4px);
+    box-shadow:
+        0 0 0 0.5px rgb(70 52 28 / 0.12),
+        0 2px 3px rgb(70 52 28 / 0.12),
+        0 20px 30px -14px rgb(70 52 28 / 0.32);
+}
+
+.cardHead {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 1.1rem 4rem 0.8rem 1.4rem;
+    /* the index card's red heading line */
+    border-bottom: solid 1.5px rgb(205 96 86 / 0.55);
+}
+
+/*
+ * the detail sits on the card's blue rules: each line is one rule tall and the rules are shifted to fall just under
+ * the baselines (the body font's baseline is 0.315em below the middle of its line box). there's always one empty
+ * rule below the text, like the rest of the card.
+ */
+.cardBody {
+    --rule: 1.75rem;
+    --pad-top: 0.35rem;
+    flex: 1;
+    padding: var(--pad-top) 1.4rem var(--rule) 1.4rem;
+    background: repeating-linear-gradient(
+            to bottom,
+            transparent 0,
+            transparent calc(var(--rule) - 1px),
+            rgb(110 140 190 / 0.3) calc(var(--rule) - 1px),
+            rgb(110 140 190 / 0.3) var(--rule)
+        )
+        0 calc(var(--pad-top) + var(--rule) / 2 + 0.315em + 2px - var(--rule));
+    font-size: 1.02rem;
 
     p {
         max-width: 32rem;
         margin: 0;
-        color: color-mix(in srgb, var(--ink) 78%, transparent);
+        color: color-mix(in srgb, var(--ink) 80%, transparent);
         font-family: "default";
-        font-size: 1.05rem;
-        line-height: 1.6;
+        font-size: 1em;
+        line-height: var(--rule);
     }
 }
 
-.programItem + .programItem {
-    border-top: dashed 1px var(--line-strong);
-}
-
-/* line the first title up with the label beside it */
-.programItem:first-child {
-    padding-top: 0;
-}
-
-.programItem:last-child {
-    padding-bottom: 0;
-}
-
-/* the item numbers are set in the heading serif, in clay, like a numbered list in a printed booklet */
+/* the number is rubber-stamped, like the goals */
 .programNumber {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 2.1rem;
+    height: 2.1rem;
+    border: solid 2px currentColor;
+    border-radius: 5px;
     color: var(--clay);
     font-family: "serif";
-    font-size: clamp(1.35rem, 2.2vw, 1.6rem);
-    line-height: 1.2;
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 1;
+    filter: url(#ink);
+    mix-blend-mode: multiply;
+    rotate: -6deg;
+}
+
+/* a paper clip over the top edge */
+.paperClip {
+    position: absolute;
+    top: -18px;
+    right: 1.6rem;
+    width: 18px;
+    overflow: visible;
+    fill: none;
+    stroke: #9a9c9e;
+    stroke-width: 2.2;
+    stroke-linecap: round;
+    filter: drop-shadow(1px 1.5px 1px rgb(40 30 15 / 0.25));
+    rotate: 6deg;
+}
+
+.programItem:nth-child(even) .paperClip {
+    right: auto;
+    left: 62%;
+    rotate: -8deg;
 }
 
 @media (max-width: 800px) {
@@ -113,12 +192,11 @@
         grid-column: auto;
     }
 
-    .programItem {
-        grid-template-columns: 2.25rem minmax(0, 1fr);
-        padding: 1.4rem 0 1.6rem;
+    .cardHead {
+        padding: 1rem 3.4rem 0.7rem 1.1rem;
+    }
 
-        p {
-            font-size: 1.02rem;
-        }
+    .cardBody {
+        padding-inline: 1.1rem;
     }
 }

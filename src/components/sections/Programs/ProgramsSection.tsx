@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import Doodle from "../../effects/Doodle";
 import SplitWords from "../../effects/SplitWords";
 import "./ProgramsSection.css";
@@ -39,14 +40,25 @@ function ProgramsSection() {
           </p>
         </header>
 
+        {/* each program is an index card: a stamped number and title above the red line, the detail on the rules
+            below, clipped together and dealt out at slightly different angles */}
         <ol className="programList">
           {programs.map((program, index) => (
-            <li className="programItem" key={program.title}>
-              <span className="programNumber" aria-hidden="true">
-                {index + 1}.
-              </span>
-              <div>
+            <li
+              className="programItem"
+              key={program.title}
+              style={{ "--tilt": `${[-1.4, 1.1, -0.7, 1.5][index]}deg` } as CSSProperties}
+            >
+              <svg className="paperClip" viewBox="0 0 22 56" aria-hidden="true">
+                <path d="M8 40 V10 a5 5 0 0 1 10 0 V44 a8 8 0 0 1 -16 0 V15" />
+              </svg>
+              <div className="cardHead">
+                <span className="programNumber" aria-hidden="true">
+                  {index + 1}
+                </span>
                 <h3>{program.title}</h3>
+              </div>
+              <div className="cardBody">
                 <p>{program.description}</p>
               </div>
             </li>

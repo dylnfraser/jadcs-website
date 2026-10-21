@@ -20,7 +20,7 @@ function App(): ReactElement {
 
     const linked = [
       ...document.querySelectorAll<HTMLElement>(
-        ".missionText > p, .missionGoalsTitle, #missionGoals > div, " + ".programItem > *",
+        ".missionText > p, .missionGoalsTitle, #missionGoals > div, .programItem",
       ),
     ];
     // pinned headings can't follow a scroll-linked reveal: once they stick their position stops tracking
