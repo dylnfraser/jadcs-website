@@ -2,7 +2,6 @@ import React, { useEffect, useRef } from "react";
 import Doodle from "../../effects/Doodle";
 import SplitWords from "../../effects/SplitWords";
 import HandNote from "../../effects/HandNote";
-import QuoteScrap from "./QuoteScrap";
 import "./MissionSection.css";
 
 const goals = [
@@ -106,7 +105,6 @@ const MissionSection: React.FC = () => {
               </div>
             ))}
           </dl>
-          <QuoteScrap />
         </div>
       </div>
     </section>

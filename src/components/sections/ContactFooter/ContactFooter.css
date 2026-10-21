@@ -96,6 +96,20 @@
     line-height: normal;
 }
 
+.footerTop {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 21rem;
+    gap: 3rem;
+    align-items: center;
+}
+
+@media (max-width: 1000px) {
+    .footerTop {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+}
+
 .contactFooterMain {
     max-width: 46rem;
 
@@ -260,7 +274,7 @@
 
     .footerColumns {
         grid-template-columns: 1fr 1fr;
-        margin-top: 3.5rem;
+        margin-top: 2.25rem;
     }
 
     .footerUp {

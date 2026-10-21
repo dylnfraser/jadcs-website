@@ -1,5 +1,6 @@
 import type { CSSProperties, ReactElement } from "react";
 import contours from "../../../assets/contours.svg?raw";
+import QuoteScrap from "./QuoteScrap";
 import "./ContactFooter.css";
 
 const contactEmail = "jadcsfund@gmail.com";
@@ -48,20 +49,24 @@ function ContactFooter() {
       <footer className="contactFooter" id="contact">
         {/* inlined rather than a background image so the rings can be animated from css in every browser */}
         <div className="footerContours" aria-hidden="true" dangerouslySetInnerHTML={{ __html: contours }} />
-        <div className="contactFooterMain">
-          <h2>Let’s expand STEM access, together.</h2>
-          <p>
-            Have a laptop to donate, want to volunteer, or want to bring JADCS to your school? We’d love to hear from
-            you.
-          </p>
-          <div className="footerActions">
-            <a className="pillButton pillButton-cream" href={`mailto:${contactEmail}`}>
-              Email us
-            </a>
-            <a className="pillButton pillButton-outline" href={donationUrl} target="_blank" rel="noreferrer">
-              Donate
-            </a>
+        {/* the statement on the left, a taped quote from someone involved on the right */}
+        <div className="footerTop">
+          <div className="contactFooterMain">
+            <h2>Let’s expand STEM access, together.</h2>
+            <p>
+              Have a laptop to donate, want to volunteer, or want to bring JADCS to your school? We’d love to hear from
+              you.
+            </p>
+            <div className="footerActions">
+              <a className="pillButton pillButton-cream" href={`mailto:${contactEmail}`}>
+                Email us
+              </a>
+              <a className="pillButton pillButton-outline" href={donationUrl} target="_blank" rel="noreferrer">
+                Donate
+              </a>
+            </div>
           </div>
+          <QuoteScrap />
         </div>
 
         <div className="footerColumns">

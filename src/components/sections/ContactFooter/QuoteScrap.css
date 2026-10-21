@@ -4,8 +4,9 @@
  */
 .quoteScrap {
     position: relative;
-    width: min(26rem, 100%);
-    margin: 3.25rem 0 0 auto;
+    width: 100%;
+    max-width: 22rem;
+    margin: 0;
     /* drawn on the wrapper, after the paper's torn-edge clip, so the shadow isn't cut away */
     filter: drop-shadow(0 1px 1px rgb(70 52 28 / 0.14)) drop-shadow(0 10px 14px rgb(70 52 28 / 0.12));
     rotate: 1.8deg;
@@ -76,7 +77,7 @@
         margin: 0;
         color: #2b3550;
         font-family: var(--font-hand);
-        font-size: 1.55rem;
+        font-size: 1.45rem;
         font-weight: 500;
         line-height: var(--rule);
     }
@@ -133,9 +134,30 @@
     }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 1000px) {
     .quoteScrap {
-        margin: 2.5rem auto 0;
+        margin: 1.75rem 0 0;
+    }
+}
+
+/* on phones the scrap is a little smaller so the whole footer still fits on one screen */
+@media (max-width: 600px) {
+    .quotePaper {
+        --rule: 1.75rem;
+        padding: 1.7rem 1.2rem 0.7rem 3rem;
+        background-position:
+            0 0,
+            0 0,
+            0 1.25rem,
+            0 0;
+
+        p {
+            font-size: 1.25rem;
+        }
+
+        figcaption {
+            font-size: 1.1rem;
+        }
     }
 }
 
