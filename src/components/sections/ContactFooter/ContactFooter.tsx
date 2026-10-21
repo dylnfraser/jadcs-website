@@ -42,59 +42,64 @@ const socialLinks = [
 
 function ContactFooter() {
   return (
-    <footer className="contactFooter" id="contact">
-      {/* inlined rather than a background image so the rings can be animated from css in every browser */}
-      <div className="footerContours" aria-hidden="true" dangerouslySetInnerHTML={{ __html: contours }} />
-      <div className="contactFooterMain">
-        <h2>Let’s expand STEM access, together.</h2>
-        <p>
-          Have a laptop to donate, want to volunteer, or want to bring JADCS to your school? We’d love to hear from you.
-        </p>
-        <div className="footerActions">
-          <a className="pillButton pillButton-cream" href={`mailto:${contactEmail}`}>
-            Email us
-          </a>
-          <a className="pillButton pillButton-outline" href={donationUrl} target="_blank" rel="noreferrer">
-            Donate
-          </a>
-        </div>
-      </div>
-
-      <div className="footerColumns">
-        <div>
-          <p className="footerLabel">Write to us</p>
-          <a href={`mailto:${contactEmail}`}>
-            <MailIcon />
-            <span className="linkText">{contactEmail}</span>
-          </a>
-        </div>
-        <div>
-          <p className="footerLabel">Follow along</p>
-          {socialLinks.map((link) => (
-            <a href={link.href} target="_blank" rel="noreferrer" key={link.label}>
-              <link.Icon />
-              <span className="linkText">{link.label}</span>
+    <>
+      {/* the green band reads as a sheet laid over the page: it casts a soft shadow onto the paper above it */}
+      <div className="footerFoldShadow" aria-hidden="true" />
+      <footer className="contactFooter" id="contact">
+        {/* inlined rather than a background image so the rings can be animated from css in every browser */}
+        <div className="footerContours" aria-hidden="true" dangerouslySetInnerHTML={{ __html: contours }} />
+        <div className="contactFooterMain">
+          <h2>Let’s expand STEM access, together.</h2>
+          <p>
+            Have a laptop to donate, want to volunteer, or want to bring JADCS to your school? We’d love to hear from
+            you.
+          </p>
+          <div className="footerActions">
+            <a className="pillButton pillButton-cream" href={`mailto:${contactEmail}`}>
+              Email us
             </a>
-          ))}
+            <a className="pillButton pillButton-outline" href={donationUrl} target="_blank" rel="noreferrer">
+              Donate
+            </a>
+          </div>
         </div>
-        <div className="footerUp">
-          <p className="footerLabel">© {new Date().getFullYear()} JADCS</p>
-          <a href="#top">
-            <span className="linkText">Back to top</span>
-            <ArrowUpIcon />
-          </a>
-        </div>
-      </div>
 
-      {/* the name set huge and cropped by the bottom of the page, like a signature at the foot of a letter */}
-      <p className="footerWordmark" aria-hidden="true">
-        {"JADCS".split("").map((letter, index) => (
-          <span key={index} style={{ "--l": index } as CSSProperties}>
-            {letter}
-          </span>
-        ))}
-      </p>
-    </footer>
+        <div className="footerColumns">
+          <div>
+            <p className="footerLabel">Write to us</p>
+            <a href={`mailto:${contactEmail}`}>
+              <MailIcon />
+              <span className="linkText">{contactEmail}</span>
+            </a>
+          </div>
+          <div>
+            <p className="footerLabel">Follow along</p>
+            {socialLinks.map((link) => (
+              <a href={link.href} target="_blank" rel="noreferrer" key={link.label}>
+                <link.Icon />
+                <span className="linkText">{link.label}</span>
+              </a>
+            ))}
+          </div>
+          <div className="footerUp">
+            <p className="footerLabel">© {new Date().getFullYear()} JADCS</p>
+            <a href="#top">
+              <span className="linkText">Back to top</span>
+              <ArrowUpIcon />
+            </a>
+          </div>
+        </div>
+
+        {/* the name set huge and cropped by the bottom of the page, like a signature at the foot of a letter */}
+        <p className="footerWordmark" aria-hidden="true">
+          {"JADCS".split("").map((letter, index) => (
+            <span key={index} style={{ "--l": index } as CSSProperties}>
+              {letter}
+            </span>
+          ))}
+        </p>
+      </footer>
+    </>
   );
 }
 

@@ -311,6 +311,31 @@ function App(): ReactElement {
     <>
       <Background />
       <Navbar />
+      {/*
+       * a pencil texture for the doodles: the stroke is nudged off its perfect line by low-level noise, then
+       * eaten into by a finer noise so it looks like graphite dragged across paper
+       */}
+      <svg width="0" height="0" style={{ position: "absolute" }} aria-hidden="true" focusable="false">
+        <filter id="pencil" filterUnits="userSpaceOnUse" x="-50" y="-50" width="200" height="200">
+          <feTurbulence type="fractalNoise" baseFrequency="0.6" numOctaves="2" seed="4" result="wobble" />
+          <feDisplacementMap
+            in="SourceGraphic"
+            in2="wobble"
+            scale="1.6"
+            xChannelSelector="R"
+            yChannelSelector="G"
+            result="drawn"
+          />
+          <feTurbulence type="fractalNoise" baseFrequency="1.8" numOctaves="1" seed="9" result="tooth" />
+          <feColorMatrix
+            in="tooth"
+            type="matrix"
+            values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.2 1.75"
+            result="toothMask"
+          />
+          <feComposite in="drawn" in2="toothMask" operator="in" />
+        </filter>
+      </svg>
       <div className="hero" id="top">
         <div className="heroBackdrop" aria-hidden="true">
           <span />

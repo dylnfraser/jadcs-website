@@ -93,7 +93,7 @@ function Doodle({
       aria-hidden="true"
     >
       <svg viewBox={shape.viewBox}>
-        <path d={shape.d} pathLength="1" />
+        <path d={shape.d} pathLength="1" filter="url(#pencil)" />
       </svg>
     </span>
   );

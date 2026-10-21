@@ -1,6 +1,43 @@
+/* sits just above the band (outside its clip) and darkens the paper toward the band's edge */
+.footerFoldShadow {
+    position: relative;
+    height: 0;
+    margin-top: 4rem;
+
+    &::after {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        width: 100vw;
+        height: 26px;
+        translate: -50% 0;
+        background: linear-gradient(to bottom, transparent, rgb(70 52 28 / 0.05) 60%, rgb(70 52 28 / 0.16));
+        content: "";
+        pointer-events: none;
+    }
+}
+
+/* a light crease along the band's top edge, then a soft shade where the sheet curls away from the fold */
+.contactFooter::after {
+    position: absolute;
+    top: 0;
+    left: calc(50% - 50vw);
+    width: 100vw;
+    height: 22px;
+    background: linear-gradient(
+        to bottom,
+        rgb(255 255 255 / 0.22),
+        rgb(255 255 255 / 0.05) 1.5px,
+        rgb(0 0 0 / 0.1) 2px,
+        transparent
+    );
+    content: "";
+    pointer-events: none;
+}
+
 .contactFooter {
     width: min(1000px, 86vw);
-    margin: 4rem auto 0;
+    margin: 0 auto;
     padding: 7rem 0 0;
     color: var(--paper);
     text-align: left;
@@ -211,9 +248,12 @@
 }
 
 @media (max-width: 800px) {
+    .footerFoldShadow {
+        margin-top: 2rem;
+    }
+
     .contactFooter {
         width: min(92vw, 680px);
-        margin-top: 2rem;
         padding-top: 4.5rem;
     }
 
