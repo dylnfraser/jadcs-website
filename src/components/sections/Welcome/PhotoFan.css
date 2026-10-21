@@ -81,9 +81,10 @@
     width: 58px;
 }
 
+/* on hover the prints jump up and fan outward, the outer ones flung a little further, then settle with a bounce */
 .photoFan:hover .photoCard {
-    rotate: calc(var(--i) * 14deg);
-    translate: calc(var(--i) * 34px) calc(var(--a) * 10px);
+    rotate: calc(var(--i) * 15deg);
+    translate: calc(var(--i) * 48px) calc(-14px - var(--a) * 10px);
 }
 
 /* smaller screens: the fan shrinks so its outer prints stay on screen */

@@ -1,15 +1,33 @@
 import type { CSSProperties, ReactElement } from "react";
 import Doodle from "../../effects/Doodle";
+import buildingTower from "../../../assets/photos/photo-3.jpg";
+import circuitKits from "../../../assets/photos/photo-2.jpg";
+import worksheets from "../../../assets/photos/photo-1.jpg";
 import "./PhotoFan.css";
 
-// photos for the hero fan. drop image files into src/assets/photos and set `src` (e.g. via an import) to replace
-// a placeholder; `alt` should describe the photo for screen readers.
+// photos for the hero fan (in src/assets/photos, with all camera metadata stripped). a card without `src` shows a
+// tinted placeholder; `alt` describes the photo for screen readers.
 type Photo = { src?: string; alt: string; caption: string; tint: string };
 
 const photos: Photo[] = [
-  { alt: "", caption: "Workshop day", tint: "var(--prim-color2)" },
-  { alt: "", caption: "A donated laptop", tint: "var(--clay-soft)" },
-  { alt: "", caption: "Mentoring session", tint: "var(--prim-color3)" },
+  {
+    src: worksheets,
+    alt: "Two students working through worksheets with pencils at a classroom table",
+    caption: "Worksheet time",
+    tint: "var(--prim-color2)",
+  },
+  {
+    src: circuitKits,
+    alt: "Students around a table building simple electromagnet circuits with batteries, wires and paper clips",
+    caption: "Circuits workshop",
+    tint: "var(--clay-soft)",
+  },
+  {
+    src: buildingTower,
+    alt: "A tower built from spaghetti, marshmallows and string during a design challenge",
+    caption: "Spaghetti tower",
+    tint: "var(--prim-color3)",
+  },
 ];
 
 function PhotoFan(): ReactElement {
