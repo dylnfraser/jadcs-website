@@ -1,6 +1,7 @@
 import type { CSSProperties } from "react";
 import Doodle from "../../effects/Doodle";
 import SplitWords from "../../effects/SplitWords";
+import InkStamp from "../../effects/InkStamp";
 import "./ProgramsSection.css";
 
 const programs = [
@@ -38,6 +39,7 @@ function ProgramsSection() {
             JADCS connects students with practical STEM learning, mentorship, and the technology needed to keep building
             outside the classroom.
           </p>
+          <InkStamp className="programsStamp" />
         </header>
 
         {/* each program is an index card: a stamped number and title above the red line, the detail on the rules

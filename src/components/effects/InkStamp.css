@@ -1,0 +1,39 @@
+/* stamped at a tilt in rough, uneven clay ink that soaks into the paper */
+.inkStamp {
+    display: block;
+    width: 132px;
+    height: 132px;
+    overflow: visible;
+    color: var(--clay);
+    filter: url(#ink-2);
+    mix-blend-mode: multiply;
+    rotate: -11deg;
+    opacity: 0;
+    scale: 1.18;
+}
+
+.inkStampLine {
+    fill: none;
+    stroke: currentColor;
+    stroke-linejoin: round;
+}
+
+.inkStampRing {
+    fill: currentColor;
+    font-family: "default";
+    font-size: 11.4px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+}
+
+/* the same thunk as the goal figures: down from just above the page, the ink taking as it presses */
+.inkStamp.isIn {
+    animation: stamp-down 620ms cubic-bezier(0.25, 0.1, 0.25, 1.25) 300ms forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .inkStamp {
+        opacity: 0.85;
+        scale: 1;
+    }
+}

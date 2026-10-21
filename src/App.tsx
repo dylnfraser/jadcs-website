@@ -119,7 +119,7 @@ function App(): ReactElement {
   // underlines sketch themselves in, once, as each comes into view
   useEffect(() => {
     const targets = document.querySelectorAll(
-      ".splitWords, .footerWordmark, .doodle-draw-scroll, .missionText u, .handNote-view, #missionGoals, .stickyNote, .quoteScrap",
+      ".splitWords, .footerWordmark, .doodle-draw-scroll, .missionText u, .handNote-view, #missionGoals, .stickyNote, .quoteScrap, .inkStamp",
     );
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       targets.forEach((target) => target.classList.add("isIn"));

@@ -195,3 +195,16 @@
         padding-inline: 1.1rem;
     }
 }
+
+/* the stamp lands below the intro, a little to the right */
+.programsStamp {
+    margin: 2rem 0 0 3rem;
+}
+
+@media (max-width: 800px) {
+    .programsStamp {
+        width: 108px;
+        height: 108px;
+        margin: 1.5rem 0 0 auto;
+    }
+}
