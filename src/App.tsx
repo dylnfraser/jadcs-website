@@ -109,9 +109,10 @@ function App(): ReactElement {
     };
   }, []);
 
-  // headings rise in word by word and the footer wordmark letter by letter, once, as each comes into view
+  // headings rise in word by word, the footer wordmark letter by letter, and the page doodles and mission
+  // underlines sketch themselves in, once, as each comes into view
   useEffect(() => {
-    const targets = document.querySelectorAll(".splitWords, .footerWordmark");
+    const targets = document.querySelectorAll(".splitWords, .footerWordmark, .doodle-draw-scroll, .missionText u");
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       targets.forEach((target) => target.classList.add("isIn"));
       return;

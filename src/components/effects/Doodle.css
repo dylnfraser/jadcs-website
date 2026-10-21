@@ -64,13 +64,13 @@
     animation: doodle-draw 900ms cubic-bezier(0.65, 0, 0.35, 1) forwards;
 }
 
-/* further down the page the stroke follows the scroll, drawing in as the doodle comes into view */
-@supports (animation-timeline: view()) {
-    :root:not(.scroll-timelines-off) .doodle-draw-scroll svg {
-        animation: doodle-draw linear both;
-        animation-timeline: view();
-        animation-range: entry 20% cover 45%;
-    }
+/* further down the page each doodle sketches itself in once, as it comes into view (App.tsx adds .isIn) */
+.doodle-draw-scroll svg {
+    stroke-dashoffset: 1;
+}
+
+.doodle-draw-scroll.isIn svg {
+    animation: doodle-draw 1100ms cubic-bezier(0.65, 0, 0.35, 1) 150ms forwards;
 }
 
 @keyframes doodle-draw {
