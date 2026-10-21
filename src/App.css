@@ -176,6 +176,7 @@ a {
 }
 
 .heroCtas {
+    position: relative;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -388,4 +389,10 @@ a {
 .goals-offscreen .missionGoalsBlock::before,
 .footer-offscreen .footerContours path {
     animation-play-state: paused;
+}
+
+/* the margin note under the Donate button, its arrow pointing back up at it */
+.noteDonate {
+    top: calc(100% + 8px);
+    left: 34px;
 }

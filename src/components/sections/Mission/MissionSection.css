@@ -17,9 +17,24 @@
     align-items: start;
 }
 
+/* the mission line is written on a sticky note, stuck on slightly crooked with its bottom corner lifting */
 .missionIntro {
     position: sticky;
     top: 7rem;
+    max-width: 22rem;
+    padding: 2rem 1.75rem 2.4rem;
+    background:
+        var(--grain-texture) 0 0 / 140px 140px,
+        /* the sticky strip along the top is a shade darker, and the lifted corner catches a little shadow */
+        linear-gradient(to bottom, rgb(0 0 0 / 0.04), transparent 18%),
+        linear-gradient(135deg, transparent 72%, rgb(70 52 28 / 0.07)),
+        #f4e3a1;
+    background-blend-mode: soft-light, normal, normal, normal;
+    box-shadow:
+        0 1px 1px rgb(70 52 28 / 0.12),
+        0 10px 18px -8px rgb(70 52 28 / 0.25),
+        /* the curl: the shadow is deepest under the bottom-right corner */ 14px 18px 20px -16px rgb(70 52 28 / 0.35);
+    rotate: -2.5deg;
     /* keep it on its own layer the whole time, so it doesn't shift by a subpixel when it starts or stops sticking */
     will-change: transform;
 }
@@ -198,14 +213,58 @@
         font-size: 0.95rem;
     }
 
+    /* each figure is rubber-stamped: a rough-inked frame, a small tilt, and ink that didn't take evenly */
     dd {
-        margin: 0;
+        width: fit-content;
+        margin: 0.25rem 0 0;
+        padding: 0.1em 0.3em 0.05em;
+        border: solid 2.5px currentColor;
+        border-radius: 6px;
         color: var(--clay);
         font-family: "serif";
         font-size: clamp(2.4rem, 4.5vw, 3.4rem);
-        font-weight: 350;
+        font-weight: 450;
         line-height: 1;
         font-variant-numeric: tabular-nums;
+        filter: url(#ink);
+        mix-blend-mode: multiply;
+        rotate: var(--stamp-tilt, -2deg);
+        opacity: 0;
+        scale: 1.35;
+    }
+
+    /* thunk: each stamp drops onto the page in turn when the row comes into view */
+    &.isIn dd {
+        animation: stamp-down 420ms cubic-bezier(0.3, 0, 0.2, 1.4) calc(var(--stamp) * 220ms) forwards;
+    }
+}
+
+@keyframes stamp-down {
+    0% {
+        opacity: 0;
+        scale: 1.35;
+    }
+
+    60% {
+        opacity: 0.92;
+    }
+
+    100% {
+        opacity: 0.92;
+        scale: 1;
+    }
+}
+
+/* the note above the goals points down at the fundraising figure */
+.noteGoals {
+    top: -0.6rem;
+    right: 2%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #missionGoals dd {
+        opacity: 0.92;
+        scale: 1;
     }
 }
 
@@ -225,6 +284,7 @@
 
     .missionIntro {
         position: static;
+        max-width: none;
     }
 
     .missionText p {

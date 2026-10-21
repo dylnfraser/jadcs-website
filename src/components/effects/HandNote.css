@@ -1,0 +1,67 @@
+/* margin notes in handwriting, slightly crooked, with a pencil arrow. the words are revealed left to right as if
+   being written, then the arrow is drawn */
+.handNote {
+    position: absolute;
+    display: flex;
+    align-items: flex-end;
+    gap: 2px;
+    color: var(--clay);
+    font-family: var(--font-hand);
+    font-size: 1.45rem;
+    font-weight: 500;
+    line-height: 1;
+    white-space: nowrap;
+    rotate: -3deg;
+    pointer-events: none;
+    user-select: none;
+
+    svg {
+        flex: none;
+        width: 40px;
+        overflow: visible;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 1.6;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-dasharray: 1;
+        stroke-dashoffset: 1;
+        vector-effect: non-scaling-stroke;
+    }
+}
+
+/* hidden until written: the reveal box is generous on every side so loops, descenders and the slant all fit */
+.handNoteText {
+    clip-path: inset(-50% 100% -50% -20%);
+}
+
+.handNote-load .handNoteText,
+.handNote-view.isIn .handNoteText {
+    animation: note-write 560ms steps(12, end) var(--note-delay, 0ms) forwards;
+}
+
+.handNote-load svg,
+.handNote-view.isIn svg {
+    animation: doodle-draw 380ms cubic-bezier(0.65, 0, 0.35, 1) calc(var(--note-delay, 0ms) + 480ms) forwards;
+}
+
+@keyframes note-write {
+    96% {
+        clip-path: inset(-50% -20% -50% -20%);
+    }
+
+    /* once written, the clip is dropped entirely so nothing can ever be cut off */
+    100% {
+        clip-path: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .handNoteText {
+        clip-path: none;
+    }
+
+    .handNote svg {
+        stroke-dashoffset: 0;
+    }
+}

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import Doodle from "../../effects/Doodle";
 import SplitWords from "../../effects/SplitWords";
+import HandNote from "../../effects/HandNote";
 import "./MissionSection.css";
 
 const goals = [
@@ -87,9 +88,13 @@ const MissionSection: React.FC = () => {
 
         <div className="missionGoalsBlock">
           <h3 className="sectionEyebrow missionGoalsTitle">Our goals for this year</h3>
+          <HandNote text="help us get there!" arrow="down" delay={900} className="noteGoals" />
           <dl id="missionGoals" ref={goalsRef}>
-            {goals.map((goal) => (
-              <div key={goal.label}>
+            {goals.map((goal, index) => (
+              <div
+                key={goal.label}
+                style={{ "--stamp": index, "--stamp-tilt": `${[-4, 2.5, -2][index]}deg` } as React.CSSProperties}
+              >
                 <dt>{goal.label}</dt>
                 <dd>{formatGoal(goal.value, goal.prefix)}</dd>
               </div>

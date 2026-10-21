@@ -1,6 +1,7 @@
 import type { CSSProperties, KeyboardEvent, ReactElement } from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import Doodle from "../../effects/Doodle";
+import HandNote from "../../effects/HandNote";
 import buildingTower from "../../../assets/photos/photo-3.jpg";
 import circuitKits from "../../../assets/photos/photo-2.jpg";
 import worksheets from "../../../assets/photos/photo-1.jpg";
@@ -120,6 +121,7 @@ function PhotoFan(): ReactElement {
         className="fanDoodle fanDoodle-plane"
         style={{ "--draw-delay": "1500ms", "--float-offset": "-1.7s" } as CSSProperties}
       />
+      <HandNote text="from our workshops" arrow="upRight" reveal="load" delay={3000} className="noteFan" />
       {photos.map((photo, index) => {
         // 0 = front, 1 = behind on the left (next up), 2 = behind on the right (just shuffled back)
         const slot = (index - front + photos.length) % photos.length;

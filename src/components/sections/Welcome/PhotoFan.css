@@ -133,6 +133,13 @@
     opacity: 0.85;
 }
 
+/* the handwritten note sits below the prints, its arrow pointing up at them */
+.noteFan {
+    bottom: -58px;
+    left: -86px;
+    z-index: 4;
+}
+
 /* the sketches sit off the fan's upper corners, clear of the prints even when the fan opens */
 .fanDoodle {
     z-index: 2;
@@ -249,7 +256,8 @@
 
 @media (max-width: 900px) {
     /* no room around the fan on narrow screens */
-    .fanDoodle {
+    .fanDoodle,
+    .noteFan {
         display: none;
     }
 

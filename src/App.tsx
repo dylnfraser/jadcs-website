@@ -6,6 +6,7 @@ import Background from "./components/layout/Background";
 import Navbar from "./components/layout/Navbar";
 import WelcomeSection from "./components/sections/Welcome/WelcomeSection";
 import PhotoFan from "./components/sections/Welcome/PhotoFan";
+import HandNote from "./components/effects/HandNote";
 import MissionSection from "./components/sections/Mission/MissionSection";
 import ProgramsSection from "./components/sections/Programs/ProgramsSection";
 import ContactFooter from "./components/sections/ContactFooter/ContactFooter";
@@ -115,7 +116,9 @@ function App(): ReactElement {
   // headings rise in word by word, the footer wordmark letter by letter, and the page doodles and mission
   // underlines sketch themselves in, once, as each comes into view
   useEffect(() => {
-    const targets = document.querySelectorAll(".splitWords, .footerWordmark, .doodle-draw-scroll, .missionText u");
+    const targets = document.querySelectorAll(
+      ".splitWords, .footerWordmark, .doodle-draw-scroll, .missionText u, .handNote-view, #missionGoals",
+    );
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       targets.forEach((target) => target.classList.add("isIn"));
       return;
@@ -335,6 +338,26 @@ function App(): ReactElement {
           />
           <feComposite in="drawn" in2="toothMask" operator="in" />
         </filter>
+        {/* stamp ink: edges roughened and the ink broken up where the stamp didn't press evenly */}
+        <filter id="ink" x="-10%" y="-20%" width="120%" height="140%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="2" result="rough" />
+          <feDisplacementMap
+            in="SourceGraphic"
+            in2="rough"
+            scale="2.2"
+            xChannelSelector="R"
+            yChannelSelector="G"
+            result="edges"
+          />
+          <feTurbulence type="fractalNoise" baseFrequency="0.35" numOctaves="3" seed="11" result="blotch" />
+          <feColorMatrix
+            in="blotch"
+            type="matrix"
+            values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.4 2.05"
+            result="blotchMask"
+          />
+          <feComposite in="edges" in2="blotchMask" operator="in" />
+        </filter>
       </svg>
       <div className="hero" id="top">
         <div className="heroBackdrop" aria-hidden="true">
@@ -357,6 +380,13 @@ function App(): ReactElement {
               <button className="pillButton pillButton-ghost" onClick={handleLearnMore}>
                 Read our mission
               </button>
+              <HandNote
+                text="helps buy laptops for students"
+                arrow="up"
+                reveal="load"
+                delay={2300}
+                className="noteDonate"
+              />
             </div>
           </div>
           <PhotoFan />
