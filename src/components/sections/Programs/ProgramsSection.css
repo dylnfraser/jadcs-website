@@ -57,12 +57,10 @@
     border-radius: 3px;
     background:
         var(--grain-texture) 0 0 / 140px 140px,
+        var(--paper-age),
         #fdfbf4;
-    background-blend-mode: soft-light, normal;
-    box-shadow:
-        0 0 0 0.5px rgb(70 52 28 / 0.12),
-        0 1px 1.5px rgb(70 52 28 / 0.14),
-        0 10px 18px -10px rgb(70 52 28 / 0.25);
+    background-blend-mode: soft-light, normal, normal;
+    box-shadow: var(--shadow-paper);
     rotate: var(--tilt, 0deg);
     transition:
         transform 450ms var(--ease-bubble),
@@ -89,10 +87,7 @@
     z-index: 2;
     rotate: 0deg;
     transform: translateY(-4px);
-    box-shadow:
-        0 0 0 0.5px rgb(70 52 28 / 0.12),
-        0 2px 3px rgb(70 52 28 / 0.12),
-        0 20px 30px -14px rgb(70 52 28 / 0.32);
+    box-shadow: var(--shadow-paper-lifted);
 }
 
 .cardHead {

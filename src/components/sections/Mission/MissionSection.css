@@ -53,11 +53,13 @@
         linear-gradient(to bottom, rgb(120 90 20 / 0.07), transparent 16%),
         /* the lifted lower part catches the light, and the very edge turns away from it */
         linear-gradient(to bottom, transparent 55%, rgb(255 255 255 / 0.22) 88%, rgb(120 90 20 / 0.1)),
+        /* handled a few times: edges a little darker, and a soft crease where it was once folded */ var(--paper-age),
+        var(--paper-crease),
         #f3e09a;
-    background-blend-mode: soft-light, normal, normal, normal;
+    background-blend-mode: soft-light, normal, normal, normal, normal, normal;
     box-shadow:
         0 0 0 0.5px rgb(120 90 20 / 0.12),
-        0 1px 1px rgb(70 52 28 / 0.1);
+        0 1px 1px rgb(60 44 22 / 0.1);
     rotate: -2.5deg;
     transform-origin: 50% 0;
     /* flat at rest (the lift is in the shading); it only tips in 3D while folding down, so the pinned note isn't
@@ -103,7 +105,9 @@
     left: 9%;
     height: 38%;
     border-radius: 0 0 40% 20%;
-    box-shadow: 0 16px 22px rgb(70 52 28 / 0.32);
+    box-shadow:
+        0 8px 10px -2px rgb(60 44 22 / 0.14),
+        0 18px 26px -4px rgb(60 44 22 / 0.18);
     rotate: -0.5deg;
     transform: skewX(-6deg);
     opacity: 0;

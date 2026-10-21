@@ -23,15 +23,11 @@
     border-radius: 3px;
     background:
         var(--grain-texture) 0 0 / 140px 140px,
+        var(--paper-age),
         /* light falling across the stock from the top left, as if the print bows very slightly */
         linear-gradient(160deg, #fffdf6, #f5efe1 70%, #efe7d6);
-    background-blend-mode: soft-light, normal;
-    /* a crisp contact shadow where the print touches the table, and a soft one from it lifting off */
-    box-shadow:
-        0 0 0 0.5px rgb(70 52 28 / 0.14),
-        0 1px 1.5px rgb(70 52 28 / 0.18),
-        0 6px 10px -4px rgb(70 52 28 / 0.14),
-        0 16px 28px -10px rgb(70 52 28 / 0.18);
+    background-blend-mode: soft-light, normal, normal;
+    box-shadow: var(--shadow-paper);
     transform-origin: 50% 120%;
     transition:
         rotate 650ms var(--ease-bubble),
@@ -177,11 +173,7 @@
 
 /* the front print sits highest off the table, so its shadow is softer and falls further */
 .photoSlot-0 {
-    box-shadow:
-        0 0 0 0.5px rgb(70 52 28 / 0.12),
-        0 2px 3px rgb(70 52 28 / 0.14),
-        0 12px 18px -6px rgb(70 52 28 / 0.16),
-        0 28px 40px -14px rgb(70 52 28 / 0.22);
+    box-shadow: var(--shadow-paper-lifted);
     z-index: 3;
     rotate: 0deg;
     translate: 0 0;

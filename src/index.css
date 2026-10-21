@@ -9,6 +9,29 @@
 }
 
 :root {
+    /* paper on a table: a hairline edge, a tight contact shadow, and soft layered shade falling away from it */
+    --shadow-paper:
+        0 0 0 0.5px rgb(60 44 22 / 0.1), 0 1px 1px rgb(60 44 22 / 0.1), 0 3px 5px -2px rgb(60 44 22 / 0.08),
+        0 9px 16px -7px rgb(60 44 22 / 0.12), 0 20px 34px -18px rgb(60 44 22 / 0.14);
+    /* the same paper lifted a little off the table: the shade spreads further and softens */
+    --shadow-paper-lifted:
+        0 0 0 0.5px rgb(60 44 22 / 0.09), 0 2px 3px rgb(60 44 22 / 0.08), 0 7px 12px -4px rgb(60 44 22 / 0.09),
+        0 18px 30px -12px rgb(60 44 22 / 0.14), 0 38px 60px -26px rgb(60 44 22 / 0.18);
+    /* the drop-shadow version, for shapes like torn paper that a box shadow can't follow */
+    --shadow-paper-drop: drop-shadow(0 1px 1px rgb(60 44 22 / 0.12)) drop-shadow(0 6px 7px rgb(60 44 22 / 0.08))
+        drop-shadow(0 16px 18px rgb(60 44 22 / 0.09));
+    /* age on paper: edges yellowed and darkened by handling, cleaner toward the middle */
+    --paper-age: radial-gradient(ellipse 125% 115% at 46% 40%, transparent 58%, rgb(150 110 45 / 0.13) 100%);
+    /* a faint fold where the paper has been creased and flattened again */
+    --paper-crease: linear-gradient(
+        100deg,
+        transparent 49.4%,
+        rgb(255 255 255 / 0.3) 49.9%,
+        rgb(110 80 30 / 0.09) 50.3%,
+        transparent 51%
+    );
+    /* a coffee ring, left by a mug set down on the page */
+    --coffee-ring: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.035' numOctaves='2' seed='7'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='10'/%3E%3C/filter%3E%3Cg filter='url(%23f)'%3E%3Ccircle cx='100' cy='100' r='68' fill='rgb(150,95,40)' fill-opacity='0.06'/%3E%3Ccircle cx='100' cy='100' r='68' fill='none' stroke='rgb(125,78,30)' stroke-opacity='0.32' stroke-width='2.6'/%3E%3Ccircle cx='100' cy='100' r='64' fill='none' stroke='rgb(125,78,30)' stroke-opacity='0.1' stroke-width='7'/%3E%3Cpath d='M40 120 A 64 64 0 0 1 70 46' fill='none' stroke='rgb(125,78,30)' stroke-opacity='0.18' stroke-width='1.6'/%3E%3C/g%3E%3C/svg%3E");
     /* the handwriting used for margin notes */
     --font-hand: "Caveat Variable", "Bradley Hand", cursive;
     /* hand-drawn wave underlines (see .missionText u and the nav and footer links) */

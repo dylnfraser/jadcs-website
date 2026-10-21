@@ -8,7 +8,7 @@
     max-width: 22rem;
     margin: 0;
     /* drawn on the wrapper, after the paper's torn-edge clip, so the shadow isn't cut away */
-    filter: drop-shadow(0 1px 1px rgb(70 52 28 / 0.14)) drop-shadow(0 10px 14px rgb(70 52 28 / 0.12));
+    filter: var(--shadow-paper-drop);
     rotate: 1.8deg;
     opacity: 0;
     translate: 0 -14px;
@@ -29,8 +29,11 @@
     padding: var(--pad-top) 1.6rem 1.2rem 3.4rem;
     /* the quote's size; the rule maths above is in this em */
     font-size: 1.45rem;
+    position: relative;
     background:
         var(--grain-texture) 0 0 / 140px 140px,
+        /* yellowed at the edges and folded in half once */ var(--paper-age),
+        var(--paper-crease),
         /* the red margin line */
         linear-gradient(
                 to right,
@@ -51,9 +54,11 @@
     background-position:
         0 0,
         0 0,
+        0 0,
+        0 0,
         0 var(--rules-at),
         0 0;
-    background-blend-mode: soft-light, normal, normal, normal;
+    background-blend-mode: soft-light, normal, normal, normal, normal, normal;
     /* the top edge is torn out of the notebook */
     clip-path: polygon(
         0 6px,
@@ -190,4 +195,18 @@
     &::after {
         opacity: 1;
     }
+}
+
+/* a coffee ring where a mug was set down on the scrap, half off its corner (clipped by the torn paper) */
+.quotePaper::after {
+    position: absolute;
+    right: -46px;
+    bottom: -58px;
+    width: 150px;
+    height: 150px;
+    background: var(--coffee-ring) center / contain no-repeat;
+    mix-blend-mode: multiply;
+    rotate: 24deg;
+    content: "";
+    pointer-events: none;
 }
