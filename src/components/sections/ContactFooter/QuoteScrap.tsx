@@ -5,9 +5,9 @@ import "./QuoteScrap.css";
 // PLACEHOLDER: replace the quote and attribution with real words from a student or volunteer (with their
 // permission) before publishing.
 const quote = {
-  text: "A quote from a student or volunteer goes here, in their own words.",
-  name: "Name",
-  role: "Student, workshop participant",
+  text: "What I love about JADCS is that it gives both the kids and me a chance to learn.",
+  name: "James Pecoraro",
+  role: "Co-founder",
 };
 
 function QuoteScrap(): ReactElement {
