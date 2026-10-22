@@ -1,140 +1,79 @@
 # JADCS
 
+### Expanding Access to STEM Education
+
 JADCS exists to close the opportunity gap in STEM education by equipping curious, STEM-driven young minds with the knowledge, tools, and technology they need to thrive.
 
-Too many students with the talent and drive to succeed in STEM are held back not by ability, but by access. Under-resourced schools, outdated equipment, and a lack of exposure to computer science leave entire communities on the sidelines of the technology revolution.
+Too many students with the talent and drive to succeed in STEM are held back not by ability, but by access. Under-resourced schools, outdated equipment, and limited exposure to computer science leave many students without the resources they need to explore their potential.
 
-JADCS is working to change that through hands-on computer science instruction, mentorship, and direct donations of computers and resources to underfunded students.
+JADCS is working to change that through hands-on computer science education, mentorship, and donations of computers and other essential learning resources.
 
-## Our mission
+## Our Mission
 
-We believe that access, not circumstance, should determine who gets to shape the future of technology. Every student deserves the chance to learn, create, and lead.
+We believe that access, not circumstance, should determine who gets to shape the future of technology. Every student deserves the opportunity to learn, create, innovate, and lead.
 
-## What we do
+Our mission is to make STEM education more accessible by providing students with the tools, knowledge, and support they need to pursue their interests and build a future in technology.
+
+## What We Do
 
 ### Computer Science Workshops
 
-Hands-on lessons for students learning programming, robotics, and digital literacy.
+We provide hands-on learning opportunities that introduce students to programming, robotics, digital literacy, and other areas of computer science. Our workshops encourage creativity, problem-solving, and confidence through practical experience.
 
-### Laptop & Technology Donations
+### Laptop and Technology Donations
 
-Collect, refurbish, and distribute devices to students who need reliable technology access.
+We collect, refurbish, and distribute laptops and other technology to students who need reliable access to digital learning tools. By helping bridge the technology gap, we aim to make learning and exploration more accessible.
 
 ### Mentorship
 
-Pair students with volunteers who can support STEM learning and career exploration.
+We connect students with volunteers who can provide guidance, encourage STEM exploration, and help them learn about educational opportunities and potential careers in science, technology, engineering, and mathematics.
 
-### School & Community Partnerships
+### School and Community Partnerships
 
-Work with schools, libraries, and nonprofits to reach students directly in their communities.
+We collaborate with schools, libraries, nonprofits, and community organizations to connect students with educational resources, technology, workshops, and mentorship opportunities.
 
-## Goals for this year
+## Our Goals for This Year
 
-- **5** founding members
-- **100** student members
-- **$1,000** initial fundraising goal
+JADCS is working toward the following initial goals:
 
-## Get involved
+- **5 founding members** to help establish and grow the organization.
+- **100 student members** to build a community of young people passionate about STEM.
+- **$1,000 in initial fundraising** to support technology donations and educational initiatives.
 
-JADCS welcomes support from people and organizations who want to expand STEM access for students.
+These goals represent the beginning of our efforts to expand access to STEM education and create meaningful opportunities for students.
 
-You can help by:
+## Get Involved
 
-- Volunteering
-- Donating a laptop or other technology
-- Partnering with JADCS through a school, library, nonprofit, or community group
-- Supporting student membership and workshops
-- Donating to the laptop fund
+JADCS welcomes individuals, volunteers, and organizations who share our commitment to making STEM education more accessible.
 
-## Donate
+You can support our mission by:
 
-Support JADCS through the laptop donation fund:
+- **Volunteering:** Help lead workshops, mentor students, or support our programs.
+- **Donating technology:** Contribute laptops, computers, and other useful technology for students.
+- **Partnering with JADCS:** Work with us through a school, library, nonprofit, or community organization.
+- **Supporting student programs:** Help us expand student membership, workshops, and learning opportunities.
+- **Contributing financially:** Support our efforts to provide students with the technology and resources they need.
 
-https://givebutter.com/laptops-for-stem-students-y64rsa
+Every contribution helps us move closer to a future where more students have the opportunity to explore STEM and participate in the technology-driven world.
 
-## Contact
+## Support Our Mission
 
-Have a laptop to donate, want to volunteer, or want to bring JADCS to your school?
+Your support can help put technology into the hands of students who need it most.
 
-Contact: jadcsfund@gmail.com
+Donations to the JADCS laptop fund help support efforts to provide students with access to reliable computers and expand opportunities for STEM learning.
 
----
+**Donate to the Laptop Fund:**
 
-## About this website
+[https://givebutter.com/laptops-for-stem-students-y64rsa](<https://givebutter.com/laptops-for-stem-students-y64rsa>)
 
-The site is a single page built with [React](https://react.dev), [TypeScript](https://www.typescriptlang.org) and [Vite](https://vite.dev). It has no backend: `npm run build` produces static files in `dist/` that can be served from any static host.
+## Contact Us
 
-### Running it locally
+Interested in volunteering, donating a laptop, partnering with JADCS, or bringing our programs to your school or community?
 
-You need [Node.js](https://nodejs.org) 20.19+ or 22.12+ (required by Vite).
+We would love to hear from you.
 
-```sh
-npm install
-npm run dev
-```
+**Email:** jadcsfund@gmail.com
 
-Then open the address Vite prints (usually http://localhost:5173).
+Together, we can help close the technology gap, inspire the next generation of innovators, and ensure that more students have the opportunity to shape the future of STEM.
 
-### Scripts
-
-| Command                | What it does                                        |
-| ---------------------- | --------------------------------------------------- |
-| `npm run dev`          | Start the local development server                  |
-| `npm run build`        | Type-check and build the production site to `dist/` |
-| `npm run preview`      | Serve the production build locally                  |
-| `npm run lint`         | Check the code with ESLint                          |
-| `npm run format`       | Format the code with Prettier                       |
-| `npm run format:check` | Check formatting without changing anything          |
-
-Please run `npm run lint`, `npm run format:check` and `npm run build` before committing.
-
-### Deployment
-
-`index.html` lists `https://jadcs.netlify.app/` as the site's address. To deploy on a static host, set the build command to `npm run build` and the publish directory to `dist`.
-
-### Where things live
-
-```
-src/
-├── App.tsx / App.css          page layout, hero, scroll reveals, shared effects
-├── index.css                  colours, fonts, buttons and other site-wide styles
-├── main.tsx                   entry point
-├── assets/
-│   ├── photos/                workshop photos used in the hero fan
-│   ├── font/                  the Author and Sentient fonts
-│   └── contours.svg           the topographic lines in the footer
-└── components/
-    ├── layout/                navbar and page background
-    ├── effects/               doodles, handwritten notes, word-by-word headings
-    └── sections/
-        ├── Welcome/           hero title, intro and the photo fan
-        ├── Mission/           sticky note, mission text and goals
-        ├── Programs/          the four programs
-        └── ContactFooter/     footer, contact links and the quote scrap
-```
-
-### Editing common content
-
-- **Hero photos:** `src/components/sections/Welcome/PhotoFan.tsx`. Each photo has a `src`, a screen-reader description (`alt`) and a caption. Add new images to `src/assets/photos/`.
-- **Footer quote:** `src/components/sections/ContactFooter/QuoteScrap.tsx`. **This is currently placeholder text** and should be replaced with a real quote before publishing.
-- **Handwritten margin notes:** the `text` on each `<HandNote>` in `App.tsx`, `PhotoFan.tsx` and `MissionSection.tsx`.
-- **Programs:** the `programs` list in `src/components/sections/Programs/ProgramsSection.tsx`.
-- **Goals:** the `goals` list in `src/components/sections/Mission/MissionSection.tsx`.
-- **Contact details and donation link:** `ContactFooter.tsx` and `Navbar.tsx`.
-
-### Photos and privacy
-
-Photos straight from a phone usually contain hidden data, including the GPS location where they were taken. Before adding a photo:
-
-1. Resize it (around 1000px on the long side is plenty) and save it as JPEG.
-2. Remove its metadata. For example, re-save it with an image editor that strips EXIF data.
-3. Make sure you have permission to publish it. For photos of children, get a parent's consent.
-
-The same applies to quotes: only publish a person's words and name with their permission.
-
-### Notes for contributors
-
-- **Reduced motion:** every animation respects the system "reduce motion" setting. Please keep it that way for new effects.
-- **Safari:** Safari can't keep scroll-linked animations in sync with pinned (sticky) elements, so `main.tsx` turns those animations off in Safari and the site falls back to simple one-time reveals.
-- **Text selection:** selected text is painted with a highlighter effect from [`@highlighters/core`](https://highlighte.rs).
-- **Fonts:** the handwriting font is [Caveat](https://fonts.google.com/specimen/Caveat), bundled through `@fontsource-variable/caveat`, so the site doesn't load anything from Google.
+**JADCS — Opportunity, Education, and Technology for Every Student.**
