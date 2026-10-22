@@ -73,7 +73,3 @@ Interested in volunteering, donating a laptop, partnering with JADCS, or bringin
 We would love to hear from you.
 
 **Email:** jadcsfund@gmail.com
-
-Together, we can help close the technology gap, inspire the next generation of innovators, and ensure that more students have the opportunity to shape the future of STEM.
-
-**JADCS — Opportunity, Education, and Technology for Every Student.**
