@@ -84,17 +84,14 @@
 @keyframes background-drift {
     0% {
         transform: translate(0, 0) scale(1);
-        opacity: 0.55;
     }
 
     50% {
         transform: translate(4vw, -4vh) scale(1.06);
-        opacity: 0.62;
     }
 
     100% {
         transform: translate(-3vw, 3vh) scale(1.03);
-        opacity: 0.5;
     }
 }
 

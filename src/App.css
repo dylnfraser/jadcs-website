@@ -36,9 +36,8 @@ a {
 .heroBackdrop span {
     position: absolute;
     aspect-ratio: 1;
+    /* a soft-edged wash drawn as a gradient: a live blur filter on a moving shape had to be redrawn every frame */
     border-radius: 50%;
-    filter: blur(70px);
-    opacity: 0.42;
     will-change: transform;
 }
 
@@ -62,8 +61,7 @@ a {
 }
 
 .gridLayer::before {
-    --grid-line: rgba(84, 66, 40, 0.07);
-    animation: grid-breathe 9s ease-in-out infinite alternate;
+    --grid-line: rgba(84, 66, 40, 0.06);
 }
 
 /* a stronger copy of the grid, lit up in a soft pool that trails the cursor (positions set from App.tsx) */
@@ -83,19 +81,17 @@ a {
     mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, black 35%, transparent 100%);
 }
 
-@keyframes grid-breathe {
-    to {
-        opacity: 0.6;
-    }
-}
-
 /* a single sage wash on the open right-hand side, balancing the left-aligned copy */
 .heroBackdrop span {
     top: 4%;
     right: -8%;
     width: 52vw;
-    background: var(--prim-color2);
-    opacity: 0.32;
+    background: radial-gradient(
+        closest-side,
+        color-mix(in srgb, var(--prim-color2) 32%, transparent),
+        color-mix(in srgb, var(--prim-color2) 22%, transparent) 45%,
+        transparent
+    );
     animation: drift-a 26s ease-in-out infinite alternate;
 }
 
@@ -355,16 +351,14 @@ a {
         opacity: 0;
         translate: 0 2.5rem;
         scale: 0.97;
-        filter: blur(14px);
     }
 
+    /* no blur on these: a blur that changes with every scroll step had to be redrawn every frame, along with
+       anything filtered inside (the index cards' frayed edges), which made scrolling choppy */
     to {
         opacity: 1;
         translate: 0 0;
         scale: 1;
-        /* blur(0), not none: switching between the two creates and drops a layer, which flashes the text every
-           time the scroll crosses the end of the reveal */
-        filter: blur(0px);
     }
 }
 
@@ -384,13 +378,12 @@ a {
 
 /* ambient loops pause while their area is scrolled out of view (.isOffscreen is set in App.tsx) */
 .hero.isOffscreen .heroBackdrop span,
-.hero.isOffscreen .gridLayer::before,
 .hero.isOffscreen .photoFan .doodle,
 .hero.isOffscreen .heroEdge::before,
 .hero.isOffscreen .heroEdge::after,
 .backgroundGradient.isOffscreen,
 .missionGoalsBlock.isOffscreen::before,
-.contactFooter.isOffscreen .footerContours path {
+.contactFooter.isOffscreen .contourBand {
     animation-play-state: paused;
 }
 

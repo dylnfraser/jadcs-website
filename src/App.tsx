@@ -160,14 +160,22 @@ function App(): ReactElement {
     const written = new Map<string, string>();
     let frame = 0;
 
-    // only touch the dom when a value actually changes: rewriting the root's custom properties restyles the
-    // whole page, and doing that on every scroll frame made the pinned headings judder
+    // only touch the dom when a value actually changes
     const write = (element: HTMLElement, name: string, value: string) => {
       const key = `${element === root ? "root" : "grid"}${name}`;
       if (written.get(key) === value) return;
       written.set(key, value);
       element.style.setProperty(name, value);
     };
+
+    // the doodles' lean is written straight onto each doodle, rather than as a page-wide value: changing a value on
+    // <html> on every frame of mouse movement made the browser restyle the whole page
+    const doodles = [...document.querySelectorAll<HTMLElement>(".doodle")].map((element) => ({
+      element,
+      depth: parseFloat(element.style.getPropertyValue("--depth")) || 8,
+    }));
+    let leanX = "";
+    let leanY = "";
 
     const tick = () => {
       current.x += (target.x - current.x) * 0.12;
@@ -182,8 +190,15 @@ function App(): ReactElement {
         write(grid, "--grid-y", `${Math.round(current.y - rect.top)}px`);
         write(grid, "--grid-glow", current.glow.toFixed(2));
       }
-      write(root, "--pointer-x", ((current.x / window.innerWidth) * 2 - 1).toFixed(3));
-      write(root, "--pointer-y", ((current.y / window.innerHeight) * 2 - 1).toFixed(3));
+      const px = ((current.x / window.innerWidth) * 2 - 1).toFixed(3);
+      const py = ((current.y / window.innerHeight) * 2 - 1).toFixed(3);
+      if (px !== leanX || py !== leanY) {
+        leanX = px;
+        leanY = py;
+        for (const { element, depth } of doodles) {
+          element.style.translate = `${(+px * depth * 0.35).toFixed(2)}px ${(+py * depth * 0.35).toFixed(2)}px`;
+        }
+      }
 
       const settled =
         Math.abs(target.x - current.x) < 0.5 &&

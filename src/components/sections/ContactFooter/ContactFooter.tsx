@@ -1,5 +1,5 @@
 import type { CSSProperties, ReactElement } from "react";
-import contours from "../../../assets/contours.svg?raw";
+import FooterContours from "./FooterContours";
 import QuoteScrap from "./QuoteScrap";
 import "./ContactFooter.css";
 
@@ -47,8 +47,7 @@ function ContactFooter() {
       {/* the green band reads as a sheet laid over the page: it casts a soft shadow onto the paper above it */}
       <div className="footerFoldShadow" aria-hidden="true" />
       <footer className="contactFooter" id="contact">
-        {/* inlined rather than a background image so the rings can be animated from css in every browser */}
-        <div className="footerContours" aria-hidden="true" dangerouslySetInnerHTML={{ __html: contours }} />
+        <FooterContours />
         {/* the statement on the left, a taped quote from someone involved on the right */}
         <div className="footerTop">
           <div className="contactFooterMain">

@@ -62,17 +62,21 @@
     opacity: 0.16;
     pointer-events: none;
 
-    svg {
+    /* each band of rings is a layer of its own, stacked over the others */
+    .contourBand {
+        position: absolute;
+        inset: 0;
         display: block;
         width: 100%;
         height: 100%;
-    }
-
-    /* each ring slowly grows and shrinks about its hill's peak, a beat behind the ring inside it,
-       so the terrain gently ripples outward (origins and offsets are set per ring in contours.svg) */
-    path {
-        transform-box: view-box;
-        animation: contour-swell 9s ease-in-out infinite alternate;
+        fill: none;
+        stroke: #f6f1e6;
+        stroke-width: 1.2;
+        stroke-linejoin: round;
+        /* each band slowly grows and shrinks about its hill's peak (set from FooterContours.tsx), a beat behind
+           the band inside it, so the terrain gently ripples outward */
+        animation: contour-swell 9s ease-in-out calc(var(--band) * -1.6s) infinite alternate;
+        will-change: transform;
     }
 }
 

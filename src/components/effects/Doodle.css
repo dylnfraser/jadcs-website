@@ -5,8 +5,8 @@
     width: 44px;
     pointer-events: none;
     user-select: none;
-    /* a faint lean toward the cursor: about a third of a pixel per unit of depth, so even the deepest moves ~5px */
-    translate: calc(var(--pointer-x, 0) * var(--depth) * 0.35px) calc(var(--pointer-y, 0) * var(--depth) * 0.35px);
+    /* a faint lean toward the cursor (about a third of a pixel per unit of depth) is set on each doodle's
+       translate from App.tsx, already eased there */
     animation: doodle-float 6s ease-in-out var(--float-offset, 0s) infinite alternate;
 
     svg {
