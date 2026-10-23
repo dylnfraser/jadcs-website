@@ -27,13 +27,34 @@
         /* light falling across the stock from the top left, as if the print bows very slightly */
         linear-gradient(160deg, #fffdf6, #f5efe1 70%, #efe7d6);
     background-blend-mode: soft-light, normal, normal;
-    box-shadow: var(--shadow-paper);
+
     transform-origin: 50% 120%;
     /* a long, even ease-out with no overshoot, so prints glide between places rather than bouncing */
     transition:
         rotate 750ms cubic-bezier(0.22, 1, 0.36, 1),
-        translate 750ms cubic-bezier(0.22, 1, 0.36, 1),
-        box-shadow 750ms cubic-bezier(0.22, 1, 0.36, 1);
+        translate 750ms cubic-bezier(0.22, 1, 0.36, 1);
+
+    /* the resting and the front print's deeper "lifted" shadow are separate layers that cross-fade, rather than
+       animating one shadow, which repainted the print on every frame of a shuffle */
+    &::before,
+    &::after {
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        border-radius: inherit;
+        transition: opacity 750ms cubic-bezier(0.22, 1, 0.36, 1);
+        content: "";
+        pointer-events: none;
+    }
+
+    &::before {
+        box-shadow: var(--shadow-paper);
+    }
+
+    &::after {
+        box-shadow: var(--shadow-paper-lifted);
+        opacity: 0;
+    }
 
     .photoWindow,
     .photoPlaceholder {
@@ -188,10 +209,6 @@
     --s2-r: 9deg;
     --s2-x: 18px;
     --s2-y: 6px;
-    /* the furthest point of the swipe, out to the right and away from the title */
-    --out-r: 14deg;
-    --out-x: 92px;
-    --out-y: -22px;
 }
 
 /* hovered: the prints lift a little and the fan opens */
@@ -206,10 +223,17 @@
 }
 
 .photoSlot-0 {
-    box-shadow: var(--shadow-paper-lifted);
     z-index: 3;
     rotate: var(--s0-r);
     translate: var(--s0-x) var(--s0-y);
+
+    &::before {
+        opacity: 0;
+    }
+
+    &::after {
+        opacity: 1;
+    }
 }
 
 .photoSlot-1 {
@@ -226,32 +250,41 @@
 
 /* the shuffle: the front print swipes up and out to the right (away from the title), drops behind the stack, and
    settles into the back */
+/* the stacking order isn't animated (that forced a repaint every frame); the print stays on top while it swipes out
+   and drops behind the others when PhotoFan.tsx marks it tucked, half way through */
 .photoCard.isLeaving {
+    z-index: 4;
     animation: fan-shuffle 1050ms cubic-bezier(0.4, 0, 0.2, 1) both;
 }
 
+.photoCard.isLeaving.fromHover {
+    animation-name: fan-shuffle-hover;
+}
+
+.photoCard.isLeaving.isTucked {
+    z-index: 0;
+}
+
+/*
+ * the swipe, written out with plain numbers for the fan at rest and for the fan hovered (clicks always happen while
+ * hovered). they match the positions above; plain numbers let the graphics card run the animation, where values
+ * read from variables made the browser repaint the prints every frame. PhotoFan.tsx picks one as the swipe starts.
+ */
 @keyframes fan-shuffle {
     0% {
-        z-index: 4;
-        rotate: var(--s0-r);
-        translate: var(--s0-x) var(--s0-y);
+        rotate: 0deg;
+        translate: 0px 0px;
     }
 
     42% {
-        z-index: 4;
-        rotate: var(--out-r);
-        translate: var(--out-x) var(--out-y);
+        rotate: 14deg;
+        translate: 92px -22px;
         opacity: 1;
     }
 
     /* it dims as it slips behind the stack, so the change in stacking reads as a smooth tuck rather than a pop */
-    50% {
-        z-index: 4;
-        opacity: 0.55;
-    }
-
+    50%,
     52% {
-        z-index: 0;
         opacity: 0.55;
     }
 
@@ -260,9 +293,36 @@
     }
 
     100% {
-        z-index: 1;
-        rotate: var(--s2-r);
-        translate: var(--s2-x) var(--s2-y);
+        rotate: 9deg;
+        translate: 18px 6px;
+    }
+}
+
+@keyframes fan-shuffle-hover {
+    0% {
+        rotate: 0deg;
+        translate: 0px -8px;
+    }
+
+    42% {
+        rotate: 14deg;
+        translate: 92px -22px;
+        opacity: 1;
+    }
+
+    /* it dims as it slips behind the stack, so the change in stacking reads as a smooth tuck rather than a pop */
+    50%,
+    52% {
+        opacity: 0.55;
+    }
+
+    70% {
+        opacity: 1;
+    }
+
+    100% {
+        rotate: 11deg;
+        translate: 22px -12px;
     }
 }
 
@@ -310,10 +370,60 @@
 }
 
 @media (max-width: 900px) {
-    .photoFan {
-        --out-r: 12deg;
-        --out-x: 70px;
-        --out-y: -18px;
+    @keyframes fan-shuffle {
+        0% {
+            rotate: 0deg;
+            translate: 0px 0px;
+        }
+
+        42% {
+            rotate: 12deg;
+            translate: 70px -18px;
+            opacity: 1;
+        }
+
+        /* it dims as it slips behind the stack, so the change in stacking reads as a smooth tuck rather than a pop */
+        50%,
+        52% {
+            opacity: 0.55;
+        }
+
+        70% {
+            opacity: 1;
+        }
+
+        100% {
+            rotate: 9deg;
+            translate: 18px 6px;
+        }
+    }
+
+    @keyframes fan-shuffle-hover {
+        0% {
+            rotate: 0deg;
+            translate: 0px -8px;
+        }
+
+        42% {
+            rotate: 12deg;
+            translate: 70px -18px;
+            opacity: 1;
+        }
+
+        /* it dims as it slips behind the stack, so the change in stacking reads as a smooth tuck rather than a pop */
+        50%,
+        52% {
+            opacity: 0.55;
+        }
+
+        70% {
+            opacity: 1;
+        }
+
+        100% {
+            rotate: 11deg;
+            translate: 22px -12px;
+        }
     }
 }
 

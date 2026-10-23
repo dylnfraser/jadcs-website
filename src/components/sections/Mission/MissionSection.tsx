@@ -122,6 +122,10 @@ const MissionSection: React.FC = () => {
         </div>
 
         <div className="missionGoalsBlock">
+          <div className="goalsWash" aria-hidden="true">
+            <span className="washLeft" />
+            <span className="washRight" />
+          </div>
           <h3 className="sectionEyebrow missionGoalsTitle">Our goals for this year</h3>
           <HandNote text="help us get there!" arrow="down" delay={900} className="noteGoals" />
           <dl id="missionGoals" ref={goalsRef}>

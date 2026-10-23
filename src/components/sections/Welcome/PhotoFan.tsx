@@ -43,6 +43,11 @@ function PhotoFan(): ReactElement {
   const [front, setFront] = useState(1);
   // the photo currently being swiped off the front and tucked in at the back
   const [leaving, setLeaving] = useState<number | null>(null);
+  // set half way through a swipe, when the leaving print slips behind the stack
+  const [tucked, setTucked] = useState(false);
+  // whether the swipe started with the fan hovered, which picks the matching keyframes
+  const [fromHover, setFromHover] = useState(false);
+  const tuckTimer = useRef(0);
   const fanRef = useRef<HTMLDivElement>(null);
   const frontRef = useRef(1);
   const lastShuffle = useRef(0);
@@ -63,6 +68,10 @@ function PhotoFan(): ReactElement {
     frontRef.current = (current + 1) % photos.length;
     lastShuffle.current = performance.now();
     setLeaving(current);
+    setTucked(false);
+    setFromHover(Boolean(fanRef.current?.matches(":hover")));
+    window.clearTimeout(tuckTimer.current);
+    tuckTimer.current = window.setTimeout(() => setTucked(true), SHUFFLE_DURATION * 0.52);
     setFront(frontRef.current);
     window.clearTimeout(clearLeaving.current);
     clearLeaving.current = window.setTimeout(() => {
@@ -99,10 +108,12 @@ function PhotoFan(): ReactElement {
     }, 250);
 
     const pending = clearLeaving;
+    const tucking = tuckTimer;
     return () => {
       observer.disconnect();
       window.clearInterval(timer);
       window.clearTimeout(pending.current);
+      window.clearTimeout(tucking.current);
     };
   }, [shuffle]);
 
@@ -146,7 +157,9 @@ function PhotoFan(): ReactElement {
         const slot = (index - front + photos.length) % photos.length;
         return (
           <figure
-            className={`photoCard photoSlot-${slot}${leaving === index ? " isLeaving" : ""}`}
+            className={`photoCard photoSlot-${slot}${
+              leaving === index ? ` isLeaving${tucked ? " isTucked" : ""}${fromHover ? " fromHover" : ""}` : ""
+            }`}
             key={photo.caption}
             style={
               {
