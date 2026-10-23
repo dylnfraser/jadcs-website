@@ -337,13 +337,6 @@ function App(): ReactElement {
        * eaten into by a finer noise so it looks like graphite dragged across paper
        */}
       <svg width="0" height="0" style={{ position: "absolute" }} aria-hidden="true" focusable="false">
-        {/* frayed paper: the edges are pushed in and out by fine noise, like card cut with dull scissors and worn.
-            the region is generous because Safari also clips the card's drop shadow to it, which cut the soft
-            shadow off in a hard-edged box */}
-        <filter id="fray" x="-14%" y="-45%" width="128%" height="200%">
-          <feTurbulence type="fractalNoise" baseFrequency="0.55" numOctaves="3" seed="21" result="fibres" />
-          <feDisplacementMap in="SourceGraphic" in2="fibres" scale="3.2" xChannelSelector="R" yChannelSelector="G" />
-        </filter>
         <filter id="pencil" filterUnits="userSpaceOnUse" x="-50" y="-50" width="200" height="200">
           <feTurbulence type="fractalNoise" baseFrequency="0.6" numOctaves="2" seed="4" result="wobble" />
           <feDisplacementMap
