@@ -1,11 +1,11 @@
 @font-face {
     font-family: "default";
-    src: url("./assets/font/Author-Variable.ttf");
+    src: url("./assets/font/Author-Variable.woff2") format("woff2");
 }
 
 @font-face {
     font-family: "serif";
-    src: url("./assets/font/Sentient-Variable.ttf");
+    src: url("./assets/font/Sentient-Variable.woff2") format("woff2");
 }
 
 :root {

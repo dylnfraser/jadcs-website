@@ -2,9 +2,9 @@ import type { CSSProperties, KeyboardEvent, ReactElement } from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import Doodle from "../../effects/Doodle";
 import HandNote from "../../effects/HandNote";
-import buildingTower from "../../../assets/photos/photo-3.jpg";
-import circuitKits from "../../../assets/photos/photo-2.jpg";
-import worksheets from "../../../assets/photos/photo-1.jpg";
+import buildingTower from "../../../assets/photos/photo-3.webp";
+import circuitKits from "../../../assets/photos/photo-2.webp";
+import worksheets from "../../../assets/photos/photo-1.webp";
 import "./PhotoFan.css";
 
 // photos for the hero fan (in src/assets/photos, with all camera metadata stripped). a card without `src` shows a
@@ -173,7 +173,8 @@ function PhotoFan(): ReactElement {
             <span className="photoTape" aria-hidden="true" />
             {photo.src ? (
               <div className="photoWindow">
-                <img src={photo.src} alt={photo.alt} loading="lazy" />
+                {/* in view as the page opens, so they load straight away rather than lazily */}
+                <img src={photo.src} alt={photo.alt} decoding="async" />
               </div>
             ) : (
               <div className="photoPlaceholder">

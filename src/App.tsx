@@ -1,6 +1,5 @@
 import type { ReactElement } from "react";
 import { useEffect, useRef } from "react";
-import { highlightSelection } from "@highlighters/core";
 import "./App.css";
 import Background from "./components/layout/Background";
 import Navbar from "./components/layout/Navbar";
@@ -241,17 +240,25 @@ function App(): ReactElement {
   }, []);
 
   // paint text selections as a soft highlighter stroke (touch devices keep the native selection)
+  // the highlighter is only needed once someone selects text, so it's loaded after the page has settled rather than
+  // as part of the first download
   useEffect(() => {
-    const handle = highlightSelection({
-      // the same deep moss as the Donate buttons (--prim-color mixed 92% with black), laid on thinly
-      color: "#445f3c",
-      opacity: 0.3,
-      // follow the selection character by character instead of jumping to whole words
-      snap: "none",
-      // looser, wobblier edges than the default ruler-straight band, like a hand-drawn stroke
-      edge: { waviness: 2.6, frequency: 15, roughness: 0.4 },
-      tip: { overshootJitter: 3, angleJitter: 4 },
-    });
+    let handle: { remove: () => void } | null = null;
+    let cancelled = false;
+    const start = () =>
+      import("@highlighters/core").then(({ highlightSelection }) => {
+        if (cancelled) return;
+        handle = highlightSelection({
+          // the same deep moss as the Donate buttons (--prim-color mixed 92% with black), laid on thinly
+          color: "#445f3c",
+          opacity: 0.3,
+          // follow the selection character by character instead of jumping to whole words
+          snap: "none",
+          // looser, wobblier edges than the default ruler-straight band, like a hand-drawn stroke
+          edge: { waviness: 2.6, frequency: 15, roughness: 0.4 },
+          tip: { overshootJitter: 3, angleJitter: 4 },
+        });
+      });
 
     // each line gets its own translucent band, taller than the line spacing, so on multi-line selections
     // neighbouring bands overlap and the ink doubles up into dark strips. trim each overlapping pair back
@@ -312,10 +319,14 @@ function App(): ReactElement {
     bodyObserver.observe(document.body, { childList: true });
     watchOverlay();
 
+    const idle = window.requestIdleCallback ?? ((callback: () => void) => window.setTimeout(callback, 1500));
+    idle(() => void start());
+
     return () => {
+      cancelled = true;
       bodyObserver.disconnect();
       overlayObserver?.disconnect();
-      handle.remove();
+      handle?.remove();
     };
   }, []);
 
